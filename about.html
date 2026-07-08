@@ -82,17 +82,11 @@
           <div style="font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.2em; color:#7A7A7A; text-transform:uppercase; margin-bottom:34px;">Ascencion &lsquo;Ace&rsquo; Burney</div>
           <h1 style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight:700; font-size:clamp(2.4rem,5vw,4.6rem); line-height:0.98; letter-spacing:-0.03em; color:#f2f0ef; text-wrap:balance;">I shape how brands<br>look, feel &amp; run.</h1>
           <p style="margin-top:32px; max-width:38ch; font-family:'Space Mono',monospace; font-weight:400; font-size:clamp(0.88rem,1.05vw,1rem); line-height:1.75; color:#a8a29a;">Product leader and builder focused on product strategy, systems design, and AI-driven automation — shaping how brands look, feel, and run through product thinking, technical systems, and creative direction, told through photography, film, and design.</p>
-          <div style="margin-top:36px; display:flex; flex-wrap:wrap; gap:10px 22px; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:#7A7A7A;">
-            <span>✦ Product Strategy</span>
-            <span>✦ Story Telling</span>
-            <span>✦ Brand Design</span>
-            <span>✦ Product Design</span>
-            <span>✦ Design Systems</span>
-            <span>✦ Web Design</span>
-            <span>✦ Photography</span>
-            <span>✦ Film</span>
-            <span>✦ AI Automation</span>
-            <span>✦ Creative Technology</span>
+          <div data-disciplines style="margin-top:36px; display:flex; align-items:baseline; gap:14px; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.14em; text-transform:uppercase; white-space:nowrap;">
+            <span data-disc-count style="color:#7A7A7A;">01 / 10</span>
+            <span aria-hidden="true" style="color:#3a3833;">·</span>
+            <span data-disc-word style="color:#e8e6e1; display:inline-block; min-width:20ch;">Product Strategy</span>
+            <span class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;">Disciplines: Product Strategy, Story Telling, Brand Design, Product Design, Design Systems, Web Design, Photography, Film, AI Automation, Creative Technology.</span>
           </div>
         </div>
 
@@ -821,6 +815,53 @@
   initExpCards();
   initCtaPhysics();
   initScramble();
+  initDisciplineRotator();
+})();
+
+function initDisciplineRotator() {}
+</script>
+
+<script>
+(function () {
+  const words = ['Product Strategy','Story Telling','Brand Design','Product Design','Design Systems','Web Design','Photography','Film','AI Automation','Creative Technology'];
+  const wordEl = document.querySelector('[data-disc-word]');
+  const countEl = document.querySelector('[data-disc-count]');
+  if (!wordEl || !countEl) return;
+  const pool = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#·/-';
+  const scramble = (el, target) => {
+    clearInterval(el._t);
+    const from = (el.textContent || '');
+    const T = target;
+    const len = Math.max(from.length, T.length);
+    const q = [];
+    for (let i = 0; i < len; i++) {
+      const s = Math.floor(Math.random() * 6);
+      q.push({ to: T[i] || '', start: s, end: s + 8 + Math.floor(Math.random() * 8), ch: '' });
+    }
+    let f = 0;
+    el._t = setInterval(() => {
+      let out = '', done = 0;
+      for (const x of q) {
+        if (f >= x.end) { done++; out += x.to; }
+        else if (f >= x.start) {
+          if (!x.ch || Math.random() < 0.32) x.ch = pool[(Math.random() * pool.length) | 0];
+          out += x.ch;
+        } else { out += ' '; }
+      }
+      el.textContent = out;
+      f++;
+      if (done >= q.length) { clearInterval(el._t); el.textContent = T; }
+    }, 34);
+  };
+  let idx = 0;
+  const tick = () => {
+    idx = (idx + 1) % words.length;
+    countEl.textContent = String(idx + 1).padStart(2, '0') + ' / 10';
+    scramble(wordEl, words[idx]);
+  };
+  const start = () => setInterval(tick, 2800);
+  if (document.readyState === 'complete') start();
+  else window.addEventListener('load', start, { once: true });
 })();
 </script>
 </body>
