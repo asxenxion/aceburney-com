@@ -113,6 +113,14 @@
   <!-- custom cursor -->
   <div data-cursor style="position:fixed; top:0; left:0; width:26px; height:26px; border:1px solid rgba(237,233,224,0.55); border-radius:50%; pointer-events:none; z-index:9999; transform:translate(-100px,-100px); transition:width .25s ease, height .25s ease, background-color .25s ease, border-color .25s ease; mix-blend-mode:difference;"></div>
 
+  <!-- scene-cut transition overlay (page-to-page) -->
+  <div data-transition style="position:fixed; inset:0; z-index:9998; background:#0D0D0D; transform:translateY(-101%); pointer-events:none; will-change:transform; transition:transform 520ms cubic-bezier(.76,0,.24,1); display:flex; align-items:center; justify-content:center;">
+    <div style="text-align:center; padding:0 24px;">
+      <div data-transition-eyebrow style="font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.22em; color:#7A7A7A; text-transform:uppercase; margin-bottom:22px; opacity:0; transition:opacity .5s ease;">— Now Arriving —</div>
+      <div data-transition-label style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight:700; color:#e8e6e1; text-transform:uppercase; font-size:clamp(3rem,11vw,9rem); line-height:0.9; letter-spacing:-0.03em; opacity:0; transition:opacity .3s ease; white-space:nowrap;">&nbsp;</div>
+    </div>
+  </div>
+
   <!-- page loader (slides up on complete) -->
   <div data-loader style="position:absolute; inset:0; z-index:9990; background:#0D0D0D; display:flex; flex-direction:column; justify-content:flex-end; padding:clamp(24px,4vw,60px); will-change:transform; transition:transform 1s cubic-bezier(.76,0,.24,1);">
     <div style="position:absolute; top:clamp(24px,4vw,34px); left:clamp(24px,4vw,60px); font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.18em; color:#7A7A7A; text-transform:uppercase;">Ace Burney</div>
@@ -145,6 +153,9 @@
   const bar = $('[data-bar]');
   const about = $('[data-about]');
   const letters = $$('[data-k]', root);
+  const transition = $('[data-transition]');
+  const transitionLabel = $('[data-transition-label]');
+  const transitionEyebrow = $('[data-transition-eyebrow]');
 
   const state = {
     words: ['PRODUCT', 'STORY TELLING', 'FILM', 'SYSTEMS', 'PHOTOGRAPHY', 'AUTOMATION', 'CREATIVE TECHNOLOGY'],
@@ -307,6 +318,77 @@
     emailEl.addEventListener('blur', leave);
   }
 
+  // ---------- scene-cut transition (page-to-page nav) ----------
+  function pageLabelFromPath(path) {
+    if (path === '/' || path === '/index.html' || path === '/index') return 'HOME';
+    return path.replace(/^\/|\.html$/g, '').replace(/-/g, ' ').toUpperCase() || 'HOME';
+  }
+
+  function playSceneExit(destUrl, destLabel) {
+    if (!transition || !transitionLabel) { location.href = destUrl; return; }
+    transition.style.pointerEvents = 'auto';
+    transition.style.transform = 'translateY(0)';
+    setTimeout(() => {
+      if (transitionEyebrow) transitionEyebrow.style.opacity = '1';
+      transitionLabel.style.opacity = '1';
+      scramble(transitionLabel, destLabel);
+    }, 240);
+    setTimeout(() => {
+      try { sessionStorage.setItem('pendingEntry', destLabel); } catch(e) {}
+      location.href = destUrl;
+    }, 1050);
+  }
+
+  function initNavIntercept() {
+    if (!transition) return;
+    document.addEventListener('click', (e) => {
+      const a = e.target.closest('a');
+      if (!a) return;
+      const href = a.getAttribute('href');
+      if (!href || href.startsWith('mailto:') || href.startsWith('tel:') || href.startsWith('#')) return;
+      if (a.target === '_blank') return;
+      let url;
+      try { url = new URL(href, location.href); } catch(_) { return; }
+      if (url.origin !== location.origin) return;
+      if (url.pathname === location.pathname) return;
+      e.preventDefault();
+      playSceneExit(url.href, pageLabelFromPath(url.pathname));
+    });
+  }
+
+  function playSceneEntry() {
+    if (!transition) return false;
+    let pending = null;
+    try { pending = sessionStorage.getItem('pendingEntry'); } catch(e) {}
+    if (!pending) return false;
+    try { sessionStorage.removeItem('pendingEntry'); } catch(e) {}
+    transition.style.transition = 'none';
+    transition.style.transform = 'translateY(0)';
+    transition.style.pointerEvents = 'auto';
+    if (transitionEyebrow) transitionEyebrow.style.opacity = '1';
+    transitionLabel.style.opacity = '1';
+    transitionLabel.textContent = pending;
+    transition.offsetHeight;
+    transition.style.transition = 'transform 520ms cubic-bezier(.76,0,.24,1)';
+    const readyPromise = Promise.all([
+      (document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve(),
+      (document.readyState === 'complete') ? Promise.resolve() : new Promise((r) => window.addEventListener('load', r, { once: true })),
+    ]);
+    Promise.race([readyPromise, new Promise((r) => setTimeout(r, 4000))]).then(() => {
+      setTimeout(() => {
+        if (transitionEyebrow) transitionEyebrow.style.opacity = '0';
+        transitionLabel.style.opacity = '0';
+        transition.style.transform = 'translateY(-101%)';
+        setTimeout(() => {
+          transition.style.display = 'none';
+          transition.style.pointerEvents = 'none';
+          try { sessionStorage.setItem('hasEntered', '1'); } catch(e) {}
+        }, 620);
+      }, 320);
+    });
+    return true;
+  }
+
   // ---------- loader ----------
   function initLoader() {
     if (!loader) return;
@@ -316,6 +398,18 @@
       loader.style.pointerEvents = 'none';
       setTimeout(() => { loader.style.display = 'none'; }, 1100);
     };
+    // If we came in via scene-cut, transition overlay handles reveal — hide loader
+    let pendingEntry = null;
+    try { pendingEntry = sessionStorage.getItem('pendingEntry'); } catch(e) {}
+    if (pendingEntry) {
+      if (counter) counter.textContent = '100';
+      if (bar) bar.style.right = '0%';
+      loader.style.transition = 'none';
+      loader.style.transform = 'translateY(-101%)';
+      loader.style.pointerEvents = 'none';
+      loader.style.display = 'none';
+      return;
+    }
     // Skip loader on subsequent in-session visits (e.g. About → Home)
     let hasEntered = false;
     try { hasEntered = sessionStorage.getItem('hasEntered') === '1'; } catch(e) {}
@@ -666,7 +760,9 @@
   initCustomCursor();
   initAmbient();
   initParticles();
-  initLoader();
+  initNavIntercept();
+  // If we're arriving from a scene-cut, play the entry; otherwise fall through to loader
+  if (!playSceneEntry()) initLoader();
 })();
 </script>
 </body>

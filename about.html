@@ -265,6 +265,14 @@
   <!-- sweep overlay (slides up on ready — no counter, just the reveal transition) -->
   <div data-sweep style="position:fixed; inset:0; z-index:9990; background:#0D0D0D; pointer-events:none; will-change:transform; transition:transform 1s cubic-bezier(.76,0,.24,1);"></div>
 
+  <!-- scene-cut transition overlay (page-to-page) -->
+  <div data-transition style="position:fixed; inset:0; z-index:9998; background:#0D0D0D; transform:translateY(-101%); pointer-events:none; will-change:transform; transition:transform 520ms cubic-bezier(.76,0,.24,1); display:flex; align-items:center; justify-content:center;">
+    <div style="text-align:center; padding:0 24px;">
+      <div data-transition-eyebrow style="font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.22em; color:#7A7A7A; text-transform:uppercase; margin-bottom:22px; opacity:0; transition:opacity .5s ease;">— Now Arriving —</div>
+      <div data-transition-label style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight:700; color:#e8e6e1; text-transform:uppercase; font-size:clamp(3rem,11vw,9rem); line-height:0.9; letter-spacing:-0.03em; opacity:0; transition:opacity .3s ease; white-space:nowrap;">&nbsp;</div>
+    </div>
+  </div>
+
 </div>
 
 <script>
@@ -281,6 +289,9 @@
   const card = $('[data-card]');
   const sheen = $('[data-sheen]');
   const sweep = $('[data-sweep]');
+  const transition = $('[data-transition]');
+  const transitionLabel = $('[data-transition-label]');
+  const transitionEyebrow = $('[data-transition-eyebrow]');
 
   const state = {
     mx: -9999, my: -9999, mouseSpeed: 0,
@@ -449,6 +460,115 @@
     loop();
   }
 
+  // ---------- shared scramble (for transition label) ----------
+  function scrambleTo(el, target, dur) {
+    if (!el) return;
+    const pool = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#·/-';
+    clearInterval(el._t);
+    const from = (el.textContent || '').replace(/ /g, ' ');
+    const len = Math.max(from.length, target.length);
+    const q = [];
+    const frames = Math.max(8, Math.round((dur || 500) / 34));
+    for (let i = 0; i < len; i++) {
+      const start = Math.floor(Math.random() * (frames / 3));
+      const end = start + Math.floor(frames * (0.4 + Math.random() * 0.5));
+      q.push({ to: target[i] || '', start, end, ch: '' });
+    }
+    let f = 0;
+    el._t = setInterval(() => {
+      let out = '', done = 0;
+      for (const x of q) {
+        if (f >= x.end) { done++; out += x.to; }
+        else if (f >= x.start) {
+          if (!x.ch || Math.random() < 0.32) x.ch = pool[(Math.random() * pool.length) | 0];
+          out += x.ch;
+        } else { out += ' '; }
+      }
+      el.textContent = out;
+      f++;
+      if (done >= q.length) clearInterval(el._t);
+    }, 34);
+  }
+
+  // ---------- scene-cut transition (page-to-page nav) ----------
+  function pageLabelFromPath(path) {
+    if (path === '/' || path === '/index.html' || path === '/index') return 'HOME';
+    return path.replace(/^\/|\.html$/g, '').replace(/-/g, ' ').toUpperCase() || 'HOME';
+  }
+
+  function playSceneExit(destUrl, destLabel) {
+    if (!transition || !transitionLabel) { location.href = destUrl; return; }
+    transition.style.pointerEvents = 'auto';
+    transition.style.transform = 'translateY(0)';
+    // Small delay so the label emerges after the curtain arrives
+    setTimeout(() => {
+      if (transitionEyebrow) transitionEyebrow.style.opacity = '1';
+      transitionLabel.style.opacity = '1';
+      scrambleTo(transitionLabel, destLabel, 450);
+    }, 240);
+    setTimeout(() => {
+      try { sessionStorage.setItem('pendingEntry', destLabel); } catch(e) {}
+      location.href = destUrl;
+    }, 1050);
+  }
+
+  function initNavIntercept() {
+    if (!transition) return;
+    document.addEventListener('click', (e) => {
+      const a = e.target.closest('a');
+      if (!a) return;
+      const href = a.getAttribute('href');
+      if (!href || href.startsWith('mailto:') || href.startsWith('tel:') || href.startsWith('#')) return;
+      if (a.target === '_blank') return;
+      let url;
+      try { url = new URL(href, location.href); } catch(_) { return; }
+      if (url.origin !== location.origin) return;
+      if (url.pathname === location.pathname) return;
+      e.preventDefault();
+      playSceneExit(url.href, pageLabelFromPath(url.pathname));
+    });
+  }
+
+  function playSceneEntry() {
+    if (!transition) return false;
+    let pending = null;
+    try { pending = sessionStorage.getItem('pendingEntry'); } catch(e) {}
+    if (!pending) return false;
+    try { sessionStorage.removeItem('pendingEntry'); } catch(e) {}
+    // Snap overlay covered, label showing destination
+    transition.style.transition = 'none';
+    transition.style.transform = 'translateY(0)';
+    transition.style.pointerEvents = 'auto';
+    if (transitionEyebrow) transitionEyebrow.style.opacity = '1';
+    transitionLabel.style.opacity = '1';
+    transitionLabel.textContent = pending;
+    transition.offsetHeight; // force reflow
+    transition.style.transition = 'transform 520ms cubic-bezier(.76,0,.24,1)';
+    // Wait for page ready, then slide up
+    const img = root.querySelector('img');
+    const imgReady = (img && !img.complete)
+      ? new Promise((res) => { img.addEventListener('load', res, { once: true }); img.addEventListener('error', res, { once: true }); })
+      : Promise.resolve();
+    const ready = Promise.all([
+      (document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve(),
+      (document.readyState === 'complete') ? Promise.resolve() : new Promise((r) => window.addEventListener('load', r, { once: true })),
+      imgReady,
+    ]);
+    Promise.race([ready, new Promise((r) => setTimeout(r, 4000))]).then(() => {
+      setTimeout(() => {
+        if (transitionEyebrow) transitionEyebrow.style.opacity = '0';
+        transitionLabel.style.opacity = '0';
+        transition.style.transform = 'translateY(-101%)';
+        setTimeout(() => {
+          transition.style.display = 'none';
+          transition.style.pointerEvents = 'none';
+          try { sessionStorage.setItem('hasEntered', '1'); } catch(e) {}
+        }, 620);
+      }, 320);
+    });
+    return true;
+  }
+
   // ---------- sweep overlay (slides up on page ready) ----------
   function initSweep() {
     if (!sweep) return;
@@ -457,6 +577,15 @@
       sweep.style.transform = 'translateY(-101%)';
       setTimeout(() => { sweep.style.display = 'none'; }, 1100);
     };
+    // If we came in via scene-cut, transition overlay handles reveal — hide sweep
+    let pending = null;
+    try { pending = sessionStorage.getItem('pendingEntry'); } catch(e) {}
+    if (pending) {
+      sweep.style.transition = 'none';
+      sweep.style.transform = 'translateY(-101%)';
+      sweep.style.display = 'none';
+      return;
+    }
     // Skip on subsequent in-session visits (e.g. Home → About → Home → About)
     let hasEntered = false;
     try { hasEntered = sessionStorage.getItem('hasEntered') === '1'; } catch(e) {}
@@ -644,7 +773,9 @@
   initCustomCursor();
   initAmbient();
   initParticles();
-  initSweep();
+  initNavIntercept();
+  // If we're arriving from a scene-cut, play the entry; otherwise fall through to sweep
+  if (!playSceneEntry()) initSweep();
   initReveals();
   initCardTilt();
   initExpCards();
