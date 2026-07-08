@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>About — Ace Burney</title>
+<meta name="description" content="Ascencion 'Ace' Burney — Founder & Product Lead at Omery. Product strategy, systems design, and AI-driven automation. Austin, TX.">
+<meta name="author" content="Ace Burney">
+<meta name="theme-color" content="#0D0D0D">
+<meta name="color-scheme" content="dark">
+<link rel="canonical" href="https://aceburney.com/about">
+<meta property="og:type" content="profile">
+<meta property="og:site_name" content="Ace Burney">
+<meta property="og:title" content="About — Ace Burney">
+<meta property="og:description" content="Founder & Product Lead at Omery. Product strategy, systems design, and AI-driven automation.">
+<meta property="og:url" content="https://aceburney.com/about">
+<meta property="og:image" content="https://aceburney.com/assets/portrait.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="About — Ace Burney">
+<meta name="twitter:description" content="Founder & Product Lead at Omery. Product strategy, systems design, and AI-driven automation.">
+<meta name="twitter:image" content="https://aceburney.com/assets/portrait.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230D0D0D'/%3E%3Ctext x='16' y='22' font-family='Helvetica,Arial,sans-serif' font-weight='700' font-size='18' fill='%23e8e6e1' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { background: #0D0D0D; }
+  body { color: #e8e6e1; }
+  a { color: #7A7A7A; text-decoration: none; }
+  a:hover { color: #e8e6e1; }
+  ::selection { background: #e8e6e1; color: #0D0D0D; }
+  @keyframes ab-fade { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes ab-scrollhint { 0% { transform: translateY(-14px); opacity: 0; } 40% { opacity: 1; } 100% { transform: translateY(46px); opacity: 0; } }
+  @keyframes ab-grain {
+    0%{transform:translate(0,0);}10%{transform:translate(-6%,-4%);}20%{transform:translate(-11%,6%);}30%{transform:translate(6%,-11%);}40%{transform:translate(-4%,14%);}50%{transform:translate(-12%,4%);}60%{transform:translate(14%,0);}70%{transform:translate(0,11%);}80%{transform:translate(-14%,-3%);}90%{transform:translate(10%,6%);}100%{transform:translate(4%,0);}
+  }
+  @media (prefers-reduced-motion: reduce) { [data-motion] { animation: none !important; } }
+  @media (max-width: 760px) {
+    [data-m="intro-grid"] { grid-template-columns: 1fr !important; gap: 40px !important; }
+    [data-m="tl-row"] { grid-template-columns: 1fr !important; min-height: auto !important; row-gap: 4px; padding: 30px 0 !important; }
+    [data-m="tl-row"] > span { display: none !important; }
+    [data-m="tl-spine"] { display: none !important; }
+    [data-m="tl-year"] { order: -1; text-align: left !important; padding: 0 0 2px 0 !important; }
+    [data-m="tl-year"] > span { left: auto !important; right: 0 !important; }
+  }
+</style>
+</head>
+<body>
+<div data-root style="position:relative; width:100%; min-height:100dvh; background:#0D0D0D; overflow-x:hidden; cursor:none; -webkit-tap-highlight-color:transparent;">
+
+  <!-- Ambient volumetric lights (fixed, behind everything) -->
+  <canvas data-ambient style="position:fixed; inset:0; z-index:0; width:100vw; height:100vh; pointer-events:none; display:block;"></canvas>
+
+  <!-- radial glow + vignette -->
+  <div style="position:fixed; inset:0; z-index:1; pointer-events:none; background:
+      radial-gradient(ellipse 70% 55% at 50% 20%, rgba(237,233,224,0.05), rgba(237,233,224,0) 60%),
+      radial-gradient(circle at 50% 40%, rgba(0,0,0,0) 42%, rgba(0,0,0,0.5) 100%);"></div>
+
+  <!-- film grain -->
+  <div data-motion style="position:fixed; inset:-60%; z-index:2; pointer-events:none; opacity:0.05; mix-blend-mode:overlay; animation:ab-grain 0.7s steps(1) infinite; background-image:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22140%22 height=%22140%22%3E%3Cfilter id=%22n%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.85%22 numOctaves=%222%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23n)%22/%3E%3C/svg%3E'); background-size:200px 200px;"></div>
+
+  <!-- cursor particle constellation -->
+  <canvas data-particle style="position:fixed; inset:0; z-index:3; width:100vw; height:100vh; pointer-events:none; display:block;"></canvas>
+
+  <!-- ===== NAV ===== -->
+  <nav style="position:fixed; top:0; left:0; right:0; z-index:30; display:flex; align-items:center; justify-content:space-between; padding:28px clamp(24px,5vw,60px); mix-blend-mode:difference;">
+    <a href="/" data-scramble data-scramble-to="← BACK HOME" style="font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.18em; color:#e8e6e1; text-transform:uppercase;">Ace Burney</a>
+    <div style="display:flex; align-items:center; gap:16px; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.18em; text-transform:uppercase;">
+      <span style="color:#e8e6e1;">About</span>
+    </div>
+  </nav>
+
+  <!-- ===== CONTENT ===== -->
+  <div style="position:relative; z-index:10; max-width:1240px; margin:0 auto; padding:0 clamp(24px,5vw,60px);">
+
+    <!-- INTRO + TRADING CARD -->
+    <section style="min-height:100dvh; display:flex; flex-direction:column; justify-content:center; gap:clamp(30px,5vh,56px); padding:120px 0 60px;">
+      <div data-m="intro-grid" style="display:grid; grid-template-columns:minmax(0,1.15fr) minmax(0,0.85fr); gap:clamp(24px,3vw,48px); align-items:center; width:100%;">
+        <!-- left: intro -->
+        <div data-reveal>
+          <div style="font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.2em; color:#7A7A7A; text-transform:uppercase; margin-bottom:34px;">Ascencion &lsquo;Ace&rsquo; Burney</div>
+          <h1 style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight:700; font-size:clamp(2.4rem,5vw,4.6rem); line-height:0.98; letter-spacing:-0.03em; color:#f2f0ef; text-wrap:balance;">I shape how brands<br>look, feel &amp; run.</h1>
+          <p style="margin-top:32px; max-width:38ch; font-family:'Space Mono',monospace; font-weight:400; font-size:clamp(0.88rem,1.05vw,1rem); line-height:1.75; color:#a8a29a;">Product leader and builder focused on product strategy, systems design, and AI-driven automation — shaping how brands look, feel, and run through product thinking, technical systems, and creative direction, told through photography, film, and design.</p>
+          <div style="margin-top:36px; display:flex; flex-wrap:wrap; gap:10px 22px; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:#7A7A7A;">
+            <span>✦ Product</span>
+            <span>✦ Story Telling</span>
+            <span>✦ Film</span>
+            <span>✦ Systems</span>
+            <span>✦ Photography</span>
+            <span>✦ Automation</span>
+            <span>✦ Creative Technology</span>
+          </div>
+        </div>
+
+        <!-- right: trading card -->
+        <div data-reveal style="display:flex; justify-content:center; perspective:1400px;">
+          <div data-card style="position:relative; width:min(100%,420px); background:linear-gradient(180deg, rgba(255,255,255,0.055), rgba(255,255,255,0.02)); border:1px solid rgba(255,255,255,0.10); border-radius:10px; padding:14px; will-change:transform; transform-style:preserve-3d; box-shadow:0 40px 90px -40px rgba(0,0,0,0.9);">
+            <div data-sheen style="position:absolute; inset:0; border-radius:10px; pointer-events:none; z-index:5; opacity:0; background:radial-gradient(circle at 50% 0%, rgba(255,255,255,0.35), rgba(255,255,255,0) 45%); mix-blend-mode:soft-light;"></div>
+            <!-- portrait -->
+            <div style="position:relative; aspect-ratio:1/1; overflow:hidden; border-radius:6px; background:#111;">
+              <img src="assets/portrait.jpg" alt="Ace Burney" width="420" height="420" loading="lazy" style="width:100%; height:100%; object-fit:cover; object-position:center 46%; filter:grayscale(1) contrast(1.05);">
+            </div>
+            <!-- body -->
+            <div style="padding:16px 6px 4px;">
+              <div style="display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:6px 12px;">
+                <h2 style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight:700; font-size:1.5rem; letter-spacing:-0.02em; color:#f2f0ef; text-transform:uppercase; white-space:nowrap;">Ace Burney</h2>
+                <span style="font-family:'Space Mono',monospace; font-size:10px; letter-spacing:0.12em; color:#7A7A7A; text-transform:uppercase; white-space:nowrap;">Product / Tech / Creative</span>
+              </div>
+              <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:18px; padding-top:16px; border-top:1px solid rgba(255,255,255,0.09);">
+                <div>
+                  <div style="font-family:'Space Mono',monospace; font-size:9px; letter-spacing:0.16em; color:#6b675f; text-transform:uppercase;">Role</div>
+                  <div style="font-family:'Space Mono',monospace; font-size:12px; color:#e8e6e1; margin-top:5px;">Builder</div>
+                </div>
+                <div>
+                  <div style="font-family:'Space Mono',monospace; font-size:9px; letter-spacing:0.16em; color:#6b675f; text-transform:uppercase;">XP</div>
+                  <div style="font-family:'Space Mono',monospace; font-size:12px; color:#e8e6e1; margin-top:5px;">14 Yrs</div>
+                </div>
+                <div>
+                  <div style="font-family:'Space Mono',monospace; font-size:9px; letter-spacing:0.16em; color:#6b675f; text-transform:uppercase;">Base</div>
+                  <div style="font-family:'Space Mono',monospace; font-size:12px; color:#e8e6e1; margin-top:5px;">ATX</div>
+                </div>
+              </div>
+              <div style="margin-top:16px; padding-top:14px; border-top:1px solid rgba(255,255,255,0.09);">
+                <div style="font-family:'Space Mono',monospace; font-size:9px; letter-spacing:0.16em; color:#6b675f; text-transform:uppercase;">Education</div>
+                <div style="margin-top:8px; display:flex; flex-direction:column; gap:9px;">
+                  <div>
+                    <div style="font-family:'Space Mono',monospace; font-size:11px; line-height:1.4; color:#cfcac2;">M.S. Technology Commercialization</div>
+                    <div style="font-family:'Space Mono',monospace; font-size:11px; line-height:1.4; color:#8f8a82;">The University of Texas at Austin</div>
+                  </div>
+                  <div>
+                    <div style="font-family:'Space Mono',monospace; font-size:11px; line-height:1.4; color:#cfcac2;">B.A. Business Administration, Marketing</div>
+                    <div style="font-family:'Space Mono',monospace; font-size:11px; line-height:1.4; color:#8f8a82;">University of Maine</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- footer -->
+            <div style="display:flex; justify-content:space-between; margin-top:14px; padding:12px 6px 4px; border-top:1px solid rgba(255,255,255,0.09); font-family:'Space Mono',monospace; font-size:10px; letter-spacing:0.14em; color:#6b675f; text-transform:uppercase;">
+              <span>Omery Studio</span>
+              <span>2026 — ATX</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- scroll indicator -->
+      <div data-reveal style="display:flex; flex-direction:column; align-items:center; gap:12px; font-family:'Space Mono',monospace; font-size:10px; letter-spacing:0.22em; color:#7A7A7A; text-transform:uppercase;">
+        <span>Scroll</span>
+        <span style="display:block; position:relative; width:1px; height:46px; overflow:hidden; background:linear-gradient(180deg, rgba(255,255,255,0.16), rgba(255,255,255,0));">
+          <span data-motion style="position:absolute; top:0; left:0; width:100%; height:14px; background:#e8e6e1; animation:ab-scrollhint 1.9s ease-in-out infinite;"></span>
+        </span>
+      </div>
+    </section>
+
+    <section style="padding:40px 0 120px;">
+      <div data-reveal style="display:flex; align-items:center; justify-content:center; gap:clamp(16px,3vw,32px); margin-bottom:clamp(50px,8vh,110px);">
+        <span style="flex:1; height:1px; background:linear-gradient(90deg, transparent, rgba(255,255,255,0.16));"></span>
+        <h2 style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight:700; font-size:clamp(1.6rem,3.4vw,2.8rem); letter-spacing:-0.01em; color:#f2f0ef; text-transform:uppercase; white-space:nowrap;">Experience</h2>
+        <span style="flex:1; height:1px; background:linear-gradient(90deg, rgba(255,255,255,0.16), transparent);"></span>
+      </div>
+
+      <div style="position:relative;">
+        <!-- center spine -->
+        <div data-m="tl-spine" style="position:absolute; left:50%; transform:translateX(-50%); top:0; bottom:0; width:1px; background:linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.16) 8%, rgba(255,255,255,0.16) 92%, rgba(255,255,255,0) 100%);"></div>
+
+        <!-- ENTRY 01 -->
+        <div data-reveal data-m="tl-row" style="position:relative; min-height:clamp(340px,54vh,560px); display:grid; grid-template-columns:1fr 1fr; align-items:center; column-gap:clamp(24px,6vw,90px);">
+          <div data-m="tl-year" style="position:relative; text-align:right; padding-right:clamp(14px,3vw,54px);">
+            <div style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight:700; font-size:clamp(4.5rem,13vw,13rem); line-height:0.78; letter-spacing:-0.04em; color:#2b2925;">2024</div>
+          </div>
+          <span style="position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:11px; height:11px; border-radius:50%; background:#e8e6e1; box-shadow:0 0 0 5px #0D0D0D, 0 0 0 6px rgba(255,255,255,0.16), 0 0 18px 2px rgba(232,230,225,0.35);"></span>
+          <div style="padding-left:clamp(14px,3vw,54px);">
+            <div data-exp-card style="position:relative; overflow:hidden; border:1px solid rgba(255,255,255,0.09); border-radius:10px; background:linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.015)); padding:clamp(22px,2.4vw,34px); box-shadow:0 30px 70px -46px rgba(0,0,0,0.9); transition:transform .5s cubic-bezier(.2,.7,.2,1), border-color .5s ease;">
+              <div data-exp-sheen style="position:absolute; inset:0; border-radius:10px; pointer-events:none; opacity:0; background:radial-gradient(circle at 50% 0%, rgba(255,255,255,0.14), rgba(255,255,255,0) 55%); transition:opacity .4s ease;"></div>
+              <span style="font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.18em; color:#7A7A7A; text-transform:uppercase;">2024 — Now</span>
+              <h3 style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight:700; font-size:clamp(1.3rem,2.1vw,1.8rem); letter-spacing:-0.01em; color:#f2f0ef; margin-top:14px;">Founder &amp; Product Lead</h3>
+              <span style="display:block; font-family:'Space Mono',monospace; font-size:12px; color:#a8a29a; margin-top:6px;"><a href="https://www.omery.studio" target="_blank" rel="noopener" data-scramble style="color:#e8e6e1;">Omery</a> — Design &amp; Systems Studio</span>
+              <p style="font-family:'Space Mono',monospace; font-size:12.5px; line-height:1.75; color:#8f8a82; margin-top:18px;">Independent practice in AI automation, product strategy, and creative systems for brands and operators.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ENTRY 02 -->
+        <div data-reveal data-m="tl-row" style="position:relative; min-height:clamp(340px,54vh,560px); display:grid; grid-template-columns:1fr 1fr; align-items:center; column-gap:clamp(24px,6vw,90px);">
+          <div style="padding-right:clamp(14px,3vw,54px);">
+            <div data-exp-card style="position:relative; overflow:hidden; border:1px solid rgba(255,255,255,0.09); border-radius:10px; background:linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.015)); padding:clamp(22px,2.4vw,34px); box-shadow:0 30px 70px -46px rgba(0,0,0,0.9); transition:transform .5s cubic-bezier(.2,.7,.2,1), border-color .5s ease;">
+              <div data-exp-sheen style="position:absolute; inset:0; border-radius:10px; pointer-events:none; opacity:0; background:radial-gradient(circle at 50% 0%, rgba(255,255,255,0.14), rgba(255,255,255,0) 55%); transition:opacity .4s ease;"></div>
+              <span style="font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.18em; color:#7A7A7A; text-transform:uppercase;">2022 — Now</span>
+              <h3 style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight:700; font-size:clamp(1.3rem,2.1vw,1.8rem); letter-spacing:-0.01em; color:#f2f0ef; margin-top:14px;">Senior Product Manager</h3>
+              <span style="display:block; font-family:'Space Mono',monospace; font-size:12px; color:#a8a29a; margin-top:6px;">Consultant — Product &amp; Systems</span>
+              <p style="font-family:'Space Mono',monospace; font-size:12.5px; line-height:1.75; color:#8f8a82; margin-top:18px;">Own SaaS products end-to-end — discovery, roadmap, and delivery. Design data and reporting workflows and automate operational processes.</p>
+            </div>
+          </div>
+          <span style="position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:11px; height:11px; border-radius:50%; background:#5a564f; box-shadow:0 0 0 5px #0D0D0D, 0 0 0 6px rgba(255,255,255,0.1);"></span>
+          <div data-m="tl-year" style="position:relative; text-align:left; padding-left:clamp(14px,3vw,54px);">
+            <div style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight:700; font-size:clamp(4.5rem,13vw,13rem); line-height:0.78; letter-spacing:-0.04em; color:#2b2925;">2022</div>
+          </div>
+        </div>
+
+        <!-- ENTRY 03 -->
+        <div data-reveal data-m="tl-row" style="position:relative; min-height:clamp(340px,54vh,560px); display:grid; grid-template-columns:1fr 1fr; align-items:center; column-gap:clamp(24px,6vw,90px);">
+          <div data-m="tl-year" style="position:relative; text-align:right; padding-right:clamp(14px,3vw,54px);">
+            <div style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight:700; font-size:clamp(4.5rem,13vw,13rem); line-height:0.78; letter-spacing:-0.04em; color:#2b2925;">2019</div>
+          </div>
+          <span style="position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:11px; height:11px; border-radius:50%; background:#5a564f; box-shadow:0 0 0 5px #0D0D0D, 0 0 0 6px rgba(255,255,255,0.1);"></span>
+          <div style="padding-left:clamp(14px,3vw,54px);">
+            <div data-exp-card style="position:relative; overflow:hidden; border:1px solid rgba(255,255,255,0.09); border-radius:10px; background:linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.015)); padding:clamp(22px,2.4vw,34px); box-shadow:0 30px 70px -46px rgba(0,0,0,0.9); transition:transform .5s cubic-bezier(.2,.7,.2,1), border-color .5s ease;">
+              <div data-exp-sheen style="position:absolute; inset:0; border-radius:10px; pointer-events:none; opacity:0; background:radial-gradient(circle at 50% 0%, rgba(255,255,255,0.14), rgba(255,255,255,0) 55%); transition:opacity .4s ease;"></div>
+              <span style="font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.18em; color:#7A7A7A; text-transform:uppercase;">2019 — Now</span>
+              <h3 style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight:700; font-size:clamp(1.3rem,2.1vw,1.8rem); letter-spacing:-0.01em; color:#f2f0ef; margin-top:14px;">Creative Director</h3>
+              <span style="display:block; font-family:'Space Mono',monospace; font-size:12px; color:#a8a29a; margin-top:6px;">Creative Studio</span>
+              <p style="font-family:'Space Mono',monospace; font-size:12.5px; line-height:1.75; color:#8f8a82; margin-top:18px;">Cinematic film &amp; photography studio — directing, shooting, and editing brand and story-driven work, including Google and nonprofit films, on automated end-to-end client pipelines.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ENTRY 04 -->
+        <div data-reveal data-m="tl-row" style="position:relative; min-height:clamp(340px,54vh,560px); display:grid; grid-template-columns:1fr 1fr; align-items:center; column-gap:clamp(24px,6vw,90px);">
+          <div style="padding-right:clamp(14px,3vw,54px);">
+            <div data-exp-card style="position:relative; overflow:hidden; border:1px solid rgba(255,255,255,0.09); border-radius:10px; background:linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.015)); padding:clamp(22px,2.4vw,34px); box-shadow:0 30px 70px -46px rgba(0,0,0,0.9); transition:transform .5s cubic-bezier(.2,.7,.2,1), border-color .5s ease;">
+              <div data-exp-sheen style="position:absolute; inset:0; border-radius:10px; pointer-events:none; opacity:0; background:radial-gradient(circle at 50% 0%, rgba(255,255,255,0.14), rgba(255,255,255,0) 55%); transition:opacity .4s ease;"></div>
+              <span style="font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.18em; color:#7A7A7A; text-transform:uppercase;">2011 — 2022</span>
+              <h3 style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight:700; font-size:clamp(1.3rem,2.1vw,1.8rem); letter-spacing:-0.01em; color:#f2f0ef; margin-top:14px;">Product &amp; Systems Design</h3>
+              <span style="display:block; font-family:'Space Mono',monospace; font-size:12px; color:#a8a29a; margin-top:6px;">Enterprise Software</span>
+              <p style="font-family:'Space Mono',monospace; font-size:12.5px; line-height:1.75; color:#8f8a82; margin-top:18px;">A decade designing enterprise platforms, data systems, dashboards, and digital learning experiences at scale.</p>
+            </div>
+          </div>
+          <span style="position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:11px; height:11px; border-radius:50%; background:#5a564f; box-shadow:0 0 0 5px #0D0D0D, 0 0 0 6px rgba(255,255,255,0.1);"></span>
+          <div data-m="tl-year" style="position:relative; text-align:left; padding-left:clamp(14px,3vw,54px);">
+            <div style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight:700; font-size:clamp(4.5rem,13vw,13rem); line-height:0.78; letter-spacing:-0.04em; color:#2b2925;">2011</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT CTA -->
+    <section style="padding:60px 0 120px; text-align:center;">
+      <div data-reveal style="font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.2em; color:#7A7A7A; text-transform:uppercase; margin-bottom:28px;">Have a project?</div>
+      <a href="mailto:ascencion@aceburney.com" data-cta style="display:inline-flex; flex-wrap:nowrap; align-items:baseline; gap:0.32em; pointer-events:auto; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight:700; font-size:clamp(3rem,11vw,9rem); line-height:0.92; letter-spacing:-0.03em; color:#f2f0ef; text-transform:uppercase;">
+        <span style="display:inline-flex;"><span data-cta-k style="display:inline-block; will-change:transform;">L</span><span data-cta-k style="display:inline-block; will-change:transform;">e</span><span data-cta-k style="display:inline-block; will-change:transform;">t</span><span data-cta-k style="display:inline-block; will-change:transform;">'</span><span data-cta-k style="display:inline-block; will-change:transform;">s</span></span>
+        <span style="display:inline-flex;"><span data-cta-k style="display:inline-block; will-change:transform;">t</span><span data-cta-k style="display:inline-block; will-change:transform;">a</span><span data-cta-k style="display:inline-block; will-change:transform;">l</span><span data-cta-k style="display:inline-block; will-change:transform;">k</span></span>
+      </a>
+      <div data-reveal style="margin-top:40px; display:flex; flex-wrap:wrap; justify-content:center; gap:14px 28px; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.16em; text-transform:uppercase;">
+        <a href="https://www.instagram.com/asxenxion/" target="_blank" rel="noopener" data-scramble>Instagram</a>
+        <span style="color:#3a3833;">/</span>
+        <a href="https://www.linkedin.com/in/aceburney/" target="_blank" rel="noopener" data-scramble>LinkedIn</a>
+        <span style="color:#3a3833;">/</span>
+        <a href="https://x.com/asxenxion" target="_blank" rel="noopener" data-scramble>X</a>
+        <span style="color:#3a3833;">/</span>
+        <a href="mailto:ascencion@aceburney.com" data-scramble>Email</a>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer style="display:flex; align-items:center; justify-content:space-between; padding:30px 0 44px; border-top:1px solid rgba(255,255,255,0.07); font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.16em; color:#6b675f; text-transform:uppercase;">
+      <span>© 2026 Ace Burney</span>
+      <span>Austin, Texas</span>
+    </footer>
+  </div>
+
+  <!-- custom cursor -->
+  <div data-cursor style="position:fixed; top:0; left:0; width:26px; height:26px; border:1px solid rgba(237,233,224,0.55); border-radius:50%; pointer-events:none; z-index:9999; transform:translate(-100px,-100px); transition:width .25s ease, height .25s ease, background-color .25s ease, border-color .25s ease; mix-blend-mode:difference;"></div>
+
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  const $ = (s, c) => (c || document).querySelector(s);
+  const $$ = (s, c) => Array.from((c || document).querySelectorAll(s));
+
+  const root = $('[data-root]');
+  const cursor = $('[data-cursor]');
+  const ambient = $('[data-ambient]');
+  const particle = $('[data-particle]');
+  const card = $('[data-card]');
+  const sheen = $('[data-sheen]');
+
+  const state = {
+    mx: -9999, my: -9999, mouseSpeed: 0,
+    _pmx: 0, _pmy: 0,
+    _cx: -100, _cy: -100,
+  };
+
+  const onMove = (e) => {
+    const dx = e.clientX - state._pmx, dy = e.clientY - state._pmy;
+    state.mouseSpeed = Math.min(Math.hypot(dx, dy), 60);
+    state._pmx = e.clientX; state._pmy = e.clientY;
+    state.mx = e.clientX; state.my = e.clientY;
+  };
+  window.addEventListener('mousemove', onMove);
+  const onLeaveWin = () => { state.mx = -9999; state.my = -9999; state.mouseSpeed = 0; };
+  document.addEventListener('mouseleave', onLeaveWin);
+  window.addEventListener('blur', onLeaveWin);
+
+  // ---------- custom cursor ----------
+  function cursorGrow(big) {
+    if (!cursor) return;
+    cursor.style.width = big ? '46px' : '26px';
+    cursor.style.height = big ? '46px' : '26px';
+    cursor.style.backgroundColor = big ? 'rgba(237,233,224,0.9)' : 'transparent';
+  }
+  function initCustomCursor() {
+    if (!cursor) return;
+    if (matchMedia('(hover: none) and (pointer: coarse)').matches) { cursor.style.display = 'none'; return; }
+    const hoverSel = 'a, button, [data-cta]';
+    root.addEventListener('mouseover', (e) => { if (e.target.closest(hoverSel)) cursorGrow(true); });
+    root.addEventListener('mouseout', (e) => { if (e.target.closest(hoverSel)) cursorGrow(false); });
+    const loop = () => {
+      state._cx += (state.mx - state._cx) * 0.18;
+      state._cy += (state.my - state._cy) * 0.18;
+      cursor.style.transform = 'translate(' + (state._cx - 13).toFixed(1) + 'px, ' + (state._cy - 13).toFixed(1) + 'px)';
+      requestAnimationFrame(loop);
+    };
+    requestAnimationFrame(loop);
+  }
+
+  // ---------- ambient lights ----------
+  function initAmbient() {
+    if (!ambient) return;
+    const ctx = ambient.getContext('2d');
+    const SCALE = 0.15;
+    let w, h;
+    const resize = () => {
+      w = Math.max(1, Math.ceil(window.innerWidth * SCALE));
+      h = Math.max(1, Math.ceil(window.innerHeight * SCALE));
+      ambient.width = w; ambient.height = h;
+    };
+    resize();
+    window.addEventListener('resize', resize, { passive: true });
+    const lights = [
+      { cx: 0.12, cy: 0.18, r: 0.40, a: 0.13, phase: 0 },
+      { cx: 0.82, cy: 0.76, r: 0.34, a: 0.10, phase: 1.8 },
+      { cx: 0.76, cy: 0.10, r: 0.30, a: 0.085, phase: 3.2 },
+      { cx: 0.08, cy: 0.82, r: 0.32, a: 0.105, phase: 4.7 },
+      { cx: 0.48, cy: 0.48, r: 0.26, a: 0.06, phase: 2.5 },
+      { cx: 0.55, cy: 0.25, r: 0.28, a: 0.08, phase: 5.5 },
+    ];
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let t = 0;
+    const draw = () => {
+      ctx.clearRect(0, 0, w, h);
+      t += 0.006;
+      lights.forEach((l) => {
+        const bx = (l.cx + Math.sin(t * 1.1 + l.phase) * 0.08 + Math.sin(t * 0.5 + l.phase * 2.3) * 0.05 + Math.sin(t * 0.2 + l.phase * 0.7) * 0.03) * w;
+        const by = (l.cy + Math.cos(t * 0.9 + l.phase * 1.2) * 0.07 + Math.cos(t * 0.4 + l.phase * 1.8) * 0.06 + Math.cos(t * 0.15 + l.phase * 0.5) * 0.04) * h;
+        const baseR = l.r * Math.min(w, h);
+        for (let j = 0; j < 4; j++) {
+          const ox = bx + Math.sin(t * (0.4 + j * 0.1) + j * 1.7 + l.phase) * baseR * 0.35;
+          const oy = by + Math.cos(t * (0.35 + j * 0.08) + j * 2.3 + l.phase * 0.8) * baseR * 0.3;
+          const sr = baseR * (0.55 + j * 0.12);
+          const sa = l.a * (0.4 - j * 0.05);
+          const grad = ctx.createRadialGradient(ox, oy, 0, ox, oy, sr * 1.2);
+          grad.addColorStop(0, 'rgba(255,255,255,' + sa.toFixed(4) + ')');
+          grad.addColorStop(0.5, 'rgba(255,255,255,' + (sa * 0.3).toFixed(4) + ')');
+          grad.addColorStop(1, 'rgba(255,255,255,0)');
+          ctx.fillStyle = grad;
+          ctx.beginPath();
+          const steps = 20;
+          const seed = l.phase + j * 3.14;
+          for (let s = 0; s <= steps; s++) {
+            const angle = (s / steps) * Math.PI * 2;
+            const distort = 1 + 0.25 * Math.sin(angle * 2 + t * 0.6 + seed) + 0.15 * Math.sin(angle * 3 + t * 0.4 + seed * 1.7) + 0.1 * Math.sin(angle * 5 + t * 0.9 + seed * 0.5);
+            const pr = sr * distort;
+            const px = ox + Math.cos(angle) * pr;
+            const py = oy + Math.sin(angle) * pr;
+            if (s === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+          }
+          ctx.closePath();
+          ctx.fill();
+        }
+      });
+      if (!reduce) requestAnimationFrame(draw);
+    };
+    draw();
+  }
+
+  // ---------- cursor particles ----------
+  function initParticles() {
+    const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    if (isTouch || !particle) return;
+    const ctx = particle.getContext('2d');
+    const REVEAL_R = 200, REPULSE_R = 160, REPULSE_FORCE = 5, COLLAPSE_FORCE = 0.12;
+    const HOME_SPRING = 0.004, FRICTION = 0.88, JITTER = 1.0, DART_CHANCE = 0.03, DART_FORCE = 4;
+    const CONNECT_R = 55, SPACING = 35, SIZE = 1.1, COL = '232,228,222';
+    let w, h, particles = [];
+    const seedParticles = () => {
+      particles = [];
+      const cols = Math.ceil(w / SPACING) + 1, rows = Math.ceil(h / SPACING) + 1;
+      for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) {
+        const hx = c * SPACING + (Math.random() - 0.5) * SPACING * 0.6;
+        const hy = r * SPACING + (Math.random() - 0.5) * SPACING * 0.6;
+        particles.push({ homeX: hx, homeY: hy, x: hx, y: hy, vx: 0, vy: 0, alpha: 0 });
+      }
+    };
+    const resize = () => { w = particle.width = window.innerWidth; h = particle.height = window.innerHeight; seedParticles(); };
+    resize();
+    window.addEventListener('resize', resize, { passive: true });
+    const loop = () => {
+      ctx.clearRect(0, 0, w, h);
+      const isMoving = state.mouseSpeed > 1.5;
+      const mx = state.mx > -9000 ? state.mx : -9999;
+      const my = state.mx > -9000 ? state.my : -9999;
+      const visible = [];
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
+        const dx = p.x - mx, dy = p.y - my;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        const nearCursor = dist < REVEAL_R * 1.3;
+        const hasVel = Math.abs(p.vx) > 0.06 || Math.abs(p.vy) > 0.06;
+        if (!nearCursor && !hasVel && p.alpha < 0.005) continue;
+        const targetA = (isMoving && nearCursor) ? Math.max(0, (1 - dist / REVEAL_R)) * 0.6 : 0;
+        p.alpha += (targetA - p.alpha) * (targetA > p.alpha ? 0.12 : 0.05);
+        if (isMoving && dist < REPULSE_R && dist > 0) {
+          const f = (1 - dist / REPULSE_R) * REPULSE_FORCE;
+          p.vx += (dx / dist) * f; p.vy += (dy / dist) * f;
+          p.vx += (Math.random() - 0.5) * JITTER; p.vy += (Math.random() - 0.5) * JITTER;
+          if (Math.random() < DART_CHANCE) { const a = Math.random() * Math.PI * 2; p.vx += Math.cos(a) * DART_FORCE; p.vy += Math.sin(a) * DART_FORCE; }
+        } else if (!isMoving && dist < REVEAL_R && dist > 3 && p.alpha > 0.01) {
+          p.vx -= (dx / dist) * COLLAPSE_FORCE; p.vy -= (dy / dist) * COLLAPSE_FORCE;
+        }
+        p.vx += (p.homeX - p.x) * HOME_SPRING; p.vy += (p.homeY - p.y) * HOME_SPRING;
+        p.vx *= FRICTION; p.vy *= FRICTION; p.x += p.vx; p.y += p.vy;
+        if (p.alpha > 0.008) {
+          ctx.beginPath(); ctx.arc(p.x, p.y, SIZE, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(' + COL + ',' + p.alpha.toFixed(3) + ')'; ctx.fill();
+          visible.push(p);
+        }
+      }
+      ctx.lineWidth = 0.3;
+      for (let i = 0; i < visible.length; i++) for (let j = i + 1; j < visible.length; j++) {
+        const a = visible[i], b = visible[j];
+        const dx = a.x - b.x, dy = a.y - b.y, d2 = dx * dx + dy * dy;
+        if (d2 < CONNECT_R * CONNECT_R) {
+          const dist = Math.sqrt(d2);
+          const lineA = (1 - dist / CONNECT_R) * Math.min(a.alpha, b.alpha) * 0.12;
+          ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y);
+          ctx.strokeStyle = 'rgba(' + COL + ',' + lineA.toFixed(3) + ')'; ctx.stroke();
+        }
+      }
+      requestAnimationFrame(loop);
+    };
+    loop();
+  }
+
+  // ---------- reveals on scroll ----------
+  function initReveals() {
+    const els = $$('[data-reveal]', root);
+    els.forEach((el) => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(30px)';
+      el.style.transition = 'opacity 0.9s cubic-bezier(.2,.7,.2,1), transform 0.9s cubic-bezier(.2,.7,.2,1)';
+    });
+    const show = (el) => { el.style.opacity = '1'; el.style.transform = 'none'; };
+    if (!('IntersectionObserver' in window)) { els.forEach(show); return; }
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          const idx = els.indexOf(e.target);
+          setTimeout(() => show(e.target), (idx % 4) * 90);
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    els.forEach((el) => obs.observe(el));
+    setTimeout(() => els.forEach((el) => { if (el.style.opacity === '0') show(el); }), 2600);
+  }
+
+  // ---------- trading card 3D tilt + idle orbit ----------
+  function initCardTilt() {
+    if (!card) return;
+    if (matchMedia('(hover: none) and (pointer: coarse)').matches) return;
+    let tx = 0, ty = 0, ttx = 0, tty = 0, sx = 50, sy = 50, tsx = 50, tsy = 50, active = 0, tActive = 0;
+    const t0 = performance.now();
+    card.addEventListener('mouseenter', () => { tActive = 1; });
+    card.addEventListener('mousemove', (e) => {
+      const r = card.getBoundingClientRect();
+      const px = (e.clientX - r.left) / r.width;
+      const py = (e.clientY - r.top) / r.height;
+      tty = (px - 0.5) * 16;
+      ttx = (py - 0.5) * -16;
+      tsx = px * 100; tsy = py * 100;
+    });
+    card.addEventListener('mouseleave', () => { ttx = 0; tty = 0; tActive = 0; });
+    const loop = () => {
+      active += (tActive - active) * 0.08;
+      const idle = 1 - active;
+      if (idle > 0.001) {
+        const t = (performance.now() - t0) / 1000;
+        const vx = 0.5 + Math.cos(t * 0.5) * 0.5;
+        const vy = 0.5 + Math.sin(t * 0.5 * 1.3) * 0.5;
+        tty = (tty * active) + ((vx - 0.5) * 7) * idle;
+        ttx = (ttx * active) + ((vy - 0.5) * -7) * idle;
+        tsx = (tsx * active) + (vx * 100) * idle;
+        tsy = (tsy * active) + (vy * 100) * idle;
+      }
+      tx += (ttx - tx) * 0.08; ty += (tty - ty) * 0.08;
+      sx += (tsx - sx) * 0.1; sy += (tsy - sy) * 0.1;
+      card.style.transform = 'rotateX(' + tx.toFixed(2) + 'deg) rotateY(' + ty.toFixed(2) + 'deg) translateZ(0)';
+      if (sheen) {
+        sheen.style.opacity = (active * 0.9).toFixed(3);
+        sheen.style.background = 'radial-gradient(circle at ' + sx.toFixed(1) + '% ' + sy.toFixed(1) + '%, rgba(255,255,255,0.4), rgba(255,255,255,0) 45%)';
+      }
+      requestAnimationFrame(loop);
+    };
+    requestAnimationFrame(loop);
+  }
+
+  // ---------- timeline card sheen + hover lift ----------
+  function initExpCards() {
+    if (matchMedia('(hover: none) and (pointer: coarse)').matches) return;
+    const cards = $$('[data-exp-card]', root);
+    cards.forEach((c) => {
+      const s = c.querySelector('[data-exp-sheen]');
+      c.addEventListener('mouseenter', () => {
+        c.style.transform = 'translateY(-4px)';
+        c.style.borderColor = 'rgba(255,255,255,0.18)';
+        if (s) s.style.opacity = '1';
+      });
+      c.addEventListener('mousemove', (e) => {
+        if (!s) return;
+        const r = c.getBoundingClientRect();
+        const x = ((e.clientX - r.left) / r.width * 100).toFixed(1);
+        const y = ((e.clientY - r.top) / r.height * 100).toFixed(1);
+        s.style.background = 'radial-gradient(circle at ' + x + '% ' + y + '%, rgba(255,255,255,0.16), rgba(255,255,255,0) 55%)';
+      });
+      c.addEventListener('mouseleave', () => {
+        c.style.transform = 'translateY(0)';
+        c.style.borderColor = 'rgba(255,255,255,0.09)';
+        if (s) s.style.opacity = '0';
+      });
+    });
+  }
+
+  // ---------- CTA magnetic letters ----------
+  function initCtaPhysics() {
+    const letters = $$('[data-cta-k]', root);
+    if (!letters.length) return;
+    const SPRING = 0.065, DAMPING = 0.82, THRESHOLD = 300, STRENGTH = 90;
+    const states = letters.map((el) => { el.style.transition = 'none'; return { el, x: 0, y: 0, vx: 0, vy: 0 }; });
+    const step = () => {
+      for (const s of states) {
+        const rect = s.el.getBoundingClientRect();
+        const restX = rect.left + rect.width / 2 - s.x;
+        const restY = rect.top + rect.height / 2 - s.y;
+        const dx = restX - state.mx, dy = restY - state.my;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < THRESHOLD && dist > 0) {
+          const falloff = Math.pow(1 - dist / THRESHOLD, 2);
+          const force = falloff * STRENGTH;
+          s.vx += (dx / dist) * force * 0.12;
+          s.vy += (dy / dist) * force * 0.12;
+        }
+        s.vx += -s.x * SPRING; s.vy += -s.y * SPRING;
+        s.vx *= DAMPING; s.vy *= DAMPING;
+        s.x += s.vx; s.y += s.vy;
+        const rot = s.vx * 1.6;
+        if (Math.abs(s.x) > 0.1 || Math.abs(s.y) > 0.1) {
+          s.el.style.transform = 'translate(' + s.x.toFixed(1) + 'px,' + s.y.toFixed(1) + 'px) rotate(' + rot.toFixed(1) + 'deg)';
+        } else {
+          s.x = 0; s.y = 0; s.vx = 0; s.vy = 0;
+          s.el.style.transform = '';
+        }
+      }
+      requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }
+
+  // ---------- scramble on hover for [data-scramble] links ----------
+  function initScramble() {
+    const pool = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789#/&*';
+    const els = $$('[data-scramble]', root);
+    els.forEach((el) => {
+      const original = el.textContent;
+      const target = el.getAttribute('data-scramble-to') || original;
+      let interval = null;
+      const scrambleTo = (dest) => {
+        let iteration = 0;
+        const fromLen = el.textContent.length, destLen = dest.length;
+        const maxLen = Math.max(destLen, fromLen);
+        clearInterval(interval);
+        interval = setInterval(() => {
+          let result = '';
+          const progress = maxLen > 0 ? iteration / maxLen : 1;
+          const curLen = Math.round(fromLen + (destLen - fromLen) * progress);
+          for (let i = 0; i < curLen; i++) {
+            result += i < iteration ? (dest[i] || '') : pool[(Math.random() * pool.length) | 0];
+          }
+          el.textContent = result;
+          iteration += 1 / 3;
+          if (iteration >= maxLen) { clearInterval(interval); el.textContent = dest; }
+        }, 30);
+      };
+      el.addEventListener('mouseenter', () => scrambleTo(target));
+      el.addEventListener('mouseleave', () => scrambleTo(original));
+    });
+  }
+
+  // ---------- boot ----------
+  initCustomCursor();
+  initAmbient();
+  initParticles();
+  initReveals();
+  initCardTilt();
+  initExpCards();
+  initCtaPhysics();
+  initScramble();
+})();
+</script>
+</body>
+</html>
