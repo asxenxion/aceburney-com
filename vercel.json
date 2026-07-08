@@ -3,18 +3,6 @@
   "trailingSlash": false,
   "headers": [
     {
-      "source": "/(.*\\.(jpg|jpeg|png|webp|avif|svg|ico|woff2))",
-      "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=2592000, immutable" }
-      ]
-    },
-    {
-      "source": "/(.*\\.html)",
-      "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
-      ]
-    },
-    {
       "source": "/(.*)",
       "headers": [
         { "key": "X-Content-Type-Options", "value": "nosniff" },
