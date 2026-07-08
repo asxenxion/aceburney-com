@@ -453,9 +453,19 @@
   function initSweep() {
     if (!sweep) return;
     const finish = () => {
+      try { sessionStorage.setItem('hasEntered', '1'); } catch(e) {}
       sweep.style.transform = 'translateY(-101%)';
       setTimeout(() => { sweep.style.display = 'none'; }, 1100);
     };
+    // Skip on subsequent in-session visits (e.g. Home → About → Home → About)
+    let hasEntered = false;
+    try { hasEntered = sessionStorage.getItem('hasEntered') === '1'; } catch(e) {}
+    if (hasEntered) {
+      sweep.style.transition = 'none';
+      sweep.style.transform = 'translateY(-101%)';
+      sweep.style.display = 'none';
+      return;
+    }
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       setTimeout(finish, 100);
       return;
