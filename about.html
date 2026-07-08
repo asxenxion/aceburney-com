@@ -262,6 +262,9 @@
   <!-- custom cursor -->
   <div data-cursor style="position:fixed; top:0; left:0; width:26px; height:26px; border:1px solid rgba(237,233,224,0.55); border-radius:50%; pointer-events:none; z-index:9999; transform:translate(-100px,-100px); transition:width .25s ease, height .25s ease, background-color .25s ease, border-color .25s ease; mix-blend-mode:difference;"></div>
 
+  <!-- sweep overlay (slides up on ready — no counter, just the reveal transition) -->
+  <div data-sweep style="position:fixed; inset:0; z-index:9990; background:#0D0D0D; pointer-events:none; will-change:transform; transition:transform 1s cubic-bezier(.76,0,.24,1);"></div>
+
 </div>
 
 <script>
@@ -277,6 +280,7 @@
   const particle = $('[data-particle]');
   const card = $('[data-card]');
   const sheen = $('[data-sheen]');
+  const sweep = $('[data-sweep]');
 
   const state = {
     mx: -9999, my: -9999, mouseSpeed: 0,
@@ -445,6 +449,33 @@
     loop();
   }
 
+  // ---------- sweep overlay (slides up on page ready) ----------
+  function initSweep() {
+    if (!sweep) return;
+    const finish = () => {
+      sweep.style.transform = 'translateY(-101%)';
+      setTimeout(() => { sweep.style.display = 'none'; }, 1100);
+    };
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setTimeout(finish, 100);
+      return;
+    }
+    const img = root.querySelector('img');
+    const imgReady = (img && !img.complete)
+      ? new Promise((res) => { img.addEventListener('load', res, { once: true }); img.addEventListener('error', res, { once: true }); })
+      : Promise.resolve();
+    const readyPromise = Promise.all([
+      (document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve(),
+      (document.readyState === 'complete') ? Promise.resolve()
+        : new Promise((res) => window.addEventListener('load', res, { once: true })),
+      imgReady,
+    ]);
+    Promise.race([
+      readyPromise,
+      new Promise((res) => setTimeout(res, 6000)),
+    ]).then(() => setTimeout(finish, 200));
+  }
+
   // ---------- reveals on scroll ----------
   function initReveals() {
     const els = $$('[data-reveal]', root);
@@ -603,6 +634,7 @@
   initCustomCursor();
   initAmbient();
   initParticles();
+  initSweep();
   initReveals();
   initCardTilt();
   initExpCards();
