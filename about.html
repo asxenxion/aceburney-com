@@ -498,7 +498,15 @@
 
   function playSceneExit(destUrl, destLabel) {
     if (!transition || !transitionLabel) { location.href = destUrl; return; }
+    // Reset from any prior entry that left it display:none / off-screen
+    transition.style.transition = 'none';
+    transition.style.display = 'flex';
+    transition.style.transform = 'translateY(-101%)';
     transition.style.pointerEvents = 'auto';
+    transitionLabel.style.opacity = '0';
+    if (transitionEyebrow) transitionEyebrow.style.opacity = '0';
+    transition.offsetHeight; // force reflow so the next transition applies
+    transition.style.transition = 'transform 520ms cubic-bezier(.76,0,.24,1)';
     transition.style.transform = 'translateY(0)';
     // Small delay so the label emerges after the curtain arrives
     setTimeout(() => {
