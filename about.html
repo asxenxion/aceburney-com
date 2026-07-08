@@ -535,6 +535,12 @@
     try { pending = sessionStorage.getItem('pendingEntry'); } catch(e) {}
     if (!pending) return false;
     try { sessionStorage.removeItem('pendingEntry'); } catch(e) {}
+    // Kill the sweep — the scene-cut overlay is doing the reveal
+    if (sweep) {
+      sweep.style.transition = 'none';
+      sweep.style.transform = 'translateY(-101%)';
+      sweep.style.display = 'none';
+    }
     // Snap overlay covered, label showing destination
     transition.style.transition = 'none';
     transition.style.transform = 'translateY(0)';

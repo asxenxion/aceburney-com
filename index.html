@@ -362,6 +362,13 @@
     try { pending = sessionStorage.getItem('pendingEntry'); } catch(e) {}
     if (!pending) return false;
     try { sessionStorage.removeItem('pendingEntry'); } catch(e) {}
+    // Kill the loader — the scene-cut overlay is doing the reveal
+    if (loader) {
+      loader.style.transition = 'none';
+      loader.style.transform = 'translateY(-101%)';
+      loader.style.pointerEvents = 'none';
+      loader.style.display = 'none';
+    }
     transition.style.transition = 'none';
     transition.style.transform = 'translateY(0)';
     transition.style.pointerEvents = 'auto';
