@@ -655,19 +655,42 @@
   // ---------- trading card 3D tilt + idle orbit ----------
   function initCardTilt() {
     if (!card) return;
-    if (matchMedia('(hover: none) and (pointer: coarse)').matches) return;
+    const isCoarse = matchMedia('(hover: none) and (pointer: coarse)').matches;
+    // Slightly softer tilt on touch — smaller card + finger obscures part of it
+    const MAX = isCoarse ? 12 : 16;
     let tx = 0, ty = 0, ttx = 0, tty = 0, sx = 50, sy = 50, tsx = 50, tsy = 50, active = 0, tActive = 0;
     const t0 = performance.now();
-    card.addEventListener('mouseenter', () => { tActive = 1; });
-    card.addEventListener('mousemove', (e) => {
+
+    const applyPoint = (clientX, clientY) => {
       const r = card.getBoundingClientRect();
-      const px = (e.clientX - r.left) / r.width;
-      const py = (e.clientY - r.top) / r.height;
-      tty = (px - 0.5) * 16;
-      ttx = (py - 0.5) * -16;
+      const px = Math.max(0, Math.min(1, (clientX - r.left) / r.width));
+      const py = Math.max(0, Math.min(1, (clientY - r.top) / r.height));
+      tty = (px - 0.5) * MAX;
+      ttx = (py - 0.5) * -MAX;
       tsx = px * 100; tsy = py * 100;
-    });
+    };
+
+    // Mouse (desktop)
+    card.addEventListener('mouseenter', () => { tActive = 1; });
+    card.addEventListener('mousemove', (e) => { applyPoint(e.clientX, e.clientY); });
     card.addEventListener('mouseleave', () => { ttx = 0; tty = 0; tActive = 0; });
+
+    // Touch (mobile) — one-finger drag on the card tilts it
+    card.addEventListener('touchstart', (e) => {
+      const t = e.touches[0];
+      if (!t) return;
+      tActive = 1;
+      applyPoint(t.clientX, t.clientY);
+    }, { passive: true });
+    card.addEventListener('touchmove', (e) => {
+      const t = e.touches[0];
+      if (!t) return;
+      applyPoint(t.clientX, t.clientY);
+    }, { passive: true });
+    const releaseTouch = () => { ttx = 0; tty = 0; tActive = 0; };
+    card.addEventListener('touchend', releaseTouch, { passive: true });
+    card.addEventListener('touchcancel', releaseTouch, { passive: true });
+
     const loop = () => {
       active += (tActive - active) * 0.08;
       const idle = 1 - active;
