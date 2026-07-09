@@ -43,6 +43,8 @@
     [data-m="tl-spine"] { display: none !important; }
     [data-m="tl-year"] { order: -1; text-align: left !important; padding: 0 0 2px 0 !important; }
     [data-m="tl-year"] > span { left: auto !important; right: 0 !important; }
+    [data-m="foot"] { grid-template-columns: 1fr 1fr !important; }
+    [data-m="foot-credit"] { grid-column: 1 / -1 !important; order: 3; justify-self: center !important; margin-top: 14px !important; }
   }
 </style>
 </head>
@@ -253,12 +255,10 @@
 
     <!-- FOOTER -->
     <footer style="padding:30px 0 44px; border-top:1px solid rgba(255,255,255,0.07);">
-      <div style="display:flex; align-items:center; justify-content:space-between; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.16em; color:#6b675f; text-transform:uppercase;">
-        <span>© 2026 Ace Burney</span>
-        <span>Austin, Texas</span>
-      </div>
-      <div data-reveal style="margin-top:22px; text-align:center; font-family:'Space Mono',monospace; font-size:10px; letter-spacing:0.18em; color:#5a564f; text-transform:uppercase;">
-        This site — designed &amp; built by me
+      <div data-m="foot" style="display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:12px 24px; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.16em; color:#6b675f; text-transform:uppercase;">
+        <span style="justify-self:start;">© 2026 Ace Burney</span>
+        <span data-m="foot-credit" data-reveal style="justify-self:center; text-align:center; font-size:10px; letter-spacing:0.18em; color:#5a564f;">This site — designed &amp; built by me</span>
+        <span style="justify-self:end;">Austin, Texas</span>
       </div>
     </footer>
   </div>
