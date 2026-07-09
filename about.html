@@ -45,6 +45,9 @@
     [data-m="tl-year"] > span { left: auto !important; right: 0 !important; }
     [data-m="foot"] { grid-template-columns: 1fr 1fr !important; }
     [data-m="foot-credit"] { grid-column: 1 / -1 !important; order: 3; justify-self: center !important; margin-top: 14px !important; }
+    [data-m="social"] { gap: 9px 10px !important; font-size: 10px !important; letter-spacing: 0.1em !important; }
+    [data-m="ig-full"] { display: none !important; }
+    [data-m="ig-short"] { display: inline !important; }
   }
 </style>
 </head>
@@ -240,8 +243,9 @@
         <span style="display:inline-flex;"><span data-cta-k style="display:inline-block; will-change:transform;">L</span><span data-cta-k style="display:inline-block; will-change:transform;">e</span><span data-cta-k style="display:inline-block; will-change:transform;">t</span><span data-cta-k style="display:inline-block; will-change:transform;">'</span><span data-cta-k style="display:inline-block; will-change:transform;">s</span></span>
         <span style="display:inline-flex;"><span data-cta-k style="display:inline-block; will-change:transform;">t</span><span data-cta-k style="display:inline-block; will-change:transform;">a</span><span data-cta-k style="display:inline-block; will-change:transform;">l</span><span data-cta-k style="display:inline-block; will-change:transform;">k</span></span>
       </a>
-      <div data-reveal style="margin-top:40px; display:flex; flex-wrap:wrap; justify-content:center; gap:14px 28px; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.16em; text-transform:uppercase;">
-        <a href="https://www.instagram.com/asxenxion/" target="_blank" rel="noopener" data-scramble>Instagram</a>
+      <div data-m="social" data-reveal style="margin-top:40px; display:flex; flex-wrap:wrap; justify-content:center; gap:14px 28px; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.16em; text-transform:uppercase;">
+        <a href="https://www.instagram.com/asxenxion/" target="_blank" rel="noopener" data-scramble data-m="ig-full">Instagram</a>
+        <a href="https://www.instagram.com/asxenxion/" target="_blank" rel="noopener" data-scramble data-m="ig-short" style="display:none;">IG</a>
         <span style="color:#3a3833;">/</span>
         <a href="https://vimeo.com/aceburney" target="_blank" rel="noopener" data-scramble>Vimeo</a>
         <span style="color:#3a3833;">/</span>
