@@ -58,9 +58,12 @@
     [data-m="head"] { flex-direction: column !important; gap: 0.1em !important; align-items: flex-start !important; }
     [data-m="avail"] { top: 20px !important; left: 20px !important; font-size: 9.5px !important; max-width: 42vw; }
     [data-m="email"] { top: 20px !important; right: 20px !important; font-size: 9.5px !important; }
-    [data-m="about"] { top: auto !important; bottom: 22px !important; font-size: 9.5px !important; }
-    [data-m="austin"] { bottom: 22px !important; left: 20px !important; font-size: 9.5px !important; }
-    [data-m="copy"] { bottom: 22px !important; right: 20px !important; font-size: 9.5px !important; }
+    [data-m="about"] { top: auto !important; bottom: 40px !important; font-size: 9.5px !important; }
+    [data-m="austin"] { bottom: 40px !important; left: 20px !important; font-size: 9.5px !important; }
+    [data-m="copy"] { bottom: 40px !important; right: 20px !important; font-size: 9.5px !important; }
+    [data-m="credit"] { bottom: 16px !important; font-size: 9px !important; letter-spacing: 0.12em !important; color: #4f4b45 !important; }
+    [data-credit-full] { display: none !important; }
+    [data-credit-short] { display: inline !important; }
   }
   @media (max-width: 380px) {
     [data-m="avail"] { display: none !important; }
@@ -109,6 +112,7 @@
   <div data-m="austin" style="position:absolute; bottom:34px; left:60px; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.18em; color:#7A7A7A; text-transform:uppercase; animation:ab-fade 1.2s ease 1.05s both;">Austin, Texas</div>
   <a data-about href="/about" data-m="about" style="position:absolute; top:34px; left:50%; transform:translateX(-50%); z-index:20; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.18em; color:#B4AEA4; text-transform:uppercase; transition:color .3s ease; animation:ab-fade 1.2s ease 0.7s both;">About</a>
   <div data-m="copy" style="position:absolute; bottom:34px; right:60px; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.18em; color:#7A7A7A; text-transform:uppercase; animation:ab-fade 1.2s ease 1.05s both;">© 2026</div>
+  <div data-m="credit" style="position:absolute; bottom:34px; left:50%; transform:translateX(-50%); z-index:15; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.18em; color:#6b675f; text-transform:uppercase; white-space:nowrap; animation:ab-fade 1.2s ease 1.25s both;"><span data-credit-full>This site — designed &amp; built by me</span><span data-credit-short style="display:none;">This site — built by me</span></div>
 
   <!-- custom cursor -->
   <div data-cursor style="position:fixed; top:0; left:0; width:26px; height:26px; border:1px solid rgba(237,233,224,0.55); border-radius:50%; pointer-events:none; z-index:9999; transform:translate(-100px,-100px); transition:width .25s ease, height .25s ease, background-color .25s ease, border-color .25s ease; mix-blend-mode:difference;"></div>
