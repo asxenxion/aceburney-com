@@ -53,6 +53,11 @@
     50%     { opacity: 1; transform: scale(1.07) translateY(-1.4%); }
   }
   @media (prefers-reduced-motion: reduce) { [data-motion] { animation: none !important; } }
+  [data-about] { transition:color .5s ease; }
+  [data-about]::after { content:''; position:absolute; left:0; right:0; bottom:-4px; height:1px; background:#B4AEA4; transform:scaleX(0); transform-origin:right; transition:transform .8s cubic-bezier(.5,0,.3,1), background-color .5s ease; }
+  [data-about].line-in { color:#e8e6e1 !important; }
+  [data-about].line-in::after { transform:scaleX(1); transform-origin:left; background:#e8e6e1; }
+  @media (prefers-reduced-motion: reduce) { [data-about]::after { transition:none; } }
   @media (max-width: 640px) {
     body { overflow-x: hidden; }
     [data-m="head"] { flex-direction: column !important; gap: 0.1em !important; align-items: center !important; }
@@ -225,24 +230,37 @@
   // ---------- headline hover + tap ----------
   head.addEventListener('mouseenter', nextWord);
   head.addEventListener('mouseleave', resetWord);
-  head.addEventListener('click', () => {
-    nextWord();
-    clearTimeout(timers.tap);
-    timers.tap = setTimeout(resetWord, 1400);
-  });
+  head.addEventListener('click', () => { playSceneExit('/about', 'ABOUT'); });
 
   // ---------- About link easter egg ----------
+  let kickAboutPulse = null;
   if (about) {
-    about.addEventListener('mouseenter', () => { state._aboutHover = true; scramble(about, 'ABOUT'); });
-    about.addEventListener('mouseleave', () => { state._aboutHover = false; });
-    timers.aboutCue = setInterval(() => {
+    let pulseOn = false, nameOn = false, aboutOn = false;
+    const refreshLine = () => { about.classList.toggle('line-in', pulseOn || nameOn || aboutOn); };
+
+    // Hovering the About link itself
+    about.addEventListener('mouseenter', () => { state._aboutHover = true; aboutOn = true; refreshLine(); scramble(about, 'ABOUT'); });
+    about.addEventListener('mouseleave', () => { state._aboutHover = false; aboutOn = false; refreshLine(); });
+
+    // Playing with the ACE BURNEY name makes About react (line draws in + brightens); the name stays pure play
+    if (head) {
+      head.addEventListener('mouseenter', () => { nameOn = true; refreshLine(); });
+      head.addEventListener('mouseleave', () => { nameOn = false; refreshLine(); });
+    }
+
+    // One coordinated reveal: line draws in + word morphs to Ascencion + brightens, then retracts
+    const doPulse = () => {
       if (state._aboutHover || document.hidden) return;
+      pulseOn = true; refreshLine();
       scramble(about, 'ASCENCION');
       timers.aboutCueBack = setTimeout(() => {
-        if (state._aboutHover) return;
-        scramble(about, 'ABOUT');
-      }, 1600);
-    }, 7500);
+        pulseOn = false; refreshLine();
+        if (!state._aboutHover) scramble(about, 'ABOUT');
+      }, 1800);
+    };
+    kickAboutPulse = doPulse;
+    // Auto-pulse on its own rhythm, even with no interaction
+    timers.aboutCue = setInterval(doPulse, 5200);
   }
 
   // ---------- email hover scramble (width-locked) ----------
@@ -483,13 +501,13 @@
   function initCustomCursor() {
     if (!cursor) return;
     if (matchMedia('(hover: none) and (pointer: coarse)').matches) { cursor.style.display = 'none'; return; }
-    const hoverSel = 'a, button, [role="button"], [data-k]';
+    const hoverSel = 'a, button, [role="button"], [data-k], [data-head]';
     root.addEventListener('mouseover', (e) => { if (e.target.closest(hoverSel)) cursorGrow(true); });
     root.addEventListener('mouseout', (e) => { if (e.target.closest(hoverSel)) cursorGrow(false); });
     const loop = () => {
       state._cx += (state.mx - state._cx) * 0.18;
       state._cy += (state.my - state._cy) * 0.18;
-      cursor.style.transform = 'translate(' + (state._cx - 13).toFixed(1) + 'px, ' + (state._cy - 13).toFixed(1) + 'px)';
+      cursor.style.transform = 'translate(' + state._cx.toFixed(1) + 'px, ' + state._cy.toFixed(1) + 'px) translate(-50%, -50%)';
       requestAnimationFrame(loop);
     };
     requestAnimationFrame(loop);
@@ -781,6 +799,13 @@
   initNavIntercept();
   // If we're arriving from a scene-cut, play the entry; otherwise fall through to loader
   if (!playSceneEntry()) initLoader();
+
+  // Fire the first About pulse the instant the page is revealed (don't wait for the 5.2s interval)
+  (function kickFirstPulse(tries) {
+    const L = $('[data-loader]');
+    if ((!L || getComputedStyle(L).display === 'none') && !document.hidden) { if (kickAboutPulse) kickAboutPulse(); return; }
+    if (tries > 0) setTimeout(() => kickFirstPulse(tries - 1), 180);
+  })(60);
 })();
 </script>
 </body>
