@@ -235,7 +235,7 @@
   // ---------- About link easter egg ----------
   let kickAboutPulse = null;
   if (about) {
-    let pulseOn = false, nameOn = false, aboutOn = false;
+    let pulseOn = false, nameOn = false, aboutOn = false, started = false;
     const refreshLine = () => { about.classList.toggle('line-in', pulseOn || nameOn || aboutOn); };
 
     // Hovering the About link itself
@@ -248,7 +248,7 @@
       head.addEventListener('mouseleave', () => { nameOn = false; refreshLine(); });
     }
 
-    // One coordinated reveal: line draws in + word morphs to Ascencion + brightens, then retracts
+    // One coordinated reveal: line draws in + word morphs "About" -> "Ascencion" + brightens, then retracts
     const doPulse = () => {
       if (state._aboutHover || document.hidden) return;
       pulseOn = true; refreshLine();
@@ -258,9 +258,14 @@
         if (!state._aboutHover) scramble(about, 'ABOUT');
       }, 1800);
     };
-    kickAboutPulse = doPulse;
-    // Auto-pulse on its own rhythm, even with no interaction
-    timers.aboutCue = setInterval(doPulse, 5200);
+    // On reveal: hold "About" a beat so it reads first, THEN animate to Ascencion, then keep the rhythm
+    kickAboutPulse = () => {
+      if (started) return; started = true;
+      timers.aboutStart = setTimeout(() => {
+        doPulse();
+        timers.aboutCue = setInterval(doPulse, 5200);
+      }, 1400);
+    };
   }
 
   // ---------- email hover scramble (width-locked) ----------
