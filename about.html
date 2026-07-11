@@ -70,7 +70,7 @@
 
   <!-- ===== NAV ===== -->
   <nav style="position:fixed; top:0; left:0; right:0; z-index:30; display:flex; align-items:center; justify-content:space-between; padding:28px clamp(24px,5vw,60px); mix-blend-mode:difference;">
-    <a href="/" data-scramble data-scramble-to="← BACK HOME" style="font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.18em; color:#e8e6e1; text-transform:uppercase;">Ace Burney</a>
+    <a href="/" data-scramble data-scramble-to="← BACK HOME" style="font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.18em; color:#e8e6e1; text-transform:uppercase;">Ace Burney.</a>
     <div style="display:flex; align-items:center; gap:16px; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.18em; text-transform:uppercase;">
       <span style="color:#e8e6e1;">About</span>
     </div>
@@ -106,7 +106,7 @@
             <!-- body -->
             <div style="padding:16px 6px 4px;">
               <div style="display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:6px 12px;">
-                <h2 style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight:700; font-size:1.5rem; letter-spacing:-0.02em; color:#f2f0ef; text-transform:uppercase; white-space:nowrap;">Ace Burney</h2>
+                <h2 style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight:700; font-size:1.5rem; letter-spacing:-0.02em; color:#f2f0ef; text-transform:uppercase; white-space:nowrap;">Ace Burney.</h2>
                 <span style="font-family:'Space Mono',monospace; font-size:10px; letter-spacing:0.12em; color:#7A7A7A; text-transform:uppercase; white-space:nowrap;">Product / Tech / Creative</span>
               </div>
               <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:18px; padding-top:16px; border-top:1px solid rgba(255,255,255,0.09);">
@@ -260,7 +260,7 @@
     <!-- FOOTER -->
     <footer style="padding:30px 0 44px; border-top:1px solid rgba(255,255,255,0.07);">
       <div data-m="foot" style="display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:12px 24px; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.16em; color:#6b675f; text-transform:uppercase;">
-        <span style="justify-self:start;">© 2026 Ace Burney</span>
+        <span style="justify-self:start;">© 2026 Ace Burney.</span>
         <span data-m="foot-credit" data-reveal style="justify-self:center; text-align:center; font-size:10px; letter-spacing:0.18em; color:#5a564f;">This site — designed &amp; built by me</span>
         <span style="justify-self:end;">Austin, Texas</span>
       </div>
@@ -791,7 +791,7 @@
     els.forEach((el) => {
       const original = el.textContent;
       const target = el.getAttribute('data-scramble-to') || original;
-      let interval = null;
+      let interval = null, hovering = false;
       const scrambleTo = (dest) => {
         let iteration = 0;
         const fromLen = el.textContent.length, destLen = dest.length;
@@ -809,8 +809,19 @@
           if (iteration >= maxLen) { clearInterval(interval); el.textContent = dest; }
         }, 30);
       };
-      el.addEventListener('mouseenter', () => scrambleTo(target));
-      el.addEventListener('mouseleave', () => scrambleTo(original));
+      el.addEventListener('mouseenter', () => { hovering = true; scrambleTo(target); });
+      el.addEventListener('mouseleave', () => { hovering = false; scrambleTo(original); });
+
+      // Home logo: periodically flash "← BACK HOME" so visitors know it returns home
+      if (el.getAttribute('data-scramble-to') === '← BACK HOME') {
+        const hint = () => {
+          if (hovering || document.hidden) return;
+          scrambleTo(target);
+          setTimeout(() => { if (!hovering) scrambleTo(original); }, 1500);
+        };
+        setTimeout(hint, 2600);
+        setInterval(hint, 8000);
+      }
     });
   }
 
