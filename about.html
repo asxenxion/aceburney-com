@@ -341,9 +341,8 @@
   }
   function initCustomCursor() {
     if (!cursor) return;
-    // Show the custom cursor whenever a hover-capable pointer (mouse/trackpad) is present —
-    // (any-hover) catches an iPad/tablet with a mouse, which reports touch as its primary pointer.
-    if (!matchMedia('(any-hover: hover)').matches) { cursor.style.display = 'none'; return; }
+    // Driven by the unified pointer (mouse OR touch via state.mx/my): follows a mouse on desktop /
+    // iPad-with-mouse, and trails the finger on touch — the same spotlight on every device.
     const hoverSel = 'a, button, [data-cta]';
     root.addEventListener('mouseover', (e) => { if (e.target.closest(hoverSel)) cursorGrow(true); });
     root.addEventListener('mouseout', (e) => { if (e.target.closest(hoverSel)) cursorGrow(false); });
@@ -679,9 +678,8 @@
   // ---------- trading card 3D tilt + idle orbit ----------
   function initCardTilt() {
     if (!card) return;
-    const isCoarse = matchMedia('(hover: none) and (pointer: coarse)').matches;
-    // Slightly softer tilt on touch — smaller card + finger obscures part of it
-    const MAX = isCoarse ? 12 : 16;
+    // Full-strength tilt when a mouse is present (incl. iPad-with-mouse); slightly softer for touch-only.
+    const MAX = matchMedia('(any-hover: hover)').matches ? 16 : 12;
     let tx = 0, ty = 0, ttx = 0, tty = 0, sx = 50, sy = 50, tsx = 50, tsy = 50, active = 0, tActive = 0;
     const t0 = performance.now();
 
@@ -741,27 +739,34 @@
 
   // ---------- timeline card sheen + hover lift ----------
   function initExpCards() {
-    if (matchMedia('(hover: none) and (pointer: coarse)').matches) return;
     const cards = $$('[data-exp-card]', root);
     cards.forEach((c) => {
       const s = c.querySelector('[data-exp-sheen]');
-      c.addEventListener('mouseenter', () => {
+      const lift = () => {
         c.style.transform = 'translateY(-4px)';
         c.style.borderColor = 'rgba(255,255,255,0.18)';
         if (s) s.style.opacity = '1';
-      });
-      c.addEventListener('mousemove', (e) => {
+      };
+      const move = (px, py) => {
         if (!s) return;
         const r = c.getBoundingClientRect();
-        const x = ((e.clientX - r.left) / r.width * 100).toFixed(1);
-        const y = ((e.clientY - r.top) / r.height * 100).toFixed(1);
+        const x = ((px - r.left) / r.width * 100).toFixed(1);
+        const y = ((py - r.top) / r.height * 100).toFixed(1);
         s.style.background = 'radial-gradient(circle at ' + x + '% ' + y + '%, rgba(255,255,255,0.16), rgba(255,255,255,0) 55%)';
-      });
-      c.addEventListener('mouseleave', () => {
+      };
+      const reset = () => {
         c.style.transform = 'translateY(0)';
         c.style.borderColor = 'rgba(255,255,255,0.09)';
         if (s) s.style.opacity = '0';
-      });
+      };
+      c.addEventListener('mouseenter', lift);
+      c.addEventListener('mousemove', (e) => move(e.clientX, e.clientY));
+      c.addEventListener('mouseleave', reset);
+      // Touch: same lift + sheen while a finger is on the card
+      c.addEventListener('touchstart', (e) => { const t = e.touches[0]; if (!t) return; lift(); move(t.clientX, t.clientY); }, { passive: true });
+      c.addEventListener('touchmove', (e) => { const t = e.touches[0]; if (!t) return; move(t.clientX, t.clientY); }, { passive: true });
+      c.addEventListener('touchend', reset, { passive: true });
+      c.addEventListener('touchcancel', reset, { passive: true });
     });
   }
 

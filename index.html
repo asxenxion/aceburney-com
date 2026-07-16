@@ -504,9 +504,8 @@
   }
   function initCustomCursor() {
     if (!cursor) return;
-    // Show the custom cursor whenever a hover-capable pointer (mouse/trackpad) is present —
-    // (any-hover) catches an iPad/tablet with a mouse, which reports touch as its primary pointer.
-    if (!matchMedia('(any-hover: hover)').matches) { cursor.style.display = 'none'; return; }
+    // Driven by the unified pointer (mouse OR touch via state.mx/my): follows a mouse on desktop /
+    // iPad-with-mouse, and trails the finger on touch — the same spotlight on every device.
     const hoverSel = 'a, button, [role="button"], [data-k], [data-head]';
     root.addEventListener('mouseover', (e) => { if (e.target.closest(hoverSel)) cursorGrow(true); });
     root.addEventListener('mouseout', (e) => { if (e.target.closest(hoverSel)) cursorGrow(false); });
@@ -581,8 +580,7 @@
 
   // ---------- cursor particles ----------
   function initParticles() {
-    const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-    if (isTouch || !particle) return;
+    if (!particle) return; // particles follow the unified pointer, so they work on touch too
     const ctx = particle.getContext('2d');
     const REVEAL_R = 200, REPULSE_R = 160, REPULSE_FORCE = 5, COLLAPSE_FORCE = 0.12;
     const HOME_SPRING = 0.004, FRICTION = 0.88, JITTER = 1.0, DART_CHANCE = 0.03, DART_FORCE = 4;
@@ -680,10 +678,11 @@
   // ---------- magnetic letter physics ----------
   function initLetterPhysics() {
     const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    const hoverCap = matchMedia('(any-hover: hover)').matches; // mouse present (incl. iPad-with-mouse)
     const SPRING = 0.065;
     const DAMPING = 0.82;
-    const THRESHOLD = isTouch ? 200 : 420;
-    const STRENGTH = isTouch ? 60 : 110;
+    const THRESHOLD = hoverCap ? 420 : 200;
+    const STRENGTH = hoverCap ? 110 : 60;
 
     const states = letters.map((el) => {
       el.style.pointerEvents = 'none';
