@@ -811,6 +811,21 @@
     if ((!L || getComputedStyle(L).display === 'none') && !document.hidden) { if (kickAboutPulse) kickAboutPulse(); return; }
     if (tries > 0) setTimeout(() => kickFirstPulse(tries - 1), 180);
   })(60);
+
+  // Back/forward-cache restore keeps full-screen overlays frozen mid-animation, so hitting
+  // Back would land on a stale scene-cut transition. Reset the overlay + loader on bfcache restore.
+  window.addEventListener('pageshow', (e) => {
+    if (!e.persisted) return;
+    if (transition) {
+      transition.style.transition = 'none';
+      transition.style.transform = 'translateY(-101%)';
+      transition.style.pointerEvents = 'none';
+      transition.style.display = 'none';
+      if (transitionLabel) transitionLabel.style.opacity = '0';
+      if (transitionEyebrow) transitionEyebrow.style.opacity = '0';
+    }
+    if (loader) { loader.style.transition = 'none'; loader.style.transform = 'translateY(-101%)'; loader.style.display = 'none'; }
+  });
 })();
 </script>
 </body>
