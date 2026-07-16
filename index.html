@@ -227,10 +227,9 @@
     if (avail) scramble(avail, 'AVAILABLE FOR PROJECTS');
   }
 
-  // ---------- headline hover + tap ----------
+  // ---------- headline hover (magnetic letters + disciplines cue) — no navigation on click ----------
   head.addEventListener('mouseenter', nextWord);
   head.addEventListener('mouseleave', resetWord);
-  head.addEventListener('click', () => { playSceneExit('/about', 'ABOUT'); });
 
   // ---------- About link easter egg ----------
   let kickAboutPulse = null;
@@ -505,7 +504,9 @@
   }
   function initCustomCursor() {
     if (!cursor) return;
-    if (matchMedia('(hover: none) and (pointer: coarse)').matches) { cursor.style.display = 'none'; return; }
+    // Show the custom cursor whenever a hover-capable pointer (mouse/trackpad) is present —
+    // (any-hover) catches an iPad/tablet with a mouse, which reports touch as its primary pointer.
+    if (!matchMedia('(any-hover: hover)').matches) { cursor.style.display = 'none'; return; }
     const hoverSel = 'a, button, [role="button"], [data-k], [data-head]';
     root.addEventListener('mouseover', (e) => { if (e.target.closest(hoverSel)) cursorGrow(true); });
     root.addEventListener('mouseout', (e) => { if (e.target.closest(hoverSel)) cursorGrow(false); });

@@ -318,6 +318,20 @@
   document.addEventListener('mouseleave', onLeaveWin);
   window.addEventListener('blur', onLeaveWin);
 
+  // Touch devices have no cursor — feed the finger position into the same state so the
+  // "Let's talk" magnetic letters react to touch the way they react to a mouse on desktop.
+  const onTouch = (e) => {
+    const t = e.touches && e.touches[0];
+    if (!t) return;
+    const dx = t.clientX - state._pmx, dy = t.clientY - state._pmy;
+    state.mouseSpeed = Math.min(Math.hypot(dx, dy), 60);
+    state._pmx = t.clientX; state._pmy = t.clientY;
+    state.mx = t.clientX; state.my = t.clientY;
+  };
+  window.addEventListener('touchstart', onTouch, { passive: true });
+  window.addEventListener('touchmove', onTouch, { passive: true });
+  window.addEventListener('touchend', () => { state.mouseSpeed = 0; setTimeout(() => { state.mx = -9999; state.my = -9999; }, 500); }, { passive: true });
+
   // ---------- custom cursor ----------
   function cursorGrow(big) {
     if (!cursor) return;
@@ -327,7 +341,9 @@
   }
   function initCustomCursor() {
     if (!cursor) return;
-    if (matchMedia('(hover: none) and (pointer: coarse)').matches) { cursor.style.display = 'none'; return; }
+    // Show the custom cursor whenever a hover-capable pointer (mouse/trackpad) is present —
+    // (any-hover) catches an iPad/tablet with a mouse, which reports touch as its primary pointer.
+    if (!matchMedia('(any-hover: hover)').matches) { cursor.style.display = 'none'; return; }
     const hoverSel = 'a, button, [data-cta]';
     root.addEventListener('mouseover', (e) => { if (e.target.closest(hoverSel)) cursorGrow(true); });
     root.addEventListener('mouseout', (e) => { if (e.target.closest(hoverSel)) cursorGrow(false); });
