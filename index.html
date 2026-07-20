@@ -189,15 +189,17 @@
   window.addEventListener('blur', onLeaveWin);
 
   // ---------- shared scramble (34ms/frame, width-locked via NBSP) ----------
-  function scramble(el, target) {
+  function scramble(el, target, fast) {
     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#·/-';
     clearInterval(el._timer);
     const from = el.textContent || '';
     const len = Math.max(from.length, target.length);
     const queue = [];
+    // `fast` tightens the frame spread (~370ms) to match the About page; default pace is unchanged
+    const sSpread = fast ? 4 : 8, eBase = fast ? 4 : 8, eSpread = fast ? 5 : 10;
     for (let i = 0; i < len; i++) {
-      const start = Math.floor(Math.random() * 8);
-      const end = start + 8 + Math.floor(Math.random() * 10);
+      const start = Math.floor(Math.random() * sSpread);
+      const end = start + eBase + Math.floor(Math.random() * eSpread);
       queue.push({ to: target[i] || '', start, end, ch: '' });
     }
     let frame = 0;
@@ -233,7 +235,22 @@
 
   // ---------- Start a Project CTA — in-place scramble on hover ----------
   const startCta = $('[data-m="start"]');
-  if (startCta) { const so = startCta.textContent.trim(); startCta.addEventListener('mouseenter', () => scramble(startCta, so)); }
+  if (startCta) {
+    const so = startCta.textContent.trim();       // "Start a Project"
+    const hover = so + ' →';                       // forward arrow on hover, like the About page
+    let cur = so;
+    startCta.addEventListener('mouseenter', () => { if (cur === hover) return; cur = hover; scramble(startCta, hover, true); });
+    startCta.addEventListener('mouseleave', () => { if (cur === so) return; cur = so; scramble(startCta, so, true); });
+    // reserve the arrow's width (on the right, since the link is right-anchored) so nothing shifts when it reveals
+    const lockStart = () => {
+      const w0 = startCta.getBoundingClientRect().width;
+      startCta.textContent = hover; const w1 = startCta.getBoundingClientRect().width;
+      startCta.textContent = (cur === so ? so : hover);
+      startCta.style.textAlign = 'left';
+      startCta.style.minWidth = Math.ceil(Math.max(w0, w1)) + 'px';
+    };
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(lockStart); else lockStart();
+  }
 
   // ---------- About link easter egg ----------
   let kickAboutPulse = null;
