@@ -72,7 +72,7 @@
   <nav style="position:fixed; top:0; left:0; right:0; z-index:30; display:flex; align-items:center; justify-content:space-between; padding:28px clamp(24px,5vw,60px); mix-blend-mode:difference;">
     <a href="/" data-scramble data-scramble-to="← BACK HOME" style="font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.18em; color:#e8e6e1; text-transform:uppercase;">Ace Burney.</a>
     <div style="display:flex; align-items:center; gap:16px; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.18em; text-transform:uppercase;">
-      <a href="/start" data-scramble style="color:#7A7A7A;">Start a Project</a>
+      <a href="/start" data-scramble data-scramble-to="START A PROJECT →" style="color:#7A7A7A;">Start a Project</a>
     </div>
   </nav>
 
@@ -813,6 +813,9 @@
       const original = el.textContent;
       const target = el.getAttribute('data-scramble-to') || original;
       let interval = null, hovering = false;
+      if (target !== original && document.fonts && document.fonts.ready) { // lock width so an arrow (→) never resizes the link on hover
+        document.fonts.ready.then(() => { const w0 = el.getBoundingClientRect().width; el.textContent = target; const w1 = el.getBoundingClientRect().width; el.textContent = (hovering ? target : original); el.style.minWidth = Math.ceil(Math.max(w0, w1)) + 'px'; });
+      }
       const scrambleTo = (dest) => {
         let iteration = 0;
         const fromLen = el.textContent.length, destLen = dest.length;
@@ -826,7 +829,7 @@
             result += i < iteration ? (dest[i] || '') : pool[(Math.random() * pool.length) | 0];
           }
           el.textContent = result;
-          iteration += 1 / 3;
+          iteration += Math.max(1 / 3, maxLen / 11); // normalize duration (~330ms) so long labels don't crawl
           if (iteration >= maxLen) { clearInterval(interval); el.textContent = dest; }
         }, 30);
       };

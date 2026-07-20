@@ -100,7 +100,7 @@
 
   <nav style="position:fixed; top:0; left:0; right:0; z-index:30; display:flex; align-items:center; justify-content:space-between; padding:26px clamp(24px,5vw,60px); mix-blend-mode:difference;">
     <a href="/" data-scramble data-scramble-to="← BACK HOME" style="font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.18em; color:#e8e6e1; text-transform:uppercase;">Ace Burney.</a>
-    <a href="/about" data-scramble style="font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.18em; color:#7A7A7A; text-transform:uppercase;">About</a>
+    <a href="/about" data-scramble data-scramble-to="ABOUT →" style="font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.18em; color:#7A7A7A; text-transform:uppercase;">About</a>
   </nav>
 
   <div class="wrap">
@@ -299,11 +299,21 @@
   // ---------- scramble ----------
   function scramble(el, target, dur) {
     if (!el) return; const pool = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#·/-'; clearInterval(el._t);
-    target = target || ''; const len = target.length, q = [], fr = Math.max(10, Math.round((dur || 460) / 34));
+    target = target || ''; const len = target.length, q = [], fr = Math.max(8, Math.round((dur || 460) / 34));
     for (let k = 0; k < len; k++) { const st = Math.floor(Math.random() * (fr / 3)); q.push({ to: target.charAt(k) || '', st, en: st + Math.floor(fr * (0.4 + Math.random() * 0.5)), ch: '' }); }
     let f = 0; el._t = setInterval(() => { let out = '', dn = 0; for (const x of q) { if (f >= x.en) { dn++; out += x.to; } else if (f >= x.st) { if (!x.ch || Math.random() < 0.35) x.ch = pool.charAt((Math.random() * pool.length) | 0); out += x.ch; } else out += ' '; } el.textContent = out; f++; if (dn >= q.length) { el.textContent = target; clearInterval(el._t); } }, 34);
   }
-  $$('[data-scramble]').forEach((el) => { const original = el.textContent.trim(); const to = el.getAttribute('data-scramble-to') || original; el.addEventListener('mouseenter', () => scramble(el, to, 420)); el.addEventListener('mouseleave', () => scramble(el, original, 360)); });
+  $$('[data-scramble]').forEach((el) => {
+    const original = el.textContent.trim();
+    const to = el.getAttribute('data-scramble-to') || original;
+    let cur = original; // guard: don't re-scramble to a target we're already on
+    el.addEventListener('mouseenter', () => { if (cur === to) return; cur = to; scramble(el, to, 260); });
+    el.addEventListener('mouseleave', () => { if (cur === original) return; cur = original; scramble(el, original, 230); });
+    if (to !== original) { // lock width so an added arrow never resizes the link on hover
+      const lock = () => { const w0 = el.getBoundingClientRect().width; el.textContent = to; const w1 = el.getBoundingClientRect().width; el.textContent = (cur === original ? original : to); el.style.minWidth = Math.ceil(Math.max(w0, w1)) + 'px'; };
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(lock); else lock();
+    }
+  });
 
   // ---------- scene-cut page transition ----------
   function pageLabel(path) { if (path === '/' || path === '/index.html' || path === '/index') return 'HOME'; return path.replace(/^\/|\.html$/g, '').replace(/-/g, ' ').toUpperCase() || 'HOME'; }
