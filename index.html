@@ -63,7 +63,7 @@
     [data-m="head"] { flex-direction: column !important; gap: 0.1em !important; align-items: center !important; }
     [data-m="head"] > div:first-child { margin-right: 14px !important; }
     [data-m="avail"] { top: 20px !important; left: 20px !important; font-size: 9.5px !important; max-width: 42vw; }
-    [data-m="email"] { top: 20px !important; right: 20px !important; font-size: 9.5px !important; }
+    [data-m="start"] { top: 20px !important; right: 20px !important; font-size: 9.5px !important; }
     [data-m="about"] { top: auto !important; bottom: 22px !important; font-size: 9.5px !important; }
     [data-m="austin"] { bottom: 22px !important; left: 20px !important; font-size: 9.5px !important; }
     [data-m="copy"] { bottom: 22px !important; right: 20px !important; font-size: 9.5px !important; }
@@ -95,8 +95,8 @@
   <!-- top-left availability -->
   <div data-avail data-m="avail" style="position:absolute; top:34px; left:60px; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.18em; color:#7A7A7A; text-transform:uppercase; animation:ab-fade 1.2s ease 0.7s both;">Available for projects</div>
 
-  <!-- top-right email -->
-  <a data-email href="mailto:ascencion@aceburney.com" data-m="email" aria-label="Send email to ascencion@aceburney.com" style="position:absolute; top:34px; right:60px; z-index:20; display:inline-flex; align-items:center; gap:0.4em; white-space:nowrap; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:#7A7A7A; text-decoration:none; transition:color .3s ease; animation:ab-fade 1.2s ease 0.7s both;"><span data-email-text style="display:inline-block; text-align:right;">Let's talk</span></a>
+  <!-- top-right: Start a Project → intake form -->
+  <a href="/start" data-m="start" aria-label="Start a project" style="position:absolute; top:34px; right:60px; z-index:20; white-space:nowrap; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:#7A7A7A; text-decoration:none; transition:color .3s ease; animation:ab-fade 1.2s ease 0.7s both;">Start a Project</a>
 
   <!-- center stack -->
   <div style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:0 24px; text-align:center; pointer-events:none;">
@@ -230,6 +230,10 @@
   // ---------- headline hover (magnetic letters + disciplines cue) — no navigation on click ----------
   head.addEventListener('mouseenter', nextWord);
   head.addEventListener('mouseleave', resetWord);
+
+  // ---------- Start a Project CTA — in-place scramble on hover ----------
+  const startCta = $('[data-m="start"]');
+  if (startCta) { const so = startCta.textContent.trim(); startCta.addEventListener('mouseenter', () => scramble(startCta, so)); }
 
   // ---------- About link easter egg ----------
   let kickAboutPulse = null;

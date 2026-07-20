@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Start a Project — Ace Burney</title>
+<meta name="description" content="Start a project with Ace Burney. A short guided brief to turn your ideas into a clear plan.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0D0D0D">
+<meta name="color-scheme" content="dark">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230D0D0D'/%3E%3Ctext x='16' y='22' font-family='Helvetica,Arial,sans-serif' font-weight='700' font-size='18' fill='%23e8e6e1' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { background: #0D0D0D; }
+  body { background: #0D0D0D; color: #e8e6e1; overflow-x: hidden; }
+  a { color: #7A7A7A; text-decoration: none; }
+  ::selection { background: #e8e6e1; color: #0D0D0D; }
+  @keyframes ab-grain { 0%{transform:translate(0,0);}10%{transform:translate(-6%,-4%);}20%{transform:translate(-11%,6%);}30%{transform:translate(6%,-11%);}40%{transform:translate(-4%,14%);}50%{transform:translate(-12%,4%);}60%{transform:translate(14%,0);}70%{transform:translate(0,11%);}80%{transform:translate(-14%,-3%);}90%{transform:translate(10%,6%);}100%{transform:translate(4%,0);} }
+  @keyframes ab-fade { from { opacity: 0; } to { opacity: 1; } }
+
+  /* ---------- wizard card (bio-card language) ---------- */
+  .wrap { position: relative; z-index: 10; min-height: 100dvh; display: flex; align-items: center; justify-content: center; padding: 110px clamp(18px,5vw,40px) 60px; }
+  .card { position: relative; width: 100%; max-width: 588px; background: linear-gradient(180deg, rgba(255,255,255,0.055), rgba(255,255,255,0.02)); border: 1px solid rgba(255,255,255,0.10); border-radius: 16px; box-shadow: 0 48px 110px -46px rgba(0,0,0,0.92); padding: clamp(22px,3.4vw,32px) clamp(20px,3vw,30px) clamp(20px,2.6vw,26px); animation: ab-fade 0.9s ease 0.15s both; }
+  .card::before { content:""; position:absolute; inset:0; border-radius:16px; pointer-events:none; background: radial-gradient(circle at 50% 0%, rgba(255,255,255,0.06), rgba(255,255,255,0) 55%); }
+
+  .head { display: flex; align-items: baseline; justify-content: space-between; font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: #6b675f; }
+  .head .cur { color: #e8e6e1; }
+  .bar { position: relative; height: 1px; background: rgba(255,255,255,0.1); margin: 14px 0 0; overflow: hidden; }
+  .bar > span { position: absolute; inset: 0 auto 0 0; background: #e8e6e1; width: 16.66%; transition: width .5s cubic-bezier(.16,1,.3,1); }
+
+  .step { display: none; animation: ab-fade .5s ease both; }
+  .step.on { display: block; }
+  .eyebrow { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: #7A7A7A; margin: 22px 0 12px; }
+  .q-title { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 700; font-size: clamp(1.5rem,4.2vw,1.9rem); letter-spacing: -0.025em; line-height: 1.02; text-transform: uppercase; color: #f2f0ef; }
+  .q-sub { font-family: 'Space Mono', monospace; font-size: 11.5px; line-height: 1.65; color: #9a958c; margin-top: 9px; }
+
+  .fields { display: flex; flex-direction: column; gap: 15px; margin-top: 22px; }
+  .field { display: flex; flex-direction: column; }
+  .f-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: #6b675f; }
+  .f-label .req { color: #b98a55; }
+  .f-in, .f-ta { width: 100%; margin-top: 8px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; padding: 12px 13px; color: #e8e6e1; font-family: 'Space Mono', monospace; font-size: 13px; line-height: 1.5; cursor: none; transition: border-color .28s ease, background-color .28s ease; }
+  .f-ta { resize: vertical; min-height: 82px; }
+  .f-label { transition: color .28s ease; }
+  .f-in:focus, .f-ta:focus { outline: none; border-color: rgba(255,255,255,0.42); background: rgba(255,255,255,0.05); }
+  .f-in::placeholder, .f-ta::placeholder { color: #56524b; }
+  .f-in.err, .f-ta.err { border-color: rgba(198,120,84,0.7); }
+  /* subtle — the field you're on just brightens its border + label; no panel, no glow */
+  .field:hover .f-label { color: #8f8a80; }
+  .field:hover .f-in, .field:hover .f-ta { border-color: rgba(255,255,255,0.24); background: rgba(255,255,255,0.03); }
+
+  /* pills */
+  .glabel { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: #6b675f; margin-bottom: 10px; }
+  .prow { display: flex; flex-wrap: wrap; gap: 8px; }
+  .pill { font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: 0.02em; color: #cfcac2; background: transparent; border: 1px solid rgba(255,255,255,0.18); border-radius: 999px; padding: 9px 15px; cursor: none; transition: all .2s ease; user-select: none; white-space: nowrap; }
+  .pill:hover { border-color: rgba(255,255,255,0.45); color: #fff; }
+  .pill.on { background: #e8e6e1; color: #0D0D0D; border-color: #e8e6e1; font-weight: 700; }
+  .pill.dash { border-style: dashed; }
+  .ppill .n { font-size: 9px; opacity: 0.55; margin-right: 5px; }
+  .ppill.first { background: #e8e6e1; color: #0D0D0D; border-color: #e8e6e1; font-weight: 700; }
+  .ppill.first .n { opacity: 1; }
+
+  .prio { display: none; margin-top: 22px; padding-top: 18px; border-top: 1px solid rgba(255,255,255,0.12); }
+  .prio.show { display: block; }
+
+  /* review */
+  .rev-row { display: flex; gap: 12px; padding: 12px 0; border-top: 1px solid rgba(255,255,255,0.08); }
+  .rev-row:first-child { border-top: 0; }
+  .rev-k { flex: 0 0 34%; font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: #6b675f; padding-top: 2px; }
+  .rev-v { flex: 1; font-family: 'Space Mono', monospace; font-size: 12px; line-height: 1.55; color: #e8e6e1; word-break: break-word; }
+  .rev-v .muted { color: #6b675f; }
+  .rev-v .star { color: #b98a55; }
+
+  /* footer nav */
+  .foot { display: flex; align-items: center; justify-content: space-between; margin-top: 26px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.09); }
+  .back { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: #6b675f; cursor: none; transition: color .25s ease; }
+  .back:hover { color: #e8e6e1; }
+  .back.hide { visibility: hidden; }
+  .nextb { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: #5f5b53; background: transparent; border: 1px solid rgba(255,255,255,0.14); border-radius: 999px; padding: 10px 20px; cursor: none; transition: all .3s ease; }
+  .nextb.ready { color: #0D0D0D; background: #e8e6e1; border-color: #e8e6e1; font-weight: 700; }
+
+  .succ { text-align: center; padding: 20px 6px 8px; animation: ab-fade .6s ease both; }
+  .succ h2 { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 700; font-size: clamp(1.8rem,5vw,2.4rem); letter-spacing: -0.03em; text-transform: uppercase; color: #f2f0ef; margin-bottom: 14px; }
+  .succ p { font-family: 'Space Mono', monospace; font-size: 12.5px; line-height: 1.7; color: #a8a29a; max-width: 40ch; margin: 0 auto; }
+
+  @media (max-width: 560px) {
+    .rev-k { flex-basis: 40%; }
+    .q-title { font-size: 1.45rem; }
+  }
+</style>
+</head>
+<body>
+<div data-root style="position:relative; width:100%; background:#0D0D0D; cursor:none; -webkit-tap-highlight-color:transparent;">
+
+  <canvas data-ambient style="position:fixed; inset:0; z-index:0; width:100vw; height:100vh; pointer-events:none; display:block;"></canvas>
+  <div style="position:fixed; inset:0; z-index:1; pointer-events:none; background:radial-gradient(ellipse 70% 55% at 50% 10%, rgba(237,233,224,0.05), rgba(237,233,224,0) 60%), radial-gradient(circle at 50% 45%, rgba(0,0,0,0) 42%, rgba(0,0,0,0.5) 100%);"></div>
+  <div data-motion style="position:fixed; inset:-60%; z-index:2; pointer-events:none; opacity:0.05; mix-blend-mode:overlay; animation:ab-grain 0.7s steps(1) infinite; background-image:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22140%22 height=%22140%22%3E%3Cfilter id=%22n%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.85%22 numOctaves=%222%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23n)%22/%3E%3C/svg%3E'); background-size:200px 200px;"></div>
+
+  <nav style="position:fixed; top:0; left:0; right:0; z-index:30; display:flex; align-items:center; justify-content:space-between; padding:26px clamp(24px,5vw,60px); mix-blend-mode:difference;">
+    <a href="/" data-scramble data-scramble-to="← BACK HOME" style="font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.18em; color:#e8e6e1; text-transform:uppercase;">Ace Burney.</a>
+    <a href="/about" data-scramble style="font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.18em; color:#7A7A7A; text-transform:uppercase;">About</a>
+  </nav>
+
+  <div class="wrap">
+    <form class="card" data-form autocomplete="on" novalidate>
+      <!-- honeypot -->
+      <input type="text" name="company_website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute; left:-9999px; width:1px; height:1px; opacity:0;">
+
+      <div class="head"><span>Start a Project</span><span><span class="cur" data-cur>01</span> / 06</span></div>
+      <div class="bar"><span data-progress></span></div>
+
+      <div data-steps>
+
+        <!-- STEP 1 -->
+        <section class="step on" data-step="1">
+          <div class="eyebrow">The basics</div>
+          <div class="q-title">Let's start with you</div>
+          <div class="q-sub">A few essentials, then the one line that captures it all.</div>
+          <div class="fields">
+            <div class="field"><label class="f-label" for="f-name">Your name <span class="req">*</span></label><input class="f-in" id="f-name" name="name" data-req type="text" placeholder="First and last"></div>
+            <div class="field"><label class="f-label" for="f-email">Best email <span class="req">*</span></label><input class="f-in" id="f-email" name="email" data-req data-email type="email" placeholder="you@email.com"></div>
+            <div class="field"><label class="f-label" for="f-org">Project or company name</label><input class="f-in" id="f-org" name="org" type="text" placeholder="If you have one yet"></div>
+            <div class="field"><label class="f-label" for="f-role">Your role</label><input class="f-in" id="f-role" name="role" type="text" placeholder="Founder, owner, marketing lead…"></div>
+            <div class="field"><label class="f-label" for="f-one">In one sentence, what are you making? <span class="req">*</span></label><input class="f-in" id="f-one" name="oneliner" data-req type="text" placeholder="In plain words — what it is and who it's for"></div>
+          </div>
+        </section>
+
+        <!-- STEP 2 -->
+        <section class="step" data-step="2">
+          <div class="eyebrow">The vision</div>
+          <div class="q-title">The big idea</div>
+          <div class="q-sub">Don't overthink it — say it how you'd say it out loud.</div>
+          <div class="fields">
+            <div class="field"><label class="f-label" for="f-idea">What are you trying to create or change? <span class="req">*</span></label><textarea class="f-ta" id="f-idea" name="bigidea" data-req placeholder="The why behind it. What should exist that doesn't yet?"></textarea></div>
+            <div class="field"><label class="f-label" for="f-aud">Who is it for? <span class="req">*</span></label><input class="f-in" id="f-aud" name="audience" data-req type="text" placeholder="Your audience — be specific"></div>
+            <div class="field"><label class="f-label" for="f-succ">What does success look like in 6–12 months?</label><textarea class="f-ta" id="f-succ" name="success" placeholder="How you'll know it worked"></textarea></div>
+          </div>
+        </section>
+
+        <!-- STEP 3 -->
+        <section class="step" data-step="3">
+          <div class="eyebrow">What you need</div>
+          <div class="q-title">What do you need?</div>
+          <div class="q-sub">Check everything that applies — we'll pick where to start next.</div>
+          <div data-groups style="margin-top:22px; display:flex; flex-direction:column; gap:18px;">
+            <div>
+              <div class="glabel">Look — how it shows up</div>
+              <div class="prow">
+                <span class="pill" data-svc="Brand &amp; identity">Brand &amp; identity</span>
+                <span class="pill" data-svc="Photography">Photography</span>
+                <span class="pill" data-svc="Film &amp; video">Film &amp; video</span>
+              </div>
+            </div>
+            <div>
+              <div class="glabel">Feel — how it works &amp; speaks</div>
+              <div class="prow">
+                <span class="pill" data-svc="Website">Website</span>
+                <span class="pill" data-svc="Product / app">Product / app</span>
+                <span class="pill" data-svc="Story &amp; messaging">Story &amp; messaging</span>
+              </div>
+            </div>
+            <div>
+              <div class="glabel">Run — how it operates</div>
+              <div class="prow">
+                <span class="pill" data-svc="AI &amp; automation">AI &amp; automation</span>
+                <span class="pill" data-svc="Systems &amp; workflows">Systems &amp; workflows</span>
+              </div>
+            </div>
+            <div><span class="pill dash" data-hatch>Not sure — help me figure it out</span></div>
+          </div>
+          <div class="prio" data-prio>
+            <div class="glabel">If we start <span style="color:#f2f0ef;">one</span> thing first &rarr;</div>
+            <div class="prow" data-prio-pills></div>
+          </div>
+        </section>
+
+        <!-- STEP 4 -->
+        <section class="step" data-step="4">
+          <div class="eyebrow">Where you're starting from</div>
+          <div class="q-title">What already exists?</div>
+          <div class="q-sub">Grounds us — no need for logins here, just point me to what's live.</div>
+          <div class="fields">
+            <div class="field"><label class="f-label" for="f-site">Current site or link (if any)</label><input class="f-in" id="f-site" name="currentSite" type="url" placeholder="www.mysite.com"></div>
+            <div class="field"><label class="f-label">What's it built on?</label>
+              <div class="prow" style="margin-top:8px;">
+                <span class="pill" data-built data-one="built">Lovable</span>
+                <span class="pill" data-built data-one="built">Squarespace</span>
+                <span class="pill" data-built data-one="built">Wix</span>
+                <span class="pill" data-built data-one="built">Webflow</span>
+                <span class="pill" data-built data-one="built">WordPress</span>
+                <span class="pill" data-built data-one="built">Custom</span>
+                <span class="pill" data-built data-one="built">Nothing yet</span>
+              </div>
+            </div>
+            <div class="field"><label class="f-label">What do you already have?</label>
+              <div class="prow" style="margin-top:8px;">
+                <span class="pill" data-exist>A name</span>
+                <span class="pill" data-exist>Logo / brand</span>
+                <span class="pill" data-exist>A website</span>
+                <span class="pill" data-exist>Social presence</span>
+                <span class="pill" data-exist>Content</span>
+                <span class="pill" data-exist>Funding / budget</span>
+                <span class="pill" data-exist>A team</span>
+                <span class="pill dash" data-exist>Starting from scratch</span>
+              </div>
+            </div>
+            <div class="field"><label class="f-label" for="f-ref">Links or references you love</label><textarea class="f-ta" id="f-ref" name="references" placeholder="Anything you've made, or work / brands you admire"></textarea></div>
+          </div>
+        </section>
+
+        <!-- STEP 5 -->
+        <section class="step" data-step="5">
+          <div class="eyebrow">Logistics</div>
+          <div class="q-title">A few practicals</div>
+          <div class="q-sub">So I know who's steering and how fast we're moving.</div>
+          <div class="fields">
+            <div class="field"><label class="f-label">Timeline</label>
+              <div class="prow" style="margin-top:8px;">
+                <span class="pill" data-time data-one="time">ASAP</span>
+                <span class="pill" data-time data-one="time">1–3 months</span>
+                <span class="pill" data-time data-one="time">3–6 months</span>
+                <span class="pill" data-time data-one="time">Just exploring</span>
+              </div>
+            </div>
+            <div class="field"><label class="f-label" for="f-stake">Who else is involved / who signs off?</label><input class="f-in" id="f-stake" name="stakeholders" type="text" placeholder="Partners, co-founders, the decision-maker"></div>
+            <div class="field"><label class="f-label" for="f-work">Already working with anyone? (designer, dev, marketer)</label><input class="f-in" id="f-work" name="workingWith" type="text" placeholder="Optional — good for me to know"></div>
+            <div class="field"><label class="f-label" for="f-notes">Anything else I should know?</label><textarea class="f-ta" id="f-notes" name="notes" placeholder="The floor is yours"></textarea></div>
+          </div>
+        </section>
+
+        <!-- STEP 6 -->
+        <section class="step" data-step="6">
+          <div class="eyebrow">Review &amp; send</div>
+          <div class="q-title">Here's your brief</div>
+          <div class="q-sub">A pile of ideas, organized. Send it over and I'll be in touch.</div>
+          <div data-review style="margin-top:20px;"></div>
+        </section>
+
+      </div>
+
+      <div class="foot">
+        <span class="back hide" data-back>&larr; Back</span>
+        <button type="button" class="nextb" data-next>Next &rarr;</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- entrance sweep (covers on load, slides up when ready) -->
+  <div data-sweep style="position:fixed; inset:0; z-index:9990; background:#0D0D0D; pointer-events:none; will-change:transform; transition:transform 1s cubic-bezier(.76,0,.24,1);"></div>
+
+  <div data-cursor style="position:fixed; top:0; left:0; width:26px; height:26px; border:1px solid rgba(237,233,224,0.55); border-radius:50%; pointer-events:none; z-index:9999; transform:translate(-100px,-100px); transition:width .25s ease, height .25s ease, background-color .25s ease; mix-blend-mode:difference;"></div>
+
+  <!-- scene-cut transition overlay -->
+  <div data-transition style="position:fixed; inset:0; z-index:9998; background:#0D0D0D; transform:translateY(-101%); pointer-events:none; will-change:transform; transition:transform 520ms cubic-bezier(.76,0,.24,1); display:flex; align-items:center; justify-content:center;">
+    <div style="text-align:center; padding:0 24px;">
+      <div data-transition-eyebrow style="font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.22em; color:#7A7A7A; text-transform:uppercase; margin-bottom:22px; opacity:0; transition:opacity .5s ease;">— Now Arriving —</div>
+      <div data-transition-label style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight:700; color:#e8e6e1; text-transform:uppercase; font-size:clamp(3rem,11vw,9rem); line-height:0.9; letter-spacing:-0.03em; opacity:0; transition:opacity .3s ease; white-space:nowrap;">&nbsp;</div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+  const $ = (s, c) => (c || document).querySelector(s);
+  const $$ = (s, c) => Array.from((c || document).querySelectorAll(s));
+  const root = $('[data-root]'), cursor = $('[data-cursor]'), ambient = $('[data-ambient]');
+  const transition = $('[data-transition]'), transitionLabel = $('[data-transition-label]'), transitionEyebrow = $('[data-transition-eyebrow]'), sweep = $('[data-sweep]');
+  const state = { mx: -9999, my: -9999, _cx: -100, _cy: -100 };
+  window.addEventListener('mousemove', (e) => { state.mx = e.clientX; state.my = e.clientY; });
+  const onTouch = (e) => { const t = e.touches && e.touches[0]; if (!t) return; state.mx = t.clientX; state.my = t.clientY; };
+  window.addEventListener('touchstart', onTouch, { passive: true });
+  window.addEventListener('touchmove', onTouch, { passive: true });
+  window.addEventListener('touchend', () => { setTimeout(() => { state.mx = -9999; state.my = -9999; }, 500); }, { passive: true });
+
+  // ---------- custom cursor (unified pointer) ----------
+  function cursorGrow(big) { if (!cursor) return; cursor.style.width = big ? '46px' : '26px'; cursor.style.height = big ? '46px' : '26px'; cursor.style.backgroundColor = big ? 'rgba(237,233,224,0.9)' : 'transparent'; }
+  if (cursor) {
+    const hoverSel = 'a, button, [role="button"], .pill, .back, input, textarea';
+    root.addEventListener('mouseover', (e) => { if (e.target.closest(hoverSel)) cursorGrow(true); });
+    root.addEventListener('mouseout', (e) => { if (e.target.closest(hoverSel)) cursorGrow(false); });
+    const cl = () => { state._cx += (state.mx - state._cx) * 0.18; state._cy += (state.my - state._cy) * 0.18; cursor.style.transform = 'translate(' + state._cx.toFixed(1) + 'px,' + state._cy.toFixed(1) + 'px) translate(-50%,-50%)'; requestAnimationFrame(cl); };
+    requestAnimationFrame(cl);
+  }
+
+  // ---------- ambient volumetric lights ----------
+  if (ambient) {
+    const ctx = ambient.getContext('2d'); const SCALE = 0.15; let w, h;
+    const resize = () => { w = Math.max(1, Math.ceil(innerWidth * SCALE)); h = Math.max(1, Math.ceil(innerHeight * SCALE)); ambient.width = w; ambient.height = h; };
+    resize(); addEventListener('resize', resize, { passive: true });
+    const lights = [{cx:0.14,cy:0.12,r:0.40,a:0.11,phase:0},{cx:0.84,cy:0.5,r:0.34,a:0.08,phase:1.8},{cx:0.7,cy:0.9,r:0.30,a:0.075,phase:3.2},{cx:0.12,cy:0.68,r:0.32,a:0.08,phase:4.7}];
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches; let t = 0;
+    const draw = () => { ctx.clearRect(0,0,w,h); t += 0.006; lights.forEach((l) => { const bx=(l.cx+Math.sin(t*1.1+l.phase)*0.08)*w, by=(l.cy+Math.cos(t*0.9+l.phase)*0.07)*h, baseR=l.r*Math.min(w,h); for(let j=0;j<4;j++){ const ox=bx+Math.sin(t*(0.4+j*0.1)+j*1.7+l.phase)*baseR*0.35, oy=by+Math.cos(t*(0.35+j*0.08)+j*2.3)*baseR*0.3, sr=baseR*(0.55+j*0.12), sa=l.a*(0.4-j*0.05); const g=ctx.createRadialGradient(ox,oy,0,ox,oy,sr*1.2); g.addColorStop(0,'rgba(255,255,255,'+sa.toFixed(4)+')'); g.addColorStop(0.5,'rgba(255,255,255,'+(sa*0.3).toFixed(4)+')'); g.addColorStop(1,'rgba(255,255,255,0)'); ctx.fillStyle=g; ctx.beginPath(); ctx.arc(ox,oy,sr*1.2,0,Math.PI*2); ctx.fill(); } }); if(!reduce) requestAnimationFrame(draw); };
+    draw();
+  }
+
+  // ---------- scramble ----------
+  function scramble(el, target, dur) {
+    if (!el) return; const pool = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#·/-'; clearInterval(el._t);
+    target = target || ''; const len = target.length, q = [], fr = Math.max(10, Math.round((dur || 460) / 34));
+    for (let k = 0; k < len; k++) { const st = Math.floor(Math.random() * (fr / 3)); q.push({ to: target.charAt(k) || '', st, en: st + Math.floor(fr * (0.4 + Math.random() * 0.5)), ch: '' }); }
+    let f = 0; el._t = setInterval(() => { let out = '', dn = 0; for (const x of q) { if (f >= x.en) { dn++; out += x.to; } else if (f >= x.st) { if (!x.ch || Math.random() < 0.35) x.ch = pool.charAt((Math.random() * pool.length) | 0); out += x.ch; } else out += ' '; } el.textContent = out; f++; if (dn >= q.length) { el.textContent = target; clearInterval(el._t); } }, 34);
+  }
+  $$('[data-scramble]').forEach((el) => { const original = el.textContent.trim(); const to = el.getAttribute('data-scramble-to') || original; el.addEventListener('mouseenter', () => scramble(el, to, 420)); el.addEventListener('mouseleave', () => scramble(el, original, 360)); });
+
+  // ---------- scene-cut page transition ----------
+  function pageLabel(path) { if (path === '/' || path === '/index.html' || path === '/index') return 'HOME'; return path.replace(/^\/|\.html$/g, '').replace(/-/g, ' ').toUpperCase() || 'HOME'; }
+  function playSceneExit(url, label) {
+    if (!transition || !transitionLabel) { location.href = url; return; }
+    transition.style.transition = 'none'; transition.style.display = 'flex'; transition.style.transform = 'translateY(-101%)'; transition.style.pointerEvents = 'auto';
+    transitionLabel.style.opacity = '0'; if (transitionEyebrow) transitionEyebrow.style.opacity = '0'; transition.offsetHeight;
+    transition.style.transition = 'transform 520ms cubic-bezier(.76,0,.24,1)'; transition.style.transform = 'translateY(0)';
+    setTimeout(() => { if (transitionEyebrow) transitionEyebrow.style.opacity = '1'; transitionLabel.style.opacity = '1'; scramble(transitionLabel, label, 420); }, 240);
+    setTimeout(() => { try { sessionStorage.setItem('pendingEntry', label); } catch (e) {} location.href = url; }, 1050);
+  }
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest('a'); if (!a) return; const href = a.getAttribute('href');
+    if (!href || href.startsWith('mailto:') || href.startsWith('tel:') || href.startsWith('#') || a.target === '_blank') return;
+    let url; try { url = new URL(href, location.href); } catch (_) { return; }
+    if (url.origin !== location.origin || url.pathname === location.pathname) return;
+    e.preventDefault(); playSceneExit(url.href, pageLabel(url.pathname));
+  });
+  window.addEventListener('pageshow', (e) => {
+    if (!e.persisted) return;
+    if (transition) { transition.style.transition = 'none'; transition.style.transform = 'translateY(-101%)'; transition.style.pointerEvents = 'none'; transition.style.display = 'none'; if (transitionLabel) transitionLabel.style.opacity = '0'; if (transitionEyebrow) transitionEyebrow.style.opacity = '0'; }
+    if (sweep) { sweep.style.transition = 'none'; sweep.style.display = 'none'; }
+  });
+
+  // ---------- scene-cut entry + entrance sweep (matches the rest of the site) ----------
+  function playSceneEntry() {
+    if (!transition) return false;
+    let pending = null; try { pending = sessionStorage.getItem('pendingEntry'); } catch (e) {}
+    if (!pending) return false;
+    try { sessionStorage.removeItem('pendingEntry'); } catch (e) {}
+    if (sweep) { sweep.style.transition = 'none'; sweep.style.transform = 'translateY(-101%)'; sweep.style.display = 'none'; }
+    transition.style.transition = 'none'; transition.style.transform = 'translateY(0)'; transition.style.pointerEvents = 'auto';
+    if (transitionEyebrow) transitionEyebrow.style.opacity = '1';
+    transitionLabel.style.opacity = '1'; transitionLabel.textContent = pending; transition.offsetHeight;
+    transition.style.transition = 'transform 520ms cubic-bezier(.76,0,.24,1)';
+    const ready = Promise.all([
+      (document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve(),
+      (document.readyState === 'complete') ? Promise.resolve() : new Promise((r) => window.addEventListener('load', r, { once: true })),
+    ]);
+    Promise.race([ready, new Promise((r) => setTimeout(r, 4000))]).then(() => {
+      setTimeout(() => {
+        if (transitionEyebrow) transitionEyebrow.style.opacity = '0';
+        transitionLabel.style.opacity = '0'; transition.style.transform = 'translateY(-101%)';
+        setTimeout(() => { transition.style.display = 'none'; transition.style.pointerEvents = 'none'; try { sessionStorage.setItem('hasEntered', '1'); } catch (e) {} }, 620);
+      }, 320);
+    });
+    return true;
+  }
+  function initSweep() {
+    if (!sweep) return;
+    const finish = () => { try { sessionStorage.setItem('hasEntered', '1'); } catch (e) {} sweep.style.transform = 'translateY(-101%)'; setTimeout(() => { sweep.style.display = 'none'; }, 1100); };
+    let pending = null; try { pending = sessionStorage.getItem('pendingEntry'); } catch (e) {}
+    if (pending) { sweep.style.transition = 'none'; sweep.style.transform = 'translateY(-101%)'; sweep.style.display = 'none'; return; }
+    let hasEntered = false; try { hasEntered = sessionStorage.getItem('hasEntered') === '1'; } catch (e) {}
+    if (hasEntered) { sweep.style.transition = 'none'; sweep.style.transform = 'translateY(-101%)'; sweep.style.display = 'none'; return; }
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) { setTimeout(finish, 100); return; }
+    const ready = Promise.all([
+      (document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve(),
+      (document.readyState === 'complete') ? Promise.resolve() : new Promise((r) => window.addEventListener('load', r, { once: true })),
+    ]);
+    Promise.race([ready, new Promise((r) => setTimeout(r, 6000))]).then(() => setTimeout(finish, 200));
+  }
+  if (!playSceneEntry()) initSweep();
+
+  // ---------- wizard ----------
+  (function initWizard() {
+    const form = $('[data-form]'), steps = $$('[data-step]', form), TOTAL = steps.length;
+    const backEl = $('[data-back]'), nextEl = $('[data-next]'), curEl = $('[data-cur]'), progEl = $('[data-progress]'), reviewEl = $('[data-review]');
+    let i = 0, submitted = false;
+    const data = { services: [], priority: null, existing: [], built: '', timeline: '' };
+
+    // pills — services (multi, grouped) + escape hatch
+    const prioWrap = $('[data-prio]'), prioPills = $('[data-prio-pills]');
+    $$('[data-svc]', form).forEach((p) => p.addEventListener('click', () => {
+      const v = p.dataset.svc; p.classList.toggle('on');
+      if (p.classList.contains('on')) data.services.push(v); else data.services = data.services.filter((x) => x !== v);
+      renderPriority(); refreshNext();
+    }));
+    const hatch = $('[data-hatch]', form);
+    if (hatch) hatch.addEventListener('click', () => { hatch.classList.toggle('on'); data.hatch = hatch.classList.contains('on'); refreshNext(); });
+    function renderPriority() {
+      if (!data.services.length) { prioWrap.classList.remove('show'); data.priority = null; prioPills.innerHTML = ''; return; }
+      prioWrap.classList.add('show'); prioPills.innerHTML = '';
+      if (data.priority && data.services.indexOf(data.priority) === -1) data.priority = null;
+      data.services.forEach((v) => {
+        const p = document.createElement('span'); p.className = 'pill ppill' + (data.priority === v ? ' first' : '');
+        p.innerHTML = (data.priority === v ? '<span class="n">01</span>' : '') + v;
+        p.addEventListener('click', () => { data.priority = (data.priority === v ? null : v); renderPriority(); refreshNext(); });
+        prioPills.appendChild(p);
+      });
+    }
+    // single-select pill groups (built, timeline)
+    $$('[data-one]', form).forEach((p) => p.addEventListener('click', () => {
+      const grp = p.dataset.one; $$('[data-one="' + grp + '"]', form).forEach((o) => o.classList.remove('on')); p.classList.add('on');
+      if (grp === 'built') data.built = p.textContent.trim(); else if (grp === 'time') data.timeline = p.textContent.trim();
+      refreshNext();
+    }));
+    // multi pills — existing
+    $$('[data-exist]', form).forEach((p) => p.addEventListener('click', () => {
+      const v = p.textContent.trim(); p.classList.toggle('on');
+      if (p.classList.contains('on')) data.existing.push(v); else data.existing = data.existing.filter((x) => x !== v);
+    }));
+
+    function validStep(n, paint) {
+      const sec = steps[n];
+      // required text inputs — only paint the error state when asked (i.e. on a failed Next)
+      let ok = true;
+      $$('[data-req]', sec).forEach((el) => {
+        const val = el.value.trim(); let bad = !val;
+        if (!bad && el.hasAttribute('data-email')) bad = !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+        if (paint) el.classList.toggle('err', bad);
+        if (bad) ok = false;
+      });
+      // step 3: need at least one service OR the hatch, and a priority if 2+ services
+      if (n === 2) {
+        if (!data.services.length && !data.hatch) ok = false;
+        if (data.services.length >= 2 && !data.priority) ok = false;
+      }
+      return ok;
+    }
+    function refreshNext() { nextEl.classList.toggle('ready', validStep(i, false)); }
+
+    function show(n) {
+      steps.forEach((s, k) => s.classList.toggle('on', k === n));
+      i = n; curEl.textContent = ('0' + (n + 1)).slice(-2);
+      progEl.style.width = ((n + 1) / TOTAL * 100).toFixed(2) + '%';
+      backEl.classList.toggle('hide', n === 0);
+      nextEl.textContent = (n === TOTAL - 1) ? 'Send brief →' : 'Next →';
+      if (n === TOTAL - 1) buildReview();
+      refreshNext();
+      const f = sec_firstInput(steps[n]); if (f) setTimeout(() => f.focus({ preventScroll: true }), 60);
+    }
+    function sec_firstInput(sec) { return sec.querySelector('input:not([type=hidden]), textarea'); }
+
+    backEl.addEventListener('click', () => { if (i > 0) show(i - 1); });
+    nextEl.addEventListener('click', () => {
+      if (!validStep(i, true)) { flash(); return; }
+      if (i < TOTAL - 1) show(i + 1); else submit();
+    });
+    // Enter advances on single-line inputs
+    form.addEventListener('keydown', (e) => { if (e.key === 'Enter' && e.target.tagName === 'INPUT') { e.preventDefault(); if (validStep(i, false)) nextEl.click(); else { validStep(i, true); flash(); } } });
+    function flash() { nextEl.animate([{ transform: 'translateX(0)' }, { transform: 'translateX(-4px)' }, { transform: 'translateX(4px)' }, { transform: 'translateX(0)' }], { duration: 220 }); }
+
+    function collect() {
+      const g = (n) => (form.querySelector('[name="' + n + '"]') || {}).value || '';
+      return {
+        name: g('name').trim(), email: g('email').trim(), org: g('org').trim(), role: g('role').trim(), oneliner: g('oneliner').trim(),
+        bigidea: g('bigidea').trim(), audience: g('audience').trim(), success: g('success').trim(),
+        services: data.services.slice(), priority: data.priority, notSure: !!data.hatch,
+        currentSite: g('currentSite').trim(), builtOn: data.built, existing: data.existing.slice(), references: g('references').trim(),
+        timeline: data.timeline, stakeholders: g('stakeholders').trim(), workingWith: g('workingWith').trim(), notes: g('notes').trim(),
+        honeypot: g('company_website')
+      };
+    }
+    function buildReview() {
+      const d = collect(); const rows = [];
+      const line = (k, v, muted) => rows.push('<div class="rev-row"><div class="rev-k">' + k + '</div><div class="rev-v">' + (v ? v : '<span class="muted">' + (muted || '—') + '</span>') + '</div></div>');
+      line('Who', (d.name || '—') + (d.role ? '  ·  ' + d.role : '') + (d.org ? '  ·  ' + d.org : ''));
+      line('Making', d.oneliner);
+      line('Big idea', d.bigidea);
+      line('For', d.audience);
+      if (d.success) line('Success', d.success);
+      let svc = d.services.join('  ·  '); if (d.notSure) svc += (svc ? '  ·  ' : '') + 'Not sure yet';
+      line('Needs', svc);
+      if (d.priority) line('Start with', '<span class="star">→ ' + d.priority + '</span>');
+      if (d.currentSite || d.builtOn) line('Current site', (d.currentSite || '—') + (d.builtOn ? '  ·  ' + d.builtOn : ''));
+      if (d.existing.length) line('Has', d.existing.join('  ·  '));
+      if (d.references) line('References', d.references);
+      if (d.timeline) line('Timeline', d.timeline);
+      if (d.stakeholders) line('Who signs off', d.stakeholders);
+      if (d.workingWith) line('Working with', d.workingWith);
+      if (d.notes) line('Notes', d.notes);
+      reviewEl.innerHTML = rows.join('');
+    }
+
+    async function submit() {
+      if (submitted) return; const d = collect();
+      if (d.honeypot) return; // bot
+      submitted = true; nextEl.textContent = 'Sending…'; nextEl.classList.remove('ready');
+      try {
+        const res = await fetch('/api/intake', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(d) });
+        if (!res.ok) throw new Error('bad status ' + res.status);
+        success(d.name);
+      } catch (err) {
+        submitted = false; nextEl.textContent = 'Send brief →'; nextEl.classList.add('ready');
+        let e = form.querySelector('[data-err]');
+        if (!e) { e = document.createElement('div'); e.setAttribute('data-err', ''); e.style.cssText = 'font-family:Space Mono,monospace; font-size:11px; color:#c67854; margin-top:14px; text-align:center;'; reviewEl.after(e); }
+        e.textContent = "Couldn't send just now — try again, or email ascencion@aceburney.com directly.";
+      }
+    }
+    function success(name) {
+      const card = $('[data-form]');
+      card.innerHTML = '<div class="succ"><div class="eyebrow" style="text-align:center;">Received</div><h2>Thanks' + (name ? ', ' + escapeHtml(name.split(' ')[0]) : '') + '.</h2><p>Your brief is on its way to Ace. You\'ll hear back soon — usually within a couple of days. In the meantime, your ideas just got a lot more organized.</p></div>';
+    }
+    function escapeHtml(s) { return s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
+
+    // live-refresh Next as they type; clear a field's error the moment it has a value
+    form.addEventListener('input', (e) => { if (e.target.classList && e.target.classList.contains('err') && e.target.value.trim()) e.target.classList.remove('err'); refreshNext(); });
+    show(0);
+  })();
+})();
+</script>
+</body>
+</html>
