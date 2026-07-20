@@ -510,7 +510,7 @@
     }
     function success(name) {
       const card = $('[data-form]');
-      card.innerHTML = '<a href="/" class="succ-x" aria-label="Return home"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 2L14 14M14 2L2 14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></a><div class="succ"><div class="eyebrow" style="text-align:center;">Received</div><h2>Thanks' + (name ? ', ' + escapeHtml(name.split(' ')[0]) : '') + '.</h2><p>Your brief is on its way to Ace. You\'ll hear back soon — usually within a couple of days. In the meantime, your ideas just got a lot more organized.</p></div>';
+      card.innerHTML = '<a href="/" class="succ-x" aria-label="Return home"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 2L14 14M14 2L2 14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></a><div class="succ"><div class="eyebrow" style="text-align:center;">Received</div><h2>Thanks' + (name ? ', ' + escapeHtml(name.split(' ')[0]) : '') + '.</h2><p>Your brief is on its way to Ace. You\'ll hear back soon, usually within a couple of days. In the meantime, thanks for thinking it through. It makes all the difference.</p></div>';
     }
     function escapeHtml(s) { return s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
 
