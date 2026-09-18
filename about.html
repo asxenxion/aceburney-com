@@ -49,6 +49,20 @@
     [data-m="ig-full"] { display: none !important; }
     [data-m="ig-short"] { display: inline !important; }
   }
+  /* Omery Studio link in the bio card footer — same muted look at rest, brightens on hover */
+  [data-omery-card-link] { color: inherit; text-decoration: none; transition: color .3s ease; }
+  [data-omery-card-link]:hover { color: #EDE9E0; }
+  /* Omery studio CTA (timeline card) — label + gently beckoning arrow, mirroring the landing */
+  [data-omery-cta] { color: #a8a29a; transition: color .3s ease; }
+  [data-omery-cta]:hover { color: #EDE9E0; }
+  [data-omery-arrow] { animation: ab-beckon 6s ease-in-out 2.6s infinite; }
+  @keyframes ab-beckon {
+    0%, 16%, 100% { transform: translate(0,0); color: #7A7A7A; }
+    4%, 12% { transform: translate(2px,-2px); color: #e8e6e1; }
+    8% { transform: translate(0,0); color: #9a958b; }
+  }
+  [data-omery-cta]:hover [data-omery-arrow] { animation: none; transform: translate(2px,-2px); color: #EDE9E0; transition: transform .3s cubic-bezier(.16,1,.3,1), color .3s ease; }
+  @media (prefers-reduced-motion: reduce) { [data-omery-arrow] { animation: none; } }
 </style>
 </head>
 <body>
@@ -139,7 +153,7 @@
             </div>
             <!-- footer -->
             <div style="display:flex; justify-content:space-between; margin-top:14px; padding:12px 6px 4px; border-top:1px solid rgba(255,255,255,0.09); font-family:'Space Mono',monospace; font-size:10px; letter-spacing:0.14em; color:#6b675f; text-transform:uppercase;">
-              <span>Omery Studio</span>
+              <a href="https://www.omery.studio" target="_blank" rel="noopener" aria-label="Visit Omery Studio (opens in a new tab)" data-omery-card-link data-scramble>Omery Studio</a>
               <span>2026 — ATX</span>
             </div>
           </div>
@@ -179,6 +193,7 @@
               <h3 style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight:700; font-size:clamp(1.3rem,2.1vw,1.8rem); letter-spacing:-0.01em; color:#f2f0ef; margin-top:14px;">Founder &amp; Product Lead</h3>
               <span style="display:block; font-family:'Space Mono',monospace; font-size:12px; color:#a8a29a; margin-top:6px;"><a href="https://www.omery.studio" target="_blank" rel="noopener" data-scramble style="color:#e8e6e1;">Omery</a> — Design &amp; Systems Studio</span>
               <p style="font-family:'Space Mono',monospace; font-size:12.5px; line-height:1.75; color:#8f8a82; margin-top:18px;">Independent practice in AI automation, product strategy, and creative systems for brands and operators.</p>
+              <a href="https://www.omery.studio" target="_blank" rel="noopener" aria-label="Visit Omery, design and systems studio (opens in a new tab)" data-omery-cta style="display:flex; align-items:center; gap:0.5em; margin-top:20px; padding-top:16px; border-top:1px solid rgba(255,255,255,0.08); font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.2em; text-transform:uppercase; text-decoration:none;"><span data-scramble>Visit the Studio</span><span data-omery-arrow aria-hidden="true" style="display:inline-block; will-change:transform;">↗</span></a>
             </div>
           </div>
         </div>

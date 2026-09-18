@@ -58,6 +58,15 @@
   [data-about].line-in { color:#e8e6e1 !important; }
   [data-about].line-in::after { transform:scaleX(1); transform-origin:left; background:#e8e6e1; }
   @media (prefers-reduced-motion: reduce) { [data-about]::after { transition:none; } }
+  /* Omery arrow beckon — two gentle up-right nudges, then quiet; 6s period drifts against the 5.2s About pulse */
+  [data-omery-arrow] { animation: ab-beckon 6s ease-in-out 2.6s infinite; }
+  @keyframes ab-beckon {
+    0%, 16%, 100% { transform: translate(0,0); color: #7A7A7A; }
+    4%, 12% { transform: translate(2px,-2px); color: #e8e6e1; }
+    8% { transform: translate(0,0); color: #9a958b; }
+  }
+  [data-omery]:hover [data-omery-arrow] { animation: none; transform: translate(2px,-2px); color: #EDE9E0; transition: transform .3s cubic-bezier(.16,1,.3,1), color .3s ease; }
+  @media (prefers-reduced-motion: reduce) { [data-omery-arrow] { animation: none; } }
   @media (max-width: 640px) {
     body { overflow-x: hidden; }
     [data-m="head"] { flex-direction: column !important; gap: 0.1em !important; align-items: center !important; }
@@ -67,7 +76,7 @@
     [data-m="about"] { top: auto !important; bottom: 22px !important; font-size: 9.5px !important; }
     [data-m="austin"] { bottom: 22px !important; left: 20px !important; font-size: 9.5px !important; }
     [data-m="copy"] { bottom: 22px !important; right: 20px !important; font-size: 9.5px !important; }
-    [data-m="credit"] { display: none !important; }
+    [data-m="omery"] { bottom: 48px !important; font-size: 9.5px !important; letter-spacing: 0.16em !important; }
   }
   @media (max-width: 380px) {
     [data-m="avail"] { display: none !important; }
@@ -116,7 +125,7 @@
   <div data-m="austin" style="position:absolute; bottom:34px; left:60px; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.18em; color:#7A7A7A; text-transform:uppercase; animation:ab-fade 1.2s ease 1.05s both;">Austin, Texas</div>
   <a data-about href="/about" data-m="about" style="position:absolute; top:34px; left:50%; transform:translateX(-50%); z-index:20; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.18em; color:#B4AEA4; text-transform:uppercase; transition:color .3s ease; animation:ab-fade 1.2s ease 0.7s both;">About</a>
   <div data-m="copy" style="position:absolute; bottom:34px; right:60px; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.18em; color:#7A7A7A; text-transform:uppercase; animation:ab-fade 1.2s ease 1.05s both;">© 2026</div>
-  <div data-m="credit" style="position:absolute; bottom:34px; left:50%; transform:translateX(-50%); z-index:15; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.18em; color:#6b675f; text-transform:uppercase; white-space:nowrap; animation:ab-fade 1.2s ease 1.25s both;"><span data-credit-full>This site — designed &amp; built by me</span><span data-credit-short style="display:none;">This site — built by me</span></div>
+  <a data-omery data-m="omery" href="https://omery.studio" target="_blank" rel="noopener" aria-label="Omery, design and systems studio (opens in a new tab)" style="position:absolute; bottom:34px; left:50%; transform:translateX(-50%); z-index:15; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.18em; color:#7A7A7A; text-transform:uppercase; text-decoration:none; white-space:nowrap; transition:color .3s ease; animation:ab-fade 1.2s ease 1.25s both;"><span data-omery-label>Omery &middot; Design &amp; Systems Studio</span><span data-omery-arrow aria-hidden="true" style="display:inline-block; margin-left:0.45em; will-change:transform;">↗</span></a>
 
   <!-- custom cursor -->
   <div data-cursor style="position:fixed; top:0; left:0; width:26px; height:26px; border:1px solid rgba(237,233,224,0.55); border-radius:50%; pointer-events:none; z-index:9999; transform:translate(-100px,-100px); transition:width .25s ease, height .25s ease, background-color .25s ease, border-color .25s ease; mix-blend-mode:difference;"></div>
@@ -251,6 +260,10 @@
     };
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(lockStart); else lockStart();
   }
+
+  // ---------- Omery studio link — in-place scramble on hover (label only; the arrow span stays intact and pulses) ----------
+  const omery = $('[data-omery]'), omeryLabel = $('[data-omery-label]');
+  if (omery && omeryLabel) { const ot = omeryLabel.textContent.trim(); omery.addEventListener('mouseenter', () => scramble(omeryLabel, ot, true)); }
 
   // ---------- About link easter egg ----------
   let kickAboutPulse = null;
