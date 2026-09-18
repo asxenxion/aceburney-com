@@ -1,6 +1,12 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
+  "redirects": [
+    { "source": "/blog", "destination": "/", "permanent": true },
+    { "source": "/blog/:path*", "destination": "/", "permanent": true },
+    { "source": "/portfolio_page/:path*", "destination": "/", "permanent": true },
+    { "source": "/portfolio_page", "destination": "/", "permanent": true }
+  ],
   "headers": [
     {
       "source": "/(.*)",

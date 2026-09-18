@@ -19,7 +19,45 @@
 <meta name="twitter:title" content="Ace Burney — Product, Tech, Creative">
 <meta name="twitter:description" content="Product strategy, systems design, and AI-driven automation. Austin, TX.">
 <meta name="twitter:image" content="https://aceburney.com/assets/portrait.jpg">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230D0D0D'/%3E%3Ctext x='16' y='22' font-family='Helvetica,Arial,sans-serif' font-weight='700' font-size='18' fill='%23e8e6e1' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="/assets/favicon/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/favicon/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/assets/favicon/favicon-180.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://aceburney.com/#website",
+      "url": "https://aceburney.com/",
+      "name": "Ace Burney",
+      "publisher": { "@id": "https://aceburney.com/#person" }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://aceburney.com/#person",
+      "name": "Ace Burney",
+      "alternateName": ["Ascencion Burney", "Ascencion \"Ace\" Burney"],
+      "givenName": "Ascencion",
+      "familyName": "Burney",
+      "url": "https://aceburney.com/",
+      "image": "https://aceburney.com/assets/portrait.jpg",
+      "jobTitle": "Founder & Product Lead",
+      "worksFor": { "@type": "Organization", "name": "Omery", "url": "https://omery.studio" },
+      "homeLocation": { "@type": "Place", "address": { "@type": "PostalAddress", "addressLocality": "Austin", "addressRegion": "TX", "addressCountry": "US" } },
+      "email": "mailto:ascencion@aceburney.com",
+      "sameAs": [
+        "https://www.linkedin.com/in/aceburney/",
+        "https://www.instagram.com/asxenxion/",
+        "https://x.com/asxenxion",
+        "https://vimeo.com/aceburney",
+        "https://omery.studio"
+      ],
+      "knowsAbout": ["Product Strategy", "Systems Design", "AI Automation", "Brand Design", "Creative Direction", "Photography", "Film"]
+    }
+  ]
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://api.fontshare.com/v2/css?f[]=clash-display@700,600&display=swap" rel="stylesheet">
@@ -70,7 +108,7 @@
   @media (max-width: 640px) {
     body { overflow-x: hidden; }
     [data-m="head"] { flex-direction: column !important; gap: 0.1em !important; align-items: center !important; }
-    [data-m="head"] > div:first-child { margin-right: 14px !important; }
+    [data-m="head"] > span:first-child { margin-right: 14px !important; }
     [data-m="avail"] { top: 20px !important; left: 20px !important; font-size: 9.5px !important; max-width: 42vw; }
     [data-m="start"] { top: 20px !important; right: 20px !important; font-size: 9.5px !important; }
     [data-m="about"] { top: auto !important; bottom: 22px !important; font-size: 9.5px !important; }
@@ -111,14 +149,16 @@
   <div style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:0 24px; text-align:center; pointer-events:none;">
 
     <!-- headline -->
-    <div data-head data-m="head" style="user-select:none; cursor:none; pointer-events:auto; display:flex; flex-wrap:nowrap; align-items:baseline; justify-content:center; gap:clamp(1rem, 4vw, 4rem);">
-      <div style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight:700; color:#e8e6e1; text-transform:uppercase; font-size:clamp(2.4rem, 12.5vw, 15rem); line-height:0.9; letter-spacing:-0.01em; white-space:nowrap; animation:ab-rise 1s cubic-bezier(.2,.8,.2,1) 0.05s both;">
+    <h1 data-head data-m="head" style="margin:0; font-size:1em; font-weight:400; user-select:none; cursor:none; pointer-events:auto; display:flex; flex-wrap:nowrap; align-items:baseline; justify-content:center; gap:clamp(1rem, 4vw, 4rem);">
+      <span style="display:block; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight:700; color:#e8e6e1; text-transform:uppercase; font-size:clamp(2.4rem, 12.5vw, 15rem); line-height:0.9; letter-spacing:-0.01em; white-space:nowrap; animation:ab-rise 1s cubic-bezier(.2,.8,.2,1) 0.05s both;">
         <span data-k style="display:inline-block; will-change:transform; transition:transform .82s cubic-bezier(.34,1.28,.4,1);">A</span><span data-k style="display:inline-block; will-change:transform; transition:transform .82s cubic-bezier(.34,1.28,.4,1);">C</span><span data-k style="display:inline-block; will-change:transform; transition:transform .82s cubic-bezier(.34,1.28,.4,1);">E</span>
-      </div>
-      <div style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight:700; color:#e8e6e1; text-transform:uppercase; font-size:clamp(2.4rem, 12.5vw, 15rem); line-height:0.9; letter-spacing:-0.01em; white-space:nowrap; animation:ab-rise 1s cubic-bezier(.2,.8,.2,1) 0.16s both;">
+      </span>
+      <span style="display:block; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight:700; color:#e8e6e1; text-transform:uppercase; font-size:clamp(2.4rem, 12.5vw, 15rem); line-height:0.9; letter-spacing:-0.01em; white-space:nowrap; animation:ab-rise 1s cubic-bezier(.2,.8,.2,1) 0.16s both;">
         <span data-k style="display:inline-block; will-change:transform; transition:transform .82s cubic-bezier(.34,1.28,.4,1);">B</span><span data-k style="display:inline-block; will-change:transform; transition:transform .82s cubic-bezier(.34,1.28,.4,1);">U</span><span data-k style="display:inline-block; will-change:transform; transition:transform .82s cubic-bezier(.34,1.28,.4,1);">R</span><span data-k style="display:inline-block; will-change:transform; transition:transform .82s cubic-bezier(.34,1.28,.4,1);">N</span><span data-k style="display:inline-block; will-change:transform; transition:transform .82s cubic-bezier(.34,1.28,.4,1);">E</span><span data-k style="display:inline-block; will-change:transform; transition:transform .82s cubic-bezier(.34,1.28,.4,1);">Y</span><span data-k style="display:inline-block; will-change:transform; transition:transform .82s cubic-bezier(.34,1.28,.4,1);">.</span>
-      </div>
-    </div>
+      </span>
+    </h1>
+
+    <p style="position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); clip-path:inset(50%); white-space:nowrap;">Ascencion "Ace" Burney is a product leader and builder in Austin, Texas, working across product strategy, systems design, and AI-driven automation.</p>
   </div>
 
   <!-- footer -->
