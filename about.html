@@ -90,6 +90,8 @@
     [data-m="social"] { gap: 9px 10px !important; font-size: 10px !important; letter-spacing: 0.1em !important; }
     [data-m="ig-full"] { display: none !important; }
     [data-m="ig-short"] { display: inline !important; }
+    [data-m="omery-full"] { display: none !important; }
+    [data-m="omery-short"] { display: inline !important; }
   }
   /* Omery Studio link in the bio card footer — same muted look at rest, brightens on hover */
   [data-omery-card-link] { color: inherit; text-decoration: none; transition: color .3s ease; }
@@ -97,13 +99,16 @@
   /* Omery studio CTA (timeline card) — label + gently beckoning arrow, mirroring the landing */
   [data-omery-cta] { color: #a8a29a; transition: color .3s ease; }
   [data-omery-cta]:hover { color: #EDE9E0; }
-  [data-omery-arrow] { animation: ab-beckon 6s ease-in-out 2.6s infinite; }
+  /* Omery link in the page footer — inherits the footer's muted color, brightens on hover */
+  [data-omery-foot] { color: inherit; text-decoration: none; transition: color .3s ease; }
+  [data-omery-foot]:hover { color: #EDE9E0; }
+  [data-omery-arrow] { animation: ab-beckon 6s ease-in-out 1s infinite; }
   @keyframes ab-beckon {
     0%, 16%, 100% { transform: translate(0,0); color: #7A7A7A; }
     4%, 12% { transform: translate(2px,-2px); color: #e8e6e1; }
     8% { transform: translate(0,0); color: #9a958b; }
   }
-  [data-omery-cta]:hover [data-omery-arrow] { animation: none; transform: translate(2px,-2px); color: #EDE9E0; transition: transform .3s cubic-bezier(.16,1,.3,1), color .3s ease; }
+  [data-omery-cta]:hover [data-omery-arrow], [data-omery-foot]:hover [data-omery-arrow] { animation: none; transform: translate(2px,-2px); color: #EDE9E0; transition: transform .3s cubic-bezier(.16,1,.3,1), color .3s ease; }
   @media (prefers-reduced-motion: reduce) { [data-omery-arrow] { animation: none; } }
 </style>
 </head>
@@ -317,7 +322,7 @@
     <!-- FOOTER -->
     <footer style="padding:30px 0 44px; border-top:1px solid rgba(255,255,255,0.07);">
       <div data-m="foot" style="display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:12px 24px; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.16em; color:#6b675f; text-transform:uppercase;">
-        <span style="justify-self:start;">© 2026 Ace Burney.</span>
+        <a href="https://omery.studio" target="_blank" rel="noopener" aria-label="Omery, design and systems studio (opens in a new tab)" data-omery-foot style="justify-self:start; white-space:nowrap;"><span data-scramble data-m="omery-full">Omery &middot; Design &amp; Systems Studio</span><span data-scramble data-m="omery-short" style="display:none;">Omery</span><span data-omery-arrow aria-hidden="true" style="display:inline-block; margin-left:0.45em; will-change:transform;">↗</span></a>
         <span data-m="foot-credit" data-reveal style="justify-self:center; text-align:center; font-size:10px; letter-spacing:0.18em; color:#5a564f;">This site — designed &amp; built by me</span>
         <span style="justify-self:end;">Austin, Texas</span>
       </div>

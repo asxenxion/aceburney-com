@@ -97,7 +97,7 @@
   [data-about].line-in::after { transform:scaleX(1); transform-origin:left; background:#e8e6e1; }
   @media (prefers-reduced-motion: reduce) { [data-about]::after { transition:none; } }
   /* Omery arrow beckon — two gentle up-right nudges, then quiet; 6s period drifts against the 5.2s About pulse */
-  [data-omery-arrow] { animation: ab-beckon 6s ease-in-out 2.6s infinite; }
+  [data-omery-arrow] { animation: ab-beckon 6s ease-in-out 1s infinite; }
   @keyframes ab-beckon {
     0%, 16%, 100% { transform: translate(0,0); color: #7A7A7A; }
     4%, 12% { transform: translate(2px,-2px); color: #e8e6e1; }
