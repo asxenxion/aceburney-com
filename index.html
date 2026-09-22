@@ -112,9 +112,8 @@
     [data-m="avail"] { top: 20px !important; left: 20px !important; font-size: 9.5px !important; max-width: 42vw; }
     [data-m="start"] { top: 20px !important; right: 20px !important; font-size: 9.5px !important; }
     [data-m="about"] { top: auto !important; bottom: 22px !important; font-size: 9.5px !important; }
-    [data-m="austin"] { bottom: 22px !important; left: 20px !important; font-size: 9.5px !important; }
-    [data-m="copy"] { bottom: 22px !important; right: 20px !important; font-size: 9.5px !important; }
-    [data-m="omery"] { bottom: 41px !important; font-size: 9.5px !important; letter-spacing: 0.16em !important; }
+    [data-m="austin"] { bottom: 22px !important; left: auto !important; right: 20px !important; font-size: 9.5px !important; }
+    [data-m="omery"] { bottom: 22px !important; left: 20px !important; font-size: 9.5px !important; letter-spacing: 0.16em !important; }
     [data-m="omery-full"] { display: none !important; }
     [data-m="omery-short"] { display: inline !important; }
   }
@@ -164,10 +163,9 @@
   </div>
 
   <!-- footer -->
-  <div data-m="austin" style="position:absolute; bottom:34px; left:60px; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.18em; color:#7A7A7A; text-transform:uppercase; animation:ab-fade 1.2s ease 1.05s both;">Austin, Texas</div>
+  <div data-m="austin" style="position:absolute; bottom:34px; right:60px; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.18em; color:#7A7A7A; text-transform:uppercase; animation:ab-fade 1.2s ease 1.05s both;">Austin, Texas</div>
   <a data-about href="/about" data-m="about" style="position:absolute; top:34px; left:50%; transform:translateX(-50%); z-index:20; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.18em; color:#B4AEA4; text-transform:uppercase; transition:color .3s ease; animation:ab-fade 1.2s ease 0.7s both;">About</a>
-  <div data-m="copy" style="position:absolute; bottom:34px; right:60px; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.18em; color:#7A7A7A; text-transform:uppercase; animation:ab-fade 1.2s ease 1.05s both;">© 2026</div>
-  <a data-omery data-m="omery" href="https://omery.studio" target="_blank" rel="noopener" aria-label="Omery, design and systems studio (opens in a new tab)" style="position:absolute; bottom:34px; left:50%; transform:translateX(-50%); z-index:15; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.18em; color:#7A7A7A; text-transform:uppercase; text-decoration:none; white-space:nowrap; transition:color .3s ease; animation:ab-fade 1.2s ease 1.25s both;"><span data-omery-label data-m="omery-full">Omery &middot; Design &amp; Systems Studio</span><span data-omery-label-short data-m="omery-short" style="display:none;">Omery</span><span data-omery-arrow aria-hidden="true" style="display:inline-block; margin-left:0.45em; will-change:transform;">↗</span></a>
+  <a data-omery data-m="omery" href="https://omery.studio" target="_blank" rel="noopener" aria-label="Omery, design and systems studio (opens in a new tab)" style="position:absolute; bottom:34px; left:60px; z-index:15; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.18em; color:#7A7A7A; text-transform:uppercase; text-decoration:none; white-space:nowrap; transition:color .3s ease; animation:ab-fade 1.2s ease 1.05s both;"><span data-omery-label data-m="omery-full">Omery &middot; Design &amp; Systems Studio</span><span data-omery-label-short data-m="omery-short" style="display:none;">Omery</span><span data-omery-arrow aria-hidden="true" style="display:inline-block; margin-left:0.45em; will-change:transform;">↗</span></a>
 
   <!-- custom cursor -->
   <div data-cursor style="position:fixed; top:0; left:0; width:26px; height:26px; border:1px solid rgba(237,233,224,0.55); border-radius:50%; pointer-events:none; z-index:9999; transform:translate(-100px,-100px); transition:width .25s ease, height .25s ease, background-color .25s ease, border-color .25s ease; mix-blend-mode:difference;"></div>
