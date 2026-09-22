@@ -24,7 +24,7 @@
   @keyframes ab-fade { from { opacity: 0; } to { opacity: 1; } }
 
   /* ---------- wizard card (bio-card language) ---------- */
-  .wrap { position: relative; z-index: 10; min-height: 100dvh; display: flex; align-items: center; justify-content: center; padding: 110px clamp(18px,5vw,40px) 60px; }
+  .wrap { position: relative; z-index: 10; min-height: 100dvh; display: flex; align-items: center; justify-content: center; padding: 110px clamp(18px,5vw,40px) 28px; }
   .card { position: relative; width: 100%; max-width: 588px; background: linear-gradient(180deg, rgba(255,255,255,0.055), rgba(255,255,255,0.02)); border: 1px solid rgba(255,255,255,0.10); border-radius: 16px; box-shadow: 0 48px 110px -46px rgba(0,0,0,0.92); padding: clamp(22px,3.4vw,32px) clamp(20px,3vw,30px) clamp(20px,2.6vw,26px); animation: ab-fade 0.9s ease 0.15s both; }
   .card::before { content:""; position:absolute; inset:0; border-radius:16px; pointer-events:none; background: radial-gradient(circle at 50% 0%, rgba(255,255,255,0.06), rgba(255,255,255,0) 55%); }
 
@@ -91,9 +91,23 @@
   .succ h2 { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 700; font-size: clamp(1.8rem,5vw,2.4rem); letter-spacing: -0.03em; text-transform: uppercase; color: #f2f0ef; margin-bottom: 14px; }
   .succ p { font-family: 'Space Mono', monospace; font-size: 12.5px; line-height: 1.7; color: #a8a29a; max-width: 40ch; margin: 0 auto; }
 
+  /* footer Omery link — inherits the footer's muted color, brightens on hover; arrow beckons */
+  [data-omery-foot] { color: inherit; text-decoration: none; transition: color .3s ease; }
+  [data-omery-foot]:hover { color: #EDE9E0; }
+  [data-omery-arrow] { animation: ab-beckon 6s ease-in-out 1s infinite; }
+  @keyframes ab-beckon {
+    0%, 16%, 100% { transform: translate(0,0); color: #7A7A7A; }
+    4%, 12% { transform: translate(2px,-2px); color: #e8e6e1; }
+    8% { transform: translate(0,0); color: #9a958b; }
+  }
+  [data-omery-foot]:hover [data-omery-arrow] { animation: none; transform: translate(2px,-2px); color: #EDE9E0; transition: transform .3s cubic-bezier(.16,1,.3,1), color .3s ease; }
+  @media (prefers-reduced-motion: reduce) { [data-omery-arrow] { animation: none; } }
+
   @media (max-width: 560px) {
     .rev-k { flex-basis: 40%; }
     .q-title { font-size: 1.45rem; }
+    [data-m="omery-full"] { display: none !important; }
+    [data-m="omery-short"] { display: inline !important; }
   }
 </style>
 </head>
@@ -253,6 +267,14 @@
     </form>
   </div>
 
+  <!-- footer — Omery studio + location, aligned to the card column -->
+  <footer style="position:relative; z-index:10; padding:0 clamp(18px,5vw,40px) 30px;">
+    <div style="max-width:588px; margin:0 auto; padding-top:16px; border-top:1px solid rgba(255,255,255,0.07); display:flex; align-items:center; justify-content:space-between; gap:16px; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.16em; color:#6b675f; text-transform:uppercase; white-space:nowrap;">
+      <a href="https://omery.studio" target="_blank" rel="noopener" aria-label="Omery, design and systems studio (opens in a new tab)" data-omery-foot><span data-scramble-foot data-m="omery-full">Omery &middot; Design &amp; Systems Studio</span><span data-scramble-foot data-m="omery-short" style="display:none;">Omery</span><span data-omery-arrow aria-hidden="true" style="display:inline-block; margin-left:0.45em; will-change:transform;">↗</span></a>
+      <span>Austin, Texas</span>
+    </div>
+  </footer>
+
   <!-- entrance sweep (covers on load, slides up when ready) -->
   <div data-sweep style="position:fixed; inset:0; z-index:9990; background:#0D0D0D; pointer-events:none; will-change:transform; transition:transform 1s cubic-bezier(.76,0,.24,1);"></div>
 
@@ -320,6 +342,14 @@
       if (document.fonts && document.fonts.ready) document.fonts.ready.then(lock); else lock();
     }
   });
+
+  // footer Omery link — in-place scramble of the visible label on hover
+  const omeryFoot = $('[data-omery-foot]');
+  if (omeryFoot) {
+    omeryFoot.addEventListener('mouseenter', () => {
+      $$('[data-scramble-foot]', omeryFoot).forEach((s) => { if (s.offsetParent !== null) scramble(s, s.textContent.trim(), 260); });
+    });
+  }
 
   // ---------- scene-cut page transition ----------
   function pageLabel(path) { if (path === '/' || path === '/index.html' || path === '/index') return 'HOME'; return path.replace(/^\/|\.html$/g, '').replace(/-/g, ' ').toUpperCase() || 'HOME'; }
