@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Work — Ace Burney</title>
+<meta name="description" content="Selected work by Ace Burney: product, systems, and creative technology, built and shipped.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://aceburney.com/work">
+<meta name="theme-color" content="#0D0D0D">
+<meta name="color-scheme" content="dark">
+<link rel="icon" href="/assets/favicon/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/favicon/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/assets/favicon/favicon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { background: #0D0D0D; }
+  body { color: #e8e6e1; overflow-x: hidden; }
+  a { color: #7A7A7A; text-decoration: none; }
+  ::selection { background: #e8e6e1; color: #0D0D0D; }
+  @keyframes ab-fade { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes ab-grain {
+    0%{transform:translate(0,0);}10%{transform:translate(-6%,-4%);}20%{transform:translate(-11%,6%);}30%{transform:translate(6%,-11%);}40%{transform:translate(-4%,14%);}50%{transform:translate(-12%,4%);}60%{transform:translate(14%,0);}70%{transform:translate(0,11%);}80%{transform:translate(-14%,-3%);}90%{transform:translate(10%,6%);}100%{transform:translate(4%,0);}
+  }
+  [data-reveal] { opacity: 0; transform: translateY(24px); transition: opacity .9s cubic-bezier(.16,1,.3,1), transform .9s cubic-bezier(.16,1,.3,1); }
+  [data-reveal].in { opacity: 1; transform: none; }
+
+  .work { position: relative; display: grid; grid-template-columns: 44px minmax(0,1fr) auto; align-items: baseline; column-gap: 28px; padding: 30px 6px 28px; border-top: 1px solid rgba(255,255,255,0.09); text-decoration: none; transition: background-color .4s ease; }
+  .work-meta-row { display: flex; align-items: baseline; justify-content: flex-end; gap: 22px; align-self: center; }
+  .work:last-of-type { border-bottom: 1px solid rgba(255,255,255,0.09); }
+  .work-num { font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: 0.1em; color: #5f5b53; transition: color .4s ease; align-self: center; }
+  .work-title { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 700; font-size: clamp(1.7rem, 4.6vw, 3.3rem); line-height: 0.98; letter-spacing: -0.025em; color: #cbc7bf; transition: color .4s ease, transform .5s cubic-bezier(.16,1,.3,1); }
+  .work-cat { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #7A7A7A; align-self: center; transition: color .4s ease; }
+  .work-year { font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: 0.08em; color: #5f5b53; align-self: center; transition: color .4s ease; }
+  .work-thumb { display: none; }
+  .work:hover { background-color: rgba(255,255,255,0.02); }
+  .work:hover .work-title { color: #f2f0ef; transform: translateX(10px); }
+  .work:hover .work-num { color: #a8a29a; }
+  .work:hover .work-cat, .work:hover .work-year { color: #b4aea4; }
+  .work.dim { opacity: 0.22; filter: grayscale(1); }
+
+  .chip { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #7A7A7A; background: transparent; border: 1px solid rgba(255,255,255,0.12); border-radius: 100px; padding: 8px 15px; cursor: none; transition: color .3s ease, border-color .3s ease, background-color .3s ease; }
+  .chip:hover { color: #e8e6e1; border-color: rgba(255,255,255,0.32); }
+  .chip[aria-pressed="true"] { color: #0D0D0D; background: #e8e6e1; border-color: #e8e6e1; }
+
+  [data-omery-foot] { color: inherit; text-decoration: none; transition: color .3s ease; }
+  [data-omery-foot]:hover { color: #EDE9E0; }
+  [data-omery-arrow] { animation: ab-beckon 6s ease-in-out 1s infinite; }
+  @keyframes ab-beckon {
+    0%, 16%, 100% { transform: translate(0,0); color: #7A7A7A; }
+    4%, 12% { transform: translate(2px,-2px); color: #e8e6e1; }
+    8% { transform: translate(0,0); color: #9a958b; }
+  }
+  [data-omery-foot]:hover [data-omery-arrow] { animation: none; transform: translate(2px,-2px); color: #EDE9E0; }
+  @media (prefers-reduced-motion: reduce) { [data-omery-arrow] { animation: none; } }
+
+  @media (max-width: 760px) {
+    [data-m="omery-full"] { display: none !important; }
+    [data-m="omery-short"] { display: inline !important; }
+    .work { grid-template-columns: 1fr; column-gap: 0; row-gap: 12px; padding: 22px 0 26px; align-items: start; }
+    .work-thumb { display: block; width: 100%; aspect-ratio: 16 / 9; border-radius: 6px; background-size: cover; background-position: center; position: relative; overflow: hidden; order: -1; }
+    .work-thumb::after { content: attr(data-label); position: absolute; left: 12px; bottom: 10px; font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(232,230,225,0.5); }
+    .work-num { display: none; }
+    .work-title { color: #e8e6e1; font-size: clamp(1.9rem, 8.5vw, 2.6rem); }
+    .work:hover .work-title { transform: none; }
+    .work-meta-row { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; }
+  }
+</style>
+<link rel="stylesheet" href="/assets/site-menu.css?v=12">
+<script src="/assets/site-menu.js?v=13" defer></script>
+</head>
+<body>
+<div data-root style="position:relative; width:100%; min-height:100dvh; display:flex; flex-direction:column; background:#0D0D0D; overflow-x:hidden; cursor:none; -webkit-tap-highlight-color:transparent;">
+
+  <!-- ambient volumetric lights (fixed, behind everything) -->
+  <canvas data-ambient style="position:fixed; inset:0; z-index:0; width:100vw; height:100vh; pointer-events:none; display:block;"></canvas>
+
+  <!-- radial glow + vignette -->
+  <div style="position:fixed; inset:0; z-index:1; pointer-events:none; background:
+      radial-gradient(ellipse 70% 55% at 50% 12%, rgba(237,233,224,0.05), rgba(237,233,224,0) 60%),
+      radial-gradient(circle at 50% 40%, rgba(0,0,0,0) 45%, rgba(0,0,0,0.5) 100%);"></div>
+
+  <!-- film grain -->
+  <div data-motion style="position:fixed; inset:-60%; z-index:2; pointer-events:none; opacity:0.05; mix-blend-mode:overlay; animation:ab-grain 0.7s steps(1) infinite; background-image:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22140%22 height=%22140%22%3E%3Cfilter id=%22n%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.85%22 numOctaves=%222%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23n)%22/%3E%3C/svg%3E'); background-size:200px 200px;"></div>
+
+  <!-- floating hover preview (desktop) -->
+  <div data-preview style="position:fixed; top:0; left:0; z-index:8; width:320px; height:210px; border-radius:8px; overflow:hidden; pointer-events:none; opacity:0; transform:translate(-50%,-50%) scale(0.94); transition:opacity .35s ease, transform .5s cubic-bezier(.16,1,.3,1); box-shadow:0 30px 80px rgba(0,0,0,0.55); border:1px solid rgba(255,255,255,0.08);">
+    <div data-preview-img style="position:absolute; inset:0; background-size:cover; background-position:center;"></div>
+    <div style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,0.55));"></div>
+    <div data-preview-cap style="position:absolute; left:16px; bottom:13px; font-family:'Space Mono',monospace; font-size:10px; letter-spacing:0.18em; text-transform:uppercase; color:rgba(232,230,225,0.75);">Preview</div>
+  </div>
+
+  <!-- ===== NAV ===== -->
+  <nav style="position:fixed; top:0; left:0; right:0; z-index:30; display:flex; align-items:center; justify-content:space-between; padding:28px clamp(24px,5vw,60px); mix-blend-mode:difference;">
+    <a href="/" data-scramble data-scramble-to="← BACK HOME" style="font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.18em; color:#e8e6e1; text-transform:uppercase;">Ace Burney.</a>
+    <button type="button" data-menu-toggle class="sm-toggle">Menu</button>
+  </nav>
+
+  <!-- ===== CONTENT ===== -->
+  <div style="position:relative; z-index:10; flex:1 0 auto; width:100%; max-width:1240px; margin:0 auto; padding:0 clamp(24px,5vw,60px);">
+
+    <!-- HEADER -->
+    <header style="min-height:56vh; display:flex; flex-direction:column; justify-content:flex-end; padding:140px 0 40px;">
+      <div data-reveal style="font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.24em; color:#7A7A7A; text-transform:uppercase; margin-bottom:26px;">Index — Selected Work</div>
+      <h1 data-reveal style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight:700; font-size:clamp(3rem,11vw,8.5rem); line-height:0.88; letter-spacing:-0.04em; color:#f2f0ef;">Work.</h1>
+      <p data-reveal style="margin-top:30px; max-width:44ch; font-family:'Space Mono',monospace; font-size:clamp(0.85rem,1vw,0.98rem); line-height:1.75; color:#a8a29a;">A running record of things I've designed, built, and shipped, each told as the story of a problem worth solving. More case studies are on the way.</p>
+    </header>
+
+    <!-- INDEX -->
+    <section data-reveal data-worklist style="padding-bottom:60px;">
+
+      <a class="work" data-work href="/work/partition" data-cats="product systems" style="--thumb:url('/assets/work/partition/floor-1200.webp');">
+        <span class="work-num">01</span>
+        <span class="work-title">Partition</span>
+        <span class="work-thumb" data-work-thumb data-label="A control room for AI agents" aria-hidden="true"></span>
+        <span class="work-meta-row"><span class="work-cat">Product · Creative Technology</span><span class="work-year">2026</span></span>
+      </a>
+
+    </section>
+
+    <!-- EMPTY STATE (shown when a filter matches nothing) -->
+    <div data-empty style="display:none; padding:20px 0 80px; font-family:'Space Mono',monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:#5f5b53;">No work in this category yet.</div>
+
+  </div>
+  <!-- site footer (shared styles: /assets/site-menu.css) -->
+  <footer class="site-foot">
+    <a class="site-foot-omery" href="https://omery.studio" target="_blank" rel="noopener" aria-label="Omery, design and systems studio (opens in a new tab)"><span class="sf-full">Omery &middot; Design &amp; Systems Studio</span><span class="sf-short">Omery</span><span class="sf-arrow" aria-hidden="true">↗</span></a>
+    <span>Austin, Texas</span>
+  </footer>
+
+  <!-- custom cursor -->
+  <div data-cursor style="position:fixed; top:0; left:0; width:26px; height:26px; border:1px solid rgba(237,233,224,0.55); border-radius:50%; pointer-events:none; z-index:9999; transform:translate(-100px,-100px); transition:width .25s ease, height .25s ease, background-color .25s ease, border-color .25s ease; mix-blend-mode:difference;"></div>
+
+  <!-- sweep overlay (reveal on load) -->
+  <div data-sweep style="position:fixed; inset:0; z-index:9990; background:#0D0D0D; pointer-events:none; will-change:transform; transition:transform 1s cubic-bezier(.76,0,.24,1);"></div>
+
+</div>
+
+<script>
+(function () {
+  'use strict';
+  const $ = (s, c) => (c || document).querySelector(s);
+  const $$ = (s, c) => Array.from((c || document).querySelectorAll(s));
+
+  const root = $('[data-root]');
+  const cursor = $('[data-cursor]');
+  const ambient = $('[data-ambient]');
+  const sweep = $('[data-sweep]');
+  const preview = $('[data-preview]');
+  const previewImg = $('[data-preview-img]');
+  const previewCap = $('[data-preview-cap]');
+
+  const state = { mx: -9999, my: -9999, _cx: -100, _cy: -100 };
+  window.addEventListener('mousemove', (e) => { state.mx = e.clientX; state.my = e.clientY; });
+
+  const canHover = matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+  // ---------- custom cursor ----------
+  (function initCursor() {
+    if (!cursor) return;
+    if (!canHover) { cursor.style.display = 'none'; return; }
+    root.addEventListener('mouseover', (e) => { if (e.target.closest('a, button, [data-cta]')) { cursor.style.width = '46px'; cursor.style.height = '46px'; cursor.style.backgroundColor = 'rgba(237,233,224,0.9)'; } });
+    root.addEventListener('mouseout', (e) => { if (e.target.closest('a, button, [data-cta]')) { cursor.style.width = '26px'; cursor.style.height = '26px'; cursor.style.backgroundColor = 'transparent'; } });
+    const loop = () => {
+      state._cx += (state.mx - state._cx) * 0.18;
+      state._cy += (state.my - state._cy) * 0.18;
+      cursor.style.transform = 'translate(' + (state._cx - 13).toFixed(1) + 'px,' + (state._cy - 13).toFixed(1) + 'px)';
+      requestAnimationFrame(loop);
+    };
+    requestAnimationFrame(loop);
+  })();
+
+  // ---------- ambient lights ----------
+  (function initAmbient() {
+    if (!ambient) return;
+    const ctx = ambient.getContext('2d');
+    const SCALE = 0.15; let w, h;
+    const resize = () => { w = Math.max(1, Math.ceil(window.innerWidth * SCALE)); h = Math.max(1, Math.ceil(window.innerHeight * SCALE)); ambient.width = w; ambient.height = h; };
+    resize();
+    window.addEventListener('resize', resize, { passive: true });
+    const lights = [
+      { cx: 0.12, cy: 0.14, r: 0.40, a: 0.13, phase: 0 },
+      { cx: 0.84, cy: 0.66, r: 0.34, a: 0.10, phase: 1.8 },
+      { cx: 0.74, cy: 0.10, r: 0.30, a: 0.085, phase: 3.2 },
+      { cx: 0.10, cy: 0.80, r: 0.32, a: 0.10, phase: 4.7 },
+      { cx: 0.50, cy: 0.42, r: 0.26, a: 0.06, phase: 2.5 },
+    ];
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let t = 0;
+    const draw = () => {
+      ctx.clearRect(0, 0, w, h); t += 0.006;
+      lights.forEach((l) => {
+        const bx = (l.cx + Math.sin(t * 1.1 + l.phase) * 0.08 + Math.sin(t * 0.5 + l.phase * 2.3) * 0.05) * w;
+        const by = (l.cy + Math.cos(t * 0.9 + l.phase * 1.2) * 0.07 + Math.cos(t * 0.4 + l.phase * 1.8) * 0.06) * h;
+        const baseR = l.r * Math.min(w, h);
+        for (let j = 0; j < 4; j++) {
+          const ox = bx + Math.sin(t * (0.4 + j * 0.1) + j * 1.7 + l.phase) * baseR * 0.35;
+          const oy = by + Math.cos(t * (0.35 + j * 0.08) + j * 2.3 + l.phase * 0.8) * baseR * 0.3;
+          const sr = baseR * (0.55 + j * 0.12), sa = l.a * (0.4 - j * 0.05);
+          const grad = ctx.createRadialGradient(ox, oy, 0, ox, oy, sr * 1.2);
+          grad.addColorStop(0, 'rgba(255,255,255,' + sa.toFixed(4) + ')');
+          grad.addColorStop(0.5, 'rgba(255,255,255,' + (sa * 0.3).toFixed(4) + ')');
+          grad.addColorStop(1, 'rgba(255,255,255,0)');
+          ctx.fillStyle = grad; ctx.beginPath(); ctx.arc(ox, oy, sr * 1.2, 0, Math.PI * 2); ctx.fill();
+        }
+      });
+      if (!reduce) requestAnimationFrame(draw);
+    };
+    draw();
+  })();
+
+  // ---------- scramble (nav link hover) ----------
+  function scrambleTo(el, target, dur) {
+    if (!el) return;
+    const pool = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#·/-←';
+    clearInterval(el._t);
+    const len = target.length;
+    const q = [];
+    const frames = Math.max(8, Math.round((dur || 500) / 34));
+    for (let i = 0; i < len; i++) { const start = Math.floor(Math.random() * (frames / 3)); q.push({ to: target[i] || '', start, end: start + Math.floor(frames * (0.4 + Math.random() * 0.5)), ch: '' }); }
+    let f = 0;
+    el._t = setInterval(() => {
+      let out = '', done = 0;
+      for (const x of q) {
+        if (f >= x.end) { done++; out += x.to; }
+        else if (f >= x.start) { if (!x.ch || Math.random() < 0.32) x.ch = pool[(Math.random() * pool.length) | 0]; out += x.ch; }
+        else out += (x.to === ' ' ? ' ' : ' ');
+      }
+      el.textContent = out; f++;
+      if (done >= q.length) clearInterval(el._t);
+    }, 34);
+  }
+  $$('[data-scramble]').forEach((el) => {
+    const original = el.textContent.trim();
+    const to = el.getAttribute('data-scramble-to') || original;
+    el.addEventListener('mouseenter', () => scrambleTo(el, to, 420));
+    el.addEventListener('mouseleave', () => scrambleTo(el, original, 360));
+  });
+
+  // ---------- reveal on scroll ----------
+  (function initReveal() {
+    const els = $$('[data-reveal]');
+    if (!('IntersectionObserver' in window)) { els.forEach((e) => e.classList.add('in')); return; }
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((en) => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    els.forEach((e) => io.observe(e));
+  })();
+
+  // ---------- floating hover preview (desktop) ----------
+  (function initPreview() {
+    if (!canHover || !preview) return;
+    let active = null;
+    const px = { x: -400, y: -400 }, tgt = { x: -400, y: -400 };
+    $$('[data-work]').forEach((row) => {
+      const thumb = getComputedStyle(row).getPropertyValue('--thumb');
+      const title = $('.work-title', row).textContent;
+      row.addEventListener('mouseenter', () => {
+        active = row;
+        previewImg.style.backgroundImage = thumb;
+        previewCap.textContent = title;
+        preview.style.opacity = '1';
+        preview.style.transform = 'translate(-50%,-50%) scale(1)';
+      });
+      row.addEventListener('mouseleave', () => {
+        if (active === row) { active = null; preview.style.opacity = '0'; preview.style.transform = 'translate(-50%,-50%) scale(0.94)'; }
+      });
+    });
+    window.addEventListener('mousemove', (e) => { tgt.x = e.clientX + 26; tgt.y = e.clientY - 10; });
+    const loop = () => { px.x += (tgt.x - px.x) * 0.14; px.y += (tgt.y - px.y) * 0.14; preview.style.left = px.x.toFixed(1) + 'px'; preview.style.top = px.y.toFixed(1) + 'px'; requestAnimationFrame(loop); };
+    requestAnimationFrame(loop);
+  })();
+
+  // ---------- fill mobile thumbnails from --thumb ----------
+  $$('[data-work]').forEach((row) => {
+    const thumb = $('[data-work-thumb]', row);
+    if (thumb) thumb.style.backgroundImage = getComputedStyle(row).getPropertyValue('--thumb');
+  });
+
+  // ---------- category filter ----------
+  (function initFilter() {
+    const chips = $$('.chip');
+    const rows = $$('[data-work]');
+    const empty = $('[data-empty]');
+    chips.forEach((chip) => {
+      chip.addEventListener('click', () => {
+        const f = chip.getAttribute('data-filter');
+        chips.forEach((c) => c.setAttribute('aria-pressed', c === chip ? 'true' : 'false'));
+        let shown = 0;
+        rows.forEach((row) => {
+          const cats = (row.getAttribute('data-cats') || '').split(' ');
+          const match = f === 'all' || cats.includes(f);
+          row.style.display = match ? '' : 'none';
+          row.classList.remove('dim');
+          if (match) shown++;
+        });
+        if (empty) empty.style.display = shown === 0 ? 'block' : 'none';
+      });
+    });
+  })();
+
+  // ---------- sweep reveal on load ----------
+  window.addEventListener('load', () => {
+    requestAnimationFrame(() => { if (sweep) sweep.style.transform = 'translateY(-101%)'; });
+  });
+  setTimeout(() => { if (sweep) sweep.style.transform = 'translateY(-101%)'; }, 600);
+})();
+</script>
+</body>
+</html>

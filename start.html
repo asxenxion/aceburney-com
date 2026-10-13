@@ -110,6 +110,8 @@
     [data-m="omery-short"] { display: inline !important; }
   }
 </style>
+<link rel="stylesheet" href="/assets/site-menu.css?v=12">
+<script src="/assets/site-menu.js?v=13" defer></script>
 </head>
 <body>
 <div data-root style="position:relative; width:100%; background:#0D0D0D; cursor:none; -webkit-tap-highlight-color:transparent;">
@@ -120,7 +122,7 @@
 
   <nav style="position:fixed; top:0; left:0; right:0; z-index:30; display:flex; align-items:center; justify-content:space-between; padding:26px clamp(24px,5vw,60px); mix-blend-mode:difference;">
     <a href="/" data-scramble data-scramble-to="← BACK HOME" style="font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.18em; color:#e8e6e1; text-transform:uppercase;">Ace Burney.</a>
-    <a href="/about" data-scramble data-scramble-to="ABOUT →" style="font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.18em; color:#7A7A7A; text-transform:uppercase;">About</a>
+    <button type="button" data-menu-toggle class="sm-toggle">Menu</button>
   </nav>
 
   <div class="wrap">
@@ -267,12 +269,10 @@
     </form>
   </div>
 
-  <!-- footer — Omery studio + location, aligned to the card column -->
-  <footer style="position:relative; z-index:10; padding:0 clamp(18px,5vw,40px) 30px;">
-    <div style="max-width:588px; margin:0 auto; padding-top:16px; border-top:1px solid rgba(255,255,255,0.07); display:flex; align-items:center; justify-content:space-between; gap:16px; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.16em; color:#6b675f; text-transform:uppercase; white-space:nowrap;">
-      <a href="https://omery.studio" target="_blank" rel="noopener" aria-label="Omery, design and systems studio (opens in a new tab)" data-omery-foot><span data-scramble-foot data-m="omery-full">Omery &middot; Design &amp; Systems Studio</span><span data-scramble-foot data-m="omery-short" style="display:none;">Omery</span><span data-omery-arrow aria-hidden="true" style="display:inline-block; margin-left:0.45em; will-change:transform;">↗</span></a>
-      <span>Austin, Texas</span>
-    </div>
+  <!-- site footer (shared styles: /assets/site-menu.css) -->
+  <footer class="site-foot">
+    <a class="site-foot-omery" href="https://omery.studio" target="_blank" rel="noopener" aria-label="Omery, design and systems studio (opens in a new tab)"><span class="sf-full">Omery &middot; Design &amp; Systems Studio</span><span class="sf-short">Omery</span><span class="sf-arrow" aria-hidden="true">↗</span></a>
+    <span>Austin, Texas</span>
   </footer>
 
   <!-- entrance sweep (covers on load, slides up when ready) -->

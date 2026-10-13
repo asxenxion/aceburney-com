@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Partition — Ace Burney</title>
+<meta name="description" content="Partition is a control room for AI coding agents, staged as an office floor. Every session is a worker at a desk, and the ones who need you put up a hand. A product case study by Ace Burney.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://aceburney.com/work/partition">
+<meta name="theme-color" content="#0D0D0D">
+<meta name="color-scheme" content="dark">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Partition — Ace Burney">
+<meta property="og:description" content="A control room for AI coding agents, staged as an office floor. From brief to daily tool in four days.">
+<meta property="og:url" content="https://aceburney.com/work/partition">
+<meta property="og:image" content="https://aceburney.com/assets/work/partition/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/assets/favicon/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/favicon/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/assets/favicon/favicon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="/assets/work/partition/tour-poster.jpg">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "name": "Partition",
+  "description": "A control room for AI coding agents, staged as an office floor.",
+  "url": "https://aceburney.com/work/partition",
+  "image": "https://aceburney.com/assets/work/partition/og.jpg",
+  "dateCreated": "2026-10-09",
+  "creator": { "@id": "https://aceburney.com/#person" }
+}
+</script>
+<style>
+  :root {
+    --bg: #0D0D0D;
+    --ink: #e8e6e1;
+    --ink-hi: #f2f0ef;
+    --ink-2: #cbc7bf;
+    --body: #b4aea4;
+    --muted: #7A7A7A;
+    --faint: #6b675f;
+    --fainter: #5f5b53;
+    --rule: rgba(255,255,255,0.08);
+    /* Kessler accents, sampled from the app itself */
+    --k-amber: #c9a35a;
+    --k-coral: #d9785d;
+    --mono: 'Space Mono', monospace;
+    --sans: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --ease: cubic-bezier(.16,1,.3,1);
+    --gutter: clamp(24px,5vw,60px);
+    --space-section: clamp(88px, 14vh, 168px);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { background: var(--bg); }
+  body { color: var(--ink); overflow-x: hidden; }
+  a { color: var(--muted); text-decoration: none; }
+  img { display: block; max-width: 100%; height: auto; }
+  ::selection { background: var(--ink); color: var(--bg); }
+  @keyframes ab-grain { 0%{transform:translate(0,0);}10%{transform:translate(-6%,-4%);}20%{transform:translate(-11%,6%);}30%{transform:translate(6%,-11%);}40%{transform:translate(-4%,14%);}50%{transform:translate(-12%,4%);}60%{transform:translate(14%,0);}70%{transform:translate(0,11%);}80%{transform:translate(-14%,-3%);}90%{transform:translate(10%,6%);}100%{transform:translate(4%,0);} }
+  @keyframes ab-pulse { 0%,100% { opacity: .35; } 50% { opacity: 1; } }
+
+  [data-reveal] { opacity: 0; transform: translateY(24px); transition: opacity .9s var(--ease), transform .9s var(--ease); }
+  [data-reveal].in { opacity: 1; transform: none; }
+
+  .wrap { position: relative; z-index: 10; max-width: 1240px; margin: 0 auto; padding: 0 var(--gutter); }
+  .eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); }
+  .sec { padding-top: var(--space-section); }
+  .sec-head { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(30px,6vw,90px); align-items: start; }
+  .sec-num { font-family: var(--mono); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--fainter); margin-bottom: 18px; }
+  .h2 { font-family: var(--sans); font-weight: 700; font-size: clamp(2rem,4.4vw,3.6rem); line-height: 0.98; letter-spacing: -0.03em; color: var(--ink-hi); }
+  .body-copy { font-family: var(--mono); font-size: clamp(0.9rem,1.05vw,1.02rem); line-height: 1.85; color: var(--body); }
+  .body-copy + .body-copy { margin-top: 22px; }
+  .body-copy strong { color: var(--ink); font-weight: 400; }
+  .body-copy em { font-style: normal; color: var(--ink); border-bottom: 1px solid rgba(232,230,225,0.25); }
+
+  /* ---------- screens ---------- */
+  .shot { position: relative; margin: 0; }
+  .shot-frame { position: relative; overflow: hidden; border-radius: 10px; border: 1px solid rgba(255,255,255,0.09); background: #a7ab9a; box-shadow: 0 50px 120px -50px rgba(0,0,0,0.95); cursor: zoom-in; }
+  [data-root] .shot-frame { cursor: none; }
+  .shot-frame img { width: 100%; transition: transform 1.2s var(--ease); }
+  .shot-frame:hover img { transform: scale(1.012); }
+  .shot-frame:focus-visible { outline: 1px solid rgba(232,230,225,0.6); outline-offset: 4px; }
+  .shot figcaption { display: flex; gap: 14px; margin-top: 14px; font-family: var(--mono); font-size: 11px; line-height: 1.6; letter-spacing: 0.04em; color: var(--faint); }
+  .shot figcaption b { font-weight: 400; color: var(--fainter); letter-spacing: 0.18em; text-transform: uppercase; flex: none; }
+
+  /* ---------- hero ---------- */
+  .hero { padding: 132px 0 0; }
+  .hero-top { display: flex; align-items: baseline; gap: 16px; margin-bottom: 22px; }
+  .hero h1 { font-family: var(--sans); font-weight: 700; font-size: clamp(3.4rem,14vw,11.5rem); line-height: 0.84; letter-spacing: -0.05em; color: var(--ink-hi); }
+  .hero-lede { margin-top: 30px; max-width: 30ch; font-family: var(--sans); font-weight: 700; font-size: clamp(1.25rem,2.4vw,1.9rem); line-height: 1.12; letter-spacing: -0.015em; color: var(--ink-2); }
+  .hero-lede span { color: var(--fainter); }
+  .hero-shot { margin-top: clamp(48px,8vh,84px); }
+  .meta-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 26px 40px; padding: 30px 0 0; margin-top: clamp(40px,6vh,64px); border-top: 1px solid var(--rule); }
+  .meta-k { font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--faint); margin-bottom: 8px; }
+  .meta-v { font-family: var(--mono); font-size: 13px; line-height: 1.55; color: var(--ink-2); }
+
+  /* ---------- tour video ---------- */
+  .tour.hero-shot { margin-top: clamp(40px,6vh,72px); }
+  .tour-head { display: flex; justify-content: space-between; margin-bottom: 14px; }
+  .tour-frame { position: relative; border-radius: 10px; overflow: hidden; border: 1px solid rgba(255,255,255,0.09); background: #a7ab9a; box-shadow: 0 50px 120px -50px rgba(0,0,0,0.95); }
+  .tour-frame video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; }
+  .tour-toggle { position: absolute; right: 16px; bottom: 16px; font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: #e8e6e1; background: rgba(13,13,13,0.72); border: 1px solid rgba(255,255,255,0.18); border-radius: 999px; padding: 9px 16px; cursor: none; backdrop-filter: blur(6px); transition: background-color .3s ease, border-color .3s ease; }
+  .tour-toggle:hover { background: rgba(13,13,13,0.9); border-color: rgba(255,255,255,0.4); }
+  .tour-toggle:focus-visible { outline: 1px solid rgba(232,230,225,0.7); outline-offset: 3px; }
+
+  /* ---------- before / after ---------- */
+  .versus { display: grid; grid-template-columns: 0.78fr 1.22fr; gap: clamp(16px,2.4vw,28px); margin-top: clamp(48px,7vh,80px); align-items: stretch; }
+  .versus-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--faint); margin-bottom: 12px; display: flex; justify-content: space-between; }
+  .list-mock { height: calc(100% - 26px); border-radius: 10px; border: 1px solid rgba(255,255,255,0.09); background: #141414; padding: 18px 0; font-family: var(--mono); font-size: 12px; overflow: hidden; position: relative; }
+  .list-mock::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 40%; background: linear-gradient(180deg, rgba(20,20,20,0), #141414 85%); pointer-events: none; }
+  .list-mock li { list-style: none; display: flex; justify-content: space-between; gap: 12px; padding: 9px 20px; color: #8f8a80; border-top: 1px solid rgba(255,255,255,0.04); white-space: nowrap; }
+  .list-mock li span:first-child { overflow: hidden; text-overflow: ellipsis; }
+  .list-mock li span:last-child { color: #4f4c46; flex: none; }
+  .versus-q { margin-top: 18px; font-family: var(--mono); font-size: 11px; line-height: 1.6; color: var(--faint); }
+
+  /* ---------- status legend ---------- */
+  .legend { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; margin-top: clamp(48px,7vh,72px); background: var(--rule); border: 1px solid var(--rule); border-radius: 10px; overflow: hidden; }
+  .legend-cell { background: #111; padding: 26px 22px 24px; }
+  .badge { width: 44px; height: 44px; border-radius: 5px; display: grid; place-items: center; background: #0f1b22; border: 2px solid #7f9fb0; font-family: var(--mono); font-weight: 700; font-size: 20px; color: #e8f1f5; }
+  .badge.err { border-color: var(--k-coral); color: #ffd9cc; box-shadow: 0 0 0 3px rgba(217,120,93,0.18); }
+  .badge.done { border-color: var(--k-amber); color: #f4dfae; }
+  .badge.sleep { border-color: #4f5a60; color: #8b979d; font-size: 15px; }
+  .badge.work { border-color: #2e7d55; background: #0f1d16; }
+  .badge.work i { width: 10px; height: 10px; border-radius: 50%; background: #5fd08e; animation: ab-pulse 1.4s ease-in-out infinite; }
+  .legend-name { margin-top: 18px; font-family: var(--sans); font-weight: 700; font-size: 1.05rem; letter-spacing: -0.01em; color: var(--ink-hi); }
+  .legend-what { margin-top: 6px; font-family: var(--mono); font-size: 11.5px; line-height: 1.6; color: var(--faint); }
+  .legend-rank { font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; color: #4a4741; float: right; }
+
+  /* ---------- identity ---------- */
+  .plates { display: grid; grid-template-columns: 1.25fr 1fr; gap: clamp(14px,2vw,24px); margin-top: clamp(48px,7vh,80px); }
+  .plate { position: relative; margin: 0; border-radius: 10px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); min-height: clamp(260px, 30vw, 400px); display: flex; align-items: center; justify-content: center; padding: clamp(40px,5vw,72px) clamp(24px,4vw,56px); }
+  .plate-partition { background: radial-gradient(120% 90% at 30% 10%, #173538 0%, #0b1a1c 55%, #071012 100%); }
+  .plate-kessler { background: radial-gradient(100% 90% at 50% 0%, #1b1b1b 0%, #0f0f0f 70%); }
+  .plate-tag { position: absolute; top: 18px; left: 20px; right: 20px; display: flex; justify-content: space-between; font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(232,230,225,0.45); }
+  .plate-lockup { display: flex; align-items: center; gap: clamp(20px,3vw,40px); }
+  .plate-icon { width: clamp(84px,9vw,132px); height: auto; border-radius: 22%; box-shadow: 0 24px 60px -20px rgba(0,0,0,0.9); }
+  .plate-word { width: clamp(180px,22vw,330px); height: auto; }
+  .plate-kessler-logo { width: min(100%, 360px); height: auto; opacity: 0.94; }
+  .marks { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(24px,4vw,56px); margin-top: clamp(36px,5vh,56px); }
+  .mark-k { font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--fainter); padding-bottom: 12px; margin-bottom: 14px; border-bottom: 1px solid var(--rule); }
+  .mark-q { font-family: var(--sans); font-weight: 700; font-size: clamp(1.05rem,1.5vw,1.25rem); line-height: 1.2; letter-spacing: -0.015em; color: var(--ink-hi); }
+  .mark-p { margin-top: 10px; font-family: var(--mono); font-size: 12px; line-height: 1.7; color: var(--faint); }
+  .palette { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; margin-top: clamp(48px,7vh,72px); background: var(--rule); border: 1px solid var(--rule); border-radius: 10px; overflow: hidden; }
+  .swatch { background: #111; display: flex; flex-direction: column; padding: 0 0 18px; }
+  .swatch i { display: block; height: clamp(72px,8vw,110px); background: var(--c); margin-bottom: 16px; box-shadow: inset 0 -1px 0 rgba(255,255,255,0.06); }
+  .swatch b { padding: 0 16px; font-family: var(--sans); font-weight: 700; font-size: 0.98rem; color: var(--ink-hi); }
+  .swatch code { padding: 4px 16px 0; font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; color: var(--muted); }
+  .swatch span { padding: 8px 16px 0; font-family: var(--mono); font-size: 11px; line-height: 1.55; color: var(--faint); }
+  .sizes { display: flex; align-items: center; gap: clamp(20px,4vw,48px); margin-top: clamp(24px,4vh,40px); padding: 24px clamp(20px,3vw,32px); border-radius: 10px; background: #0b1a1c; border: 1px solid rgba(255,255,255,0.06); }
+  .sizes-row { display: flex; align-items: flex-end; gap: clamp(14px,2vw,28px); flex: none; }
+  .sizes-row img { image-rendering: auto; }
+  .sizes-cap { font-family: var(--mono); font-size: 12px; line-height: 1.7; color: rgba(232,230,225,0.6); max-width: 52ch; }
+  .studies { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(14px,2vw,24px); margin-top: clamp(48px,7vh,80px); }
+  .shot-frame.study { background: #071012; }
+
+  /* ---------- floor walk ---------- */
+  .walk { margin-top: clamp(56px,8vh,96px); display: flex; flex-direction: column; gap: clamp(80px,12vh,150px); }
+  .beat { display: grid; grid-template-columns: 0.42fr 1fr; gap: clamp(28px,4.5vw,72px); align-items: center; }
+  .beat.flip { grid-template-columns: 1fr 0.42fr; }
+  .beat.flip .beat-text { order: 2; }
+  .beat.tall { grid-template-columns: 0.62fr 0.9fr; }
+  .beat.tall.flip { grid-template-columns: 0.9fr 0.62fr; }
+  .beat-step { font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--fainter); margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
+  .beat-step::after { content: ""; flex: 1; height: 1px; background: var(--rule); max-width: 80px; }
+  .h3 { font-family: var(--sans); font-weight: 700; font-size: clamp(1.45rem,2.4vw,2.05rem); line-height: 1.04; letter-spacing: -0.025em; color: var(--ink-hi); margin-bottom: 18px; }
+  .beat .body-copy { font-size: clamp(0.85rem,0.95vw,0.95rem); }
+  .pair-shots { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(14px,2vw,24px); margin-top: clamp(80px,12vh,150px); }
+
+  /* ---------- quote ---------- */
+  .quote { padding: var(--space-section) 0 0; text-align: center; }
+  .quote blockquote { max-width: 16ch; margin: 0 auto; font-family: var(--sans); font-weight: 700; font-size: clamp(2.4rem,7.4vw,6rem); line-height: 0.95; letter-spacing: -0.04em; color: var(--ink-hi); }
+  .quote cite { display: block; margin-top: 28px; font-style: normal; font-family: var(--mono); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--faint); }
+
+  /* ---------- principles ---------- */
+  .rules { margin-top: clamp(40px,6vh,64px); border-top: 1px solid var(--rule); list-style: none; }
+  .rule { display: grid; grid-template-columns: 70px 0.8fr 1.2fr; gap: 24px; padding: 30px 0; border-bottom: 1px solid var(--rule); align-items: baseline; transition: background-color .4s ease; }
+  .rule:hover { background: rgba(255,255,255,0.015); }
+  .rule-n { font-family: var(--mono); font-size: 12px; color: var(--fainter); }
+  .rule-t { font-family: var(--sans); font-weight: 700; font-size: clamp(1.15rem,1.8vw,1.5rem); letter-spacing: -0.02em; line-height: 1.1; color: var(--ink-hi); }
+  .rule .body-copy { font-size: 0.9rem; }
+
+  /* ---------- the brief (memo) ---------- */
+  .memo-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(30px,5vw,80px); align-items: start; margin-top: clamp(40px,6vh,64px); }
+  .memo { position: relative; background: #e9e6dc; color: #22211e; border-radius: 4px; padding: clamp(26px,3vw,40px); box-shadow: 0 60px 120px -50px rgba(0,0,0,0.95); transform: rotate(-1.2deg); transition: transform .8s var(--ease); }
+  .memo.in { transform: rotate(-1.2deg); }
+  .memo:hover { transform: rotate(0deg); }
+  .memo::before { content: ""; position: absolute; inset: 0; border-radius: 4px; opacity: 0.35; mix-blend-mode: multiply; pointer-events: none; background-image: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22%3E%3Cfilter id=%22n%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.9%22 numOctaves=%222%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23n)%22 opacity=%220.5%22/%3E%3C/svg%3E'); }
+  .memo-head { display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 14px; border-bottom: 2px solid #22211e; font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; }
+  .memo-title { font-family: var(--sans); font-weight: 700; font-size: 1.5rem; letter-spacing: -0.02em; margin: 18px 0 6px; }
+  .memo-sub { font-family: var(--mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #6c6a62; margin-bottom: 18px; }
+  .memo ol { list-style: none; counter-reset: r; }
+  .memo li { counter-increment: r; display: grid; grid-template-columns: 26px 1fr; gap: 6px; padding: 11px 0; border-top: 1px solid rgba(34,33,30,0.15); font-family: var(--mono); font-size: 12px; line-height: 1.6; }
+  .memo li::before { content: counter(r, decimal-leading-zero); color: #8a877d; font-size: 10px; padding-top: 2px; }
+  .memo-foot { margin-top: 16px; font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; color: #8a877d; }
+
+  /* ---------- cut list ---------- */
+  .cuts { margin-top: clamp(40px,6vh,64px); display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 10px; overflow: hidden; }
+  .cut { background: #111; padding: 24px 22px 26px; }
+  .cut-t { font-family: var(--sans); font-weight: 700; font-size: 1.05rem; letter-spacing: -0.01em; color: #8f8a80; text-decoration: line-through; text-decoration-color: rgba(217,120,93,0.75); text-decoration-thickness: 2px; }
+  .cut-why { margin-top: 10px; font-family: var(--mono); font-size: 11.5px; line-height: 1.6; color: var(--faint); }
+
+  /* ---------- numbers ---------- */
+  .stats { margin-top: clamp(40px,6vh,64px); display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+  .stat { padding: 34px 24px 30px 0; }
+  .stat + .stat { padding-left: 24px; border-left: 1px solid var(--rule); }
+  .stat-n { font-family: var(--sans); font-weight: 700; font-size: clamp(2.6rem,6vw,5rem); line-height: 0.9; letter-spacing: -0.045em; color: var(--ink-hi); }
+  .stat:first-child .stat-n { font-size: clamp(3.4rem,9vw,7.5rem); }
+  .stat-l { margin-top: 12px; font-family: var(--mono); font-size: 11px; line-height: 1.55; letter-spacing: 0.04em; color: var(--faint); max-width: 24ch; }
+
+  /* ---------- close ---------- */
+  .credit { margin-top: 28px; font-family: var(--mono); font-size: 11px; line-height: 1.7; color: var(--faint); max-width: 70ch; }
+  .credit a { color: var(--ink-2); border-bottom: 1px solid rgba(232,230,225,0.2); transition: color .3s ease, border-color .3s ease; }
+  .credit a:hover { color: var(--ink-hi); border-color: rgba(232,230,225,0.6); }
+  .cta { display: block; margin-top: var(--space-section); padding: clamp(48px,8vh,96px) 0; border-top: 1px solid var(--rule); text-align: center; }
+  .cta-big { display: inline-flex; align-items: baseline; gap: 0.25em; font-family: var(--sans); font-weight: 700; font-size: clamp(2.4rem,8vw,6rem); line-height: 0.92; letter-spacing: -0.04em; color: var(--ink-2); transition: color .4s ease; }
+  .cta-big .arr { display: inline-block; transition: transform .5s var(--ease); }
+  .cta-big { flex-wrap: wrap; justify-content: center; column-gap: 0.25em; }
+  .cta-w { display: inline-flex; white-space: nowrap; }
+  [data-cta-k] { display: inline-block; will-change: transform; }
+  .cta-w .arr { margin-left: 0.25em; }
+  .cta:hover .cta-big { color: var(--ink-hi); }
+  .cta:hover .cta-big .arr { transform: translateX(14px); }
+  .cta-sub { margin-top: 18px; font-family: var(--mono); font-size: 12px; color: var(--faint); }
+
+  /* ---------- lightbox ---------- */
+  .lightbox { position: fixed; inset: 0; z-index: 9000; display: none; align-items: center; justify-content: center; padding: clamp(16px,4vw,56px); background: rgba(8,8,8,0.92); }
+  .lightbox.on { display: flex; animation: lb-in .35s ease both; }
+  .lightbox img { max-width: 100%; max-height: 100%; width: auto; border-radius: 8px; box-shadow: 0 40px 120px rgba(0,0,0,0.8); }
+  .lightbox-x { position: absolute; top: 22px; right: 26px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
+  @keyframes lb-in { from { opacity: 0; } to { opacity: 1; } }
+
+  /* footer Omery link (shared with the rest of the site) */
+  [data-omery-foot] { color: inherit; text-decoration: none; transition: color .3s ease; }
+  [data-omery-foot]:hover { color: #EDE9E0; }
+  [data-omery-arrow] { animation: ab-beckon 6s ease-in-out 1s infinite; }
+  @keyframes ab-beckon {
+    0%, 16%, 100% { transform: translate(0,0); color: #7A7A7A; }
+    4%, 12% { transform: translate(2px,-2px); color: #e8e6e1; }
+    8% { transform: translate(0,0); color: #9a958b; }
+  }
+  [data-omery-foot]:hover [data-omery-arrow] { animation: none; transform: translate(2px,-2px); color: #EDE9E0; transition: transform .3s var(--ease), color .3s ease; }
+
+  @media (prefers-reduced-motion: reduce) {
+    [data-omery-arrow], .badge.work i, [data-motion] { animation: none; }
+    [data-reveal] { opacity: 1; transform: none; transition: none; }
+    .memo, .memo.in { transform: none; }
+  }
+
+  @media (max-width: 900px) {
+    .meta-grid { grid-template-columns: 1fr 1fr; }
+    .legend { grid-template-columns: 1fr 1fr; }
+    .legend-cell:last-child { grid-column: span 2; }
+    .stats { grid-template-columns: 1fr 1fr; }
+    .stat:nth-child(3) { padding-left: 0; border-left: 0; }
+    .stat:nth-child(n+3) { border-top: 1px solid var(--rule); }
+  }
+  @media (max-width: 760px) {
+    .sec-head, .versus, .beat, .beat.flip, .beat.tall, .beat.tall.flip, .memo-wrap, .pair-shots, .plates, .marks, .studies { grid-template-columns: 1fr; }
+    .palette { grid-template-columns: 1fr 1fr; }
+    .swatch:last-child { grid-column: span 2; }
+    .sizes { flex-direction: column; align-items: flex-start; }
+    .plate-lockup { flex-direction: column; }
+    .beat.flip .beat-text { order: 0; }
+    .hero h1 { font-size: 21vw; }
+    .hero-lede { font-size: 1.3rem; }
+    .rule { grid-template-columns: 40px 1fr; }
+    .rule .body-copy { grid-column: 2; }
+    .list-mock { height: 300px; }
+    .memo, .memo.in { transform: none; }
+    .shot figcaption { flex-direction: column; gap: 4px; }
+    [data-m="omery-full"] { display: none !important; }
+    [data-m="omery-short"] { display: inline !important; }
+    [data-m="nav-about"] { display: none; }
+  }
+</style>
+<link rel="stylesheet" href="/assets/site-menu.css?v=12">
+<script src="/assets/site-menu.js?v=13" defer></script>
+</head>
+<body>
+<div data-root style="position:relative; width:100%; min-height:100dvh; background:#0D0D0D; overflow-x:hidden; cursor:none; -webkit-tap-highlight-color:transparent;">
+
+  <canvas data-ambient aria-hidden="true" style="position:fixed; inset:0; z-index:0; width:100vw; height:100vh; pointer-events:none; display:block;"></canvas>
+  <div aria-hidden="true" style="position:fixed; inset:0; z-index:1; pointer-events:none; background:radial-gradient(ellipse 70% 55% at 50% 8%, rgba(237,233,224,0.05), rgba(237,233,224,0) 60%), radial-gradient(circle at 50% 40%, rgba(0,0,0,0) 45%, rgba(0,0,0,0.5) 100%);"></div>
+  <div data-motion aria-hidden="true" style="position:fixed; inset:-60%; z-index:2; pointer-events:none; opacity:0.05; mix-blend-mode:overlay; animation:ab-grain 0.7s steps(1) infinite; background-image:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22140%22 height=%22140%22%3E%3Cfilter id=%22n%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.85%22 numOctaves=%222%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23n)%22/%3E%3C/svg%3E'); background-size:200px 200px;"></div>
+
+  <!-- ===== NAV ===== -->
+  <header>
+    <nav aria-label="Main navigation" style="position:fixed; top:0; left:0; right:0; z-index:30; display:flex; align-items:center; justify-content:space-between; padding:28px var(--gutter); mix-blend-mode:difference;">
+      <a href="/" data-scramble data-scramble-to="← BACK HOME" style="font-family:var(--mono); font-size:11px; letter-spacing:0.18em; color:#e8e6e1; text-transform:uppercase;">Ace Burney.</a>
+      <button type="button" data-menu-toggle class="sm-toggle">Menu</button>
+    </nav>
+  </header>
+
+  <main class="wrap">
+
+    <!-- ===== HERO ===== -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <a href="/work" data-reveal data-scramble data-scramble-to="← ALL WORK" class="eyebrow" style="display:inline-block; margin-bottom:40px;">← All Work</a>
+      <div class="hero-top eyebrow" data-reveal><img src="/assets/work/partition/partition-icon-64.png" width="28" height="28" alt="" style="align-self:center; border-radius:7px;"><span style="color:var(--fainter);">01</span><span style="color:#3a3833;">/</span><span>Product · Creative Technology</span></div>
+      <h1 id="hero-heading" data-reveal>Partition.</h1>
+      <p class="hero-lede" data-reveal>A control room for AI coding agents, staged as an office floor. <span>Every session is a worker at a desk. The ones who need you put up a hand.</span></p>
+
+      <figure class="shot tour hero-shot" data-reveal>
+        <div class="tour-head"><span class="eyebrow">Watch</span><span class="eyebrow" style="color:var(--fainter);">A minute on the floor · 0:59</span></div>
+        <div class="tour-frame">
+          <video data-tour muted playsinline loop preload="auto" poster="/assets/work/partition/tour-poster.jpg" width="1920" height="1080" aria-label="A one-minute tour of Partition: the floor, the list of who needs you, a conversation, assigning a task, the waiting room, and the floor map.">
+            <source src="/assets/work/partition/tour.mp4" type="video/mp4">
+          </video>
+          <button type="button" class="tour-toggle" data-tour-toggle aria-label="Play the tour"><span data-tour-icon>Play</span></button>
+        </div>
+        <figcaption><b>Fig. 01</b><span>A minute on the floor, recorded in the real app on a demo floor. A reply is typed and a task is drafted, but nothing is sent.</span></figcaption>
+      </figure>
+
+      <dl class="meta-grid" data-reveal>
+        <div><dt class="meta-k">Role</dt><dd class="meta-v">Product, design direction, build lead</dd></div>
+        <div><dt class="meta-k">Year</dt><dd class="meta-v">2026</dd></div>
+        <div><dt class="meta-k">Type</dt><dd class="meta-v">Personal tool, runs on macOS</dd></div>
+        <div><dt class="meta-k">Built with</dt><dd class="meta-v">Three.js, Node, Claude Agent SDK</dd></div>
+      </dl>
+
+    </section>
+
+    <!-- ===== 01 THE SITUATION ===== -->
+    <section class="sec" aria-labelledby="problem-heading">
+      <div class="sec-head">
+        <div data-reveal>
+          <div class="sec-num">01 / The situation</div>
+          <h2 id="problem-heading" class="h2">I was the bottleneck, and I couldn't see the queue.</h2>
+        </div>
+        <div data-reveal>
+          <p class="body-copy">Most of my building now runs through AI coding agents. On a normal day I have <strong>thirty-nine sessions open across six projects</strong>: sites, a client platform, an app, and this tool itself. Most of the time they don't need me. When one does, it says so quietly, as one row in a list of chat titles.</p>
+          <p class="body-copy">A row can't tell you who is stuck, who is waiting on a yes, or who finished an hour ago. So the cost was an agent sitting on a one-word question while I was heads-down somewhere else, and client work stalled behind it.</p>
+          <p class="body-copy">I was the only person who could unblock them, and the only one paying for the wait. I didn't need a better list. <em>I needed to see the room.</em></p>
+        </div>
+      </div>
+
+      <div class="versus" data-reveal>
+        <div>
+          <div class="versus-label"><span>Before</span><span>A list</span></div>
+          <ul class="list-mock" aria-label="A plain list of session titles, all styled the same">
+            <li><span>Recurring billing skips the 31st</span><span>10m</span></li>
+            <li><span>Add PDF export to invoices</span><span>12m</span></li>
+            <li><span>Rate limit the public API</span><span>18m</span></li>
+            <li><span>Compress hero video</span><span>21m</span></li>
+            <li><span>Sync to cloud storage</span><span>40m</span></li>
+            <li><span>Weekly summary email</span><span>44m</span></li>
+            <li><span>Stripe webhook retries</span><span>51m</span></li>
+            <li><span>Tax summary for Q3</span><span>3h</span></li>
+            <li><span>Late fee rules by client</span><span>5h</span></li>
+            <li><span>Blog index pagination</span><span>5h</span></li>
+            <li><span>Lighthouse score pass</span><span>6h</span></li>
+          </ul>
+          <p class="versus-q">Which of these needs you? The list can't say.</p>
+        </div>
+        <figure class="shot">
+          <div class="versus-label"><span>After</span><span>A floor</span></div>
+          <div class="shot-frame" tabindex="0" role="button" aria-label="Enlarge: the floor with its side panel">
+            <img src="/assets/work/partition/floor-ui-1200.webp" srcset="/assets/work/partition/floor-ui-1200.webp 1200w, /assets/work/partition/floor-ui-2400.webp 2400w" sizes="(max-width: 760px) 100vw, 740px" width="1200" height="714" alt="The same sessions as workers on the floor, with a side panel counting 7 working, 5 need you, 1 blocked and 2 finished, and portraits of the workers waiting first." loading="lazy" data-full="/assets/work/partition/floor-ui-2400.webp">
+          </div>
+          <figcaption><b>Same work</b><span>Seven working, five waiting, one blocked, two finished. You know before you read a word.</span></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ===== 02 THE APPROACH ===== -->
+    <section class="sec" aria-labelledby="idea-heading">
+      <div class="sec-head">
+        <div data-reveal>
+          <div class="sec-num">02 / The approach</div>
+          <h2 id="idea-heading" class="h2">Turn status into body language.</h2>
+        </div>
+        <div data-reveal>
+          <p class="body-copy">People are very good at reading a room: a raised hand, an empty chair, someone waiting by the door. So Partition stages the work as an office. <strong>Each project is a department, each session is a worker at a desk, and status is how they sit.</strong> A glance does what scrolling used to.</p>
+          <p class="body-copy">I wrote the brief and made the calls. Claude Code built it one phase at a time, stopping after each to show me the change and wait for my go-ahead.</p>
+        </div>
+      </div>
+
+      <div class="legend" data-reveal role="list" aria-label="How a worker shows their status, most urgent first">
+        <div class="legend-cell" role="listitem"><span class="legend-rank">1st</span><div class="badge err" aria-hidden="true">!</div><div class="legend-name">Blocked</div><p class="legend-what">The session hit an error. The worker leaves the floor for the waiting room.</p></div>
+        <div class="legend-cell" role="listitem"><span class="legend-rank">2nd</span><div class="badge" aria-hidden="true">?</div><div class="legend-name">Needs you</div><p class="legend-what">Waiting on your reply. It holds up a sign until you answer.</p></div>
+        <div class="legend-cell" role="listitem"><span class="legend-rank">3rd</span><div class="badge work" aria-hidden="true"><i></i></div><div class="legend-name">Working</div><p class="legend-what">Hands on the keys. Its card shows what it's doing right now.</p></div>
+        <div class="legend-cell" role="listitem"><span class="legend-rank">4th</span><div class="badge done" aria-hidden="true">✓</div><div class="legend-name">Shipped</div><p class="legend-what">Its pull request landed.</p></div>
+        <div class="legend-cell" role="listitem"><span class="legend-rank">5th</span><div class="badge sleep" aria-hidden="true">z</div><div class="legend-name">Dormant</div><p class="legend-what">Nothing for three days. It fades into the background.</p></div>
+      </div>
+
+      <div class="sec-head" style="margin-top:clamp(56px,9vh,96px);">
+        <div data-reveal>
+          <div class="sec-num">How it developed</div>
+          <h3 class="h3">Five days, one loop at a time.</h3>
+        </div>
+        <div data-reveal>
+          <p class="body-copy">Each day added one part of the same loop: notice who needs you, answer them, hand out the next thing, get back to work.</p>
+        </div>
+      </div>
+      <ol class="rules" data-reveal>
+        <li class="rule"><span class="rule-n">Oct 9</span><span class="rule-t">The brief and the floor.</span><p class="body-copy">Look, status rules and ground rules written down. Sessions appear as workers at desks.</p></li>
+        <li class="rule"><span class="rule-n">Oct 10</span><span class="rule-t">Answer from the floor.</span><p class="body-copy">Click a worker, read the conversation, reply in place. The ones waiting longest come first.</p></li>
+        <li class="rule"><span class="rule-n">Oct 11</span><span class="rule-t">Hand out work.</span><p class="body-copy">Assign tasks by department, set what a worker may do without asking, schedule repeats, and get a written summary of the day.</p></li>
+        <li class="rule"><span class="rule-n">Oct 12</span><span class="rule-t">A real app.</span><p class="body-copy">Its own window and Dock icon, running at login, updating only when no task it started is still running.</p></li>
+        <li class="rule"><span class="rule-n">Oct 13</span><span class="rule-t">Oversight.</span><p class="body-copy">A flat plan of the whole floor and every conversation in a department side by side, plus voice input and @ mentions.</p></li>
+      </ol>
+
+      <div class="walk" style="margin-top:clamp(56px,9vh,96px);">
+
+        <article class="beat" data-reveal>
+          <div class="beat-text">
+            <div class="beat-step">Notice and answer</div>
+            <h3 class="h3">The ones waiting on you come first.</h3>
+            <p class="body-copy">The panel opens on the faces of whoever is waiting, longest wait first, with what each one wants. Pick one and the floor flies to that worker with the conversation open, so you answer right there and the session picks up where it stopped.</p>
+          </div>
+          <figure class="shot">
+            <div class="shot-frame" tabindex="0" role="button" aria-label="Enlarge: a worker's card and conversation">
+              <img src="/assets/work/partition/conversation-1200.webp" srcset="/assets/work/partition/conversation-1200.webp 1200w, /assets/work/partition/conversation-2400.webp 2400w" sizes="(max-width: 760px) 100vw, 820px" width="1200" height="714" alt="A close view of a department. One worker's card reads Stripe webhook retries, waiting on you, and a drawer on the right shows the conversation with a reply box." loading="lazy" data-full="/assets/work/partition/conversation-2400.webp">
+            </div>
+            <figcaption><b>Fig. 02</b><span>A worker asks which of two fixes I prefer. I answer from the floor.</span></figcaption>
+          </figure>
+        </article>
+
+        <article class="beat tall flip" data-reveal>
+          <figure class="shot">
+            <div class="shot-frame" tabindex="0" role="button" aria-label="Enlarge: the Assign a task form">
+              <img src="/assets/work/partition/assign-1200.webp" srcset="/assets/work/partition/assign-1200.webp 1200w, /assets/work/partition/assign-2400.webp 1280w" sizes="(max-width: 760px) 100vw, 680px" width="1200" height="1214" alt="The Assign a task form: department Switchboard, worker Claude, permissions Auto, when Now, and a task describing a status page for a public API." loading="lazy" data-full="/assets/work/partition/assign-2400.webp">
+            </div>
+            <figcaption><b>Fig. 03</b><span>Permissions decide what the worker may do without asking.</span></figcaption>
+          </figure>
+          <div class="beat-text">
+            <div class="beat-step">Delegate</div>
+            <h3 class="h3">Hand out the next thing.</h3>
+            <p class="body-copy">Pick a department, Claude or Codex, and how much the worker may do on its own. In <strong>Auto</strong>, routine edits just happen and anything risky still asks. Approve a kind of request once with <strong>Always allow</strong> and it never interrupts you again.</p>
+          </div>
+        </article>
+
+        <article class="beat" data-reveal>
+          <div class="beat-text">
+            <div class="beat-step">Recover</div>
+            <h3 class="h3">Errors can't hide in a column.</h3>
+            <p class="body-copy">A session that fails doesn't just turn red. Its worker gets up, leaves the floor and waits in a room by the lift. It is the hardest thing on the floor to miss, which is the point.</p>
+          </div>
+          <figure class="shot">
+            <div class="shot-frame" tabindex="0" role="button" aria-label="Enlarge: the waiting room">
+              <img src="/assets/work/partition/break-room-1200.webp" srcset="/assets/work/partition/break-room-1200.webp 1200w, /assets/work/partition/break-room-2400.webp 2400w" sizes="(max-width: 760px) 100vw, 820px" width="1200" height="741" alt="A single worker sits on a bench in a bare white room beneath a red exclamation-mark sign, next to an elevator." loading="lazy" data-full="/assets/work/partition/break-room-2400.webp">
+            </div>
+            <figcaption><b>Fig. 04</b><span>A nightly sync lost its storage token. Its worker waits here until it's fixed.</span></figcaption>
+          </figure>
+        </article>
+      </div>
+
+      <figure class="shot" data-reveal style="margin-top:clamp(56px,9vh,96px);">
+        <div class="shot-frame" tabindex="0" role="button" aria-label="Enlarge: Oversight">
+          <img src="/assets/work/partition/oversight-1200.webp" srcset="/assets/work/partition/oversight-1200.webp 1200w, /assets/work/partition/oversight-2400.webp 2400w" sizes="(max-width: 760px) 100vw, 1200px" width="1200" height="750" alt="Oversight: a flat plan of the floor with six numbered departments on the left, and on the right five conversations from the Ledger department as boxes, two of them waiting on a reply, each with its own reply field." loading="lazy" data-full="/assets/work/partition/oversight-2400.webp">
+        </div>
+        <figcaption><b>Fig. 05</b><span>Oversight. Pick a department on the plan and answer all of its workers at once.</span></figcaption>
+      </figure>
+    </section>
+
+    <!-- ===== 03 WHY IT WORKS ===== -->
+    <section class="sec" aria-labelledby="decisions-heading">
+      <div class="sec-head">
+        <div data-reveal>
+          <div class="sec-num">03 / Why it works</div>
+          <h2 id="decisions-heading" class="h2">A playful surface on strict rules.</h2>
+        </div>
+        <div data-reveal>
+          <p class="body-copy">An office you can walk around is only useful if you trust what it shows. These are the calls that made it something I run real work through, and the reason behind each.</p>
+        </div>
+      </div>
+      <ol class="rules" data-reveal>
+        <li class="rule"><span class="rule-n">01</span><span class="rule-t">One status wins.</span><p class="body-copy">Blocked beats waiting beats working beats shipped. A worker shows one state at a time, so the most urgent thing is always the loudest.</p></li>
+        <li class="rule"><span class="rule-n">02</span><span class="rule-t">Status is posture. Identity is clothing.</span><p class="body-copy">A worker's look never changes with their state, so you learn who someone is by their suit and what they're doing by how they sit.</p></li>
+        <li class="rule"><span class="rule-n">03</span><span class="rule-t">Quiet by default.</span><p class="body-copy">Flat light and lots of empty space. The calm is what lets one raised hand stand out, so anything that moved without meaning something was cut: wandering workers, an overtime alarm, a lift ding.</p></li>
+        <li class="rule"><span class="rule-n">04</span><span class="rule-t">Nothing leaves the machine.</span><p class="body-copy">It reads the agents' own files on the Mac, with no account and no upload, and there is deliberately no "skip all permissions" switch. A tool I'd hand my clients' work to had to be boring about safety.</p></li>
+      </ol>
+    </section>
+
+    <!-- ===== 04 RESULTS ===== -->
+    <section class="sec" aria-labelledby="close-heading">
+      <div class="sec-head">
+        <div data-reveal>
+          <div class="sec-num">04 / Results</div>
+          <h2 id="close-heading" class="h2">The work didn't get smaller. It got visible.</h2>
+        </div>
+        <div data-reveal>
+          <p class="body-copy"><strong>Short term:</strong> within four days of the first commit it was the tool I work from, running at login. <strong>Longer term:</strong> I run as many agents as before, but nobody waits on me without my knowing, errors can't hide in a scroll, and the day ends with a written record of what got done.</p>
+        </div>
+      </div>
+      <div class="stats" data-reveal>
+        <div class="stat"><div class="stat-n">4 days</div><p class="stat-l">From the first commit to the tool I work from</p></div>
+        <div class="stat"><div class="stat-n">40</div><p class="stat-l">Pull requests, each reviewed and merged</p></div>
+        <div class="stat"><div class="stat-n">292</div><p class="stat-l">Automated tests, all passing</p></div>
+        <div class="stat"><div class="stat-n">7</div><p class="stat-l">Coding tools it can read, Claude Code first</p></div>
+      </div>
+
+      <div class="sec-head" style="margin-top:clamp(56px,9vh,96px);">
+        <div data-reveal>
+          <div class="sec-num">What I didn't expect</div>
+          <h3 class="h3">Seeing the room created a new queue.</h3>
+        </div>
+        <div data-reveal>
+          <p class="body-copy">Once I could see everyone waiting, answering them became the slow part: five raised hands meant five trips across the floor. That is why Oversight exists, a flat plan with a whole department's conversations side by side.</p>
+          <p class="body-copy">The second surprise was trust. A finished session that still looked busy for half an hour did more damage than a missing feature, because it taught me to doubt the floor. Fixing what the floor shows mattered more than adding to it.</p>
+        </div>
+      </div>
+
+      <div class="sec-head" style="margin-top:clamp(56px,9vh,96px);">
+        <div data-reveal>
+          <div class="sec-num">The lesson</div>
+          <h3 class="h3">Give the hidden cost a shape.</h3>
+        </div>
+        <div data-reveal>
+          <p class="body-copy">When building gets this fast, the hard question stops being "can we make it" and becomes "should it exist." The answer here was to find the thing quietly costing time, make it readable at a glance, and keep only what earns its place. It's the same way I approach client work.</p>
+        </div>
+      </div>
+      <p class="credit" data-reveal style="margin-top:56px;">Screens show a demo floor with sample projects. Partition is a personal tool.</p>
+    </section>
+
+    <a href="/start" class="cta" data-reveal aria-label="Start a project">
+      <div class="eyebrow" style="margin-bottom:18px; color:var(--fainter);">Have something with a lot of moving parts?</div>
+      <div class="cta-big" data-cta-word>Start a Project <span class="arr" aria-hidden="true">→</span></div>
+      <p class="cta-sub">A short guided brief. I'll take it from there.</p>
+    </a>
+
+  </main>
+
+  <!-- site footer (shared styles: /assets/site-menu.css) -->
+  <footer class="site-foot">
+    <a class="site-foot-omery" href="https://omery.studio" target="_blank" rel="noopener" aria-label="Omery, design and systems studio (opens in a new tab)"><span class="sf-full">Omery &middot; Design &amp; Systems Studio</span><span class="sf-short">Omery</span><span class="sf-arrow" aria-hidden="true">↗</span></a>
+    <span>Austin, Texas</span>
+  </footer>
+  <!-- lightbox -->
+  <div class="lightbox" data-lightbox role="dialog" aria-modal="true" aria-label="Enlarged screenshot">
+    <span class="lightbox-x">Close · Esc</span>
+    <img data-lightbox-img alt="">
+  </div>
+
+  <div data-sweep style="position:fixed; inset:0; z-index:9990; background:#0D0D0D; pointer-events:none; will-change:transform; transition:transform 1s cubic-bezier(.76,0,.24,1);"></div>
+  <div data-cursor style="position:fixed; top:0; left:0; width:26px; height:26px; border:1px solid rgba(237,233,224,0.55); border-radius:50%; pointer-events:none; z-index:9999; transform:translate(-100px,-100px); transition:width .25s ease, height .25s ease, background-color .25s ease; mix-blend-mode:difference;"></div>
+
+  <!-- scene-cut transition overlay -->
+  <div data-transition style="position:fixed; inset:0; z-index:9998; background:#0D0D0D; transform:translateY(-101%); pointer-events:none; will-change:transform; transition:transform 520ms cubic-bezier(.76,0,.24,1); display:flex; align-items:center; justify-content:center;">
+    <div style="text-align:center; padding:0 24px;">
+      <div data-transition-eyebrow style="font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.22em; color:#7A7A7A; text-transform:uppercase; margin-bottom:22px; opacity:0; transition:opacity .5s ease;">— Now Arriving —</div>
+      <div data-transition-label style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight:700; color:#e8e6e1; text-transform:uppercase; font-size:clamp(3rem,11vw,9rem); line-height:0.9; letter-spacing:-0.03em; opacity:0; transition:opacity .3s ease; white-space:nowrap;">&nbsp;</div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+  const $ = (s, c) => (c || document).querySelector(s);
+  const $$ = (s, c) => Array.from((c || document).querySelectorAll(s));
+  const root = $('[data-root]'), cursor = $('[data-cursor]'), ambient = $('[data-ambient]');
+  const transition = $('[data-transition]'), transitionLabel = $('[data-transition-label]'), transitionEyebrow = $('[data-transition-eyebrow]'), sweep = $('[data-sweep]');
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const state = { mx: -9999, my: -9999, _cx: -100, _cy: -100 };
+  window.addEventListener('mousemove', (e) => { state.mx = e.clientX; state.my = e.clientY; });
+
+  // ---------- custom cursor ----------
+  const canHover = matchMedia('(hover: hover) and (pointer: fine)').matches;
+  function cursorGrow(big) { cursor.style.width = big ? '46px' : '26px'; cursor.style.height = big ? '46px' : '26px'; cursor.style.backgroundColor = big ? 'rgba(237,233,224,0.9)' : 'transparent'; }
+  if (cursor && canHover) {
+    const hoverSel = 'a, button, [role="button"]';
+    root.addEventListener('mouseover', (e) => { if (e.target.closest(hoverSel)) cursorGrow(true); });
+    root.addEventListener('mouseout', (e) => { if (e.target.closest(hoverSel)) cursorGrow(false); });
+    const loop = () => { state._cx += (state.mx - state._cx) * 0.18; state._cy += (state.my - state._cy) * 0.18; cursor.style.transform = 'translate(' + state._cx.toFixed(1) + 'px,' + state._cy.toFixed(1) + 'px) translate(-50%,-50%)'; requestAnimationFrame(loop); };
+    requestAnimationFrame(loop);
+  } else if (cursor) { cursor.style.display = 'none'; root.style.cursor = 'auto'; }
+
+  // ---------- ambient volumetric lights ----------
+  if (ambient) {
+    const ctx = ambient.getContext('2d'); const SCALE = 0.15; let w, h;
+    const resize = () => { w = Math.max(1, Math.ceil(innerWidth * SCALE)); h = Math.max(1, Math.ceil(innerHeight * SCALE)); ambient.width = w; ambient.height = h; };
+    resize(); addEventListener('resize', resize, { passive: true });
+    const lights = [{cx:0.14,cy:0.12,r:0.40,a:0.11,phase:0},{cx:0.84,cy:0.5,r:0.34,a:0.08,phase:1.8},{cx:0.7,cy:0.9,r:0.30,a:0.075,phase:3.2},{cx:0.12,cy:0.68,r:0.32,a:0.08,phase:4.7}];
+    let t = 0;
+    const draw = () => { ctx.clearRect(0,0,w,h); t += 0.006; lights.forEach((l) => { const bx=(l.cx+Math.sin(t*1.1+l.phase)*0.08)*w, by=(l.cy+Math.cos(t*0.9+l.phase)*0.07)*h, baseR=l.r*Math.min(w,h); for(let j=0;j<4;j++){ const ox=bx+Math.sin(t*(0.4+j*0.1)+j*1.7+l.phase)*baseR*0.35, oy=by+Math.cos(t*(0.35+j*0.08)+j*2.3)*baseR*0.3, sr=baseR*(0.55+j*0.12), sa=l.a*(0.4-j*0.05); const g=ctx.createRadialGradient(ox,oy,0,ox,oy,sr*1.2); g.addColorStop(0,'rgba(255,255,255,'+sa.toFixed(4)+')'); g.addColorStop(0.5,'rgba(255,255,255,'+(sa*0.3).toFixed(4)+')'); g.addColorStop(1,'rgba(255,255,255,0)'); ctx.fillStyle=g; ctx.beginPath(); ctx.arc(ox,oy,sr*1.2,0,Math.PI*2); ctx.fill(); } }); if(!reduceMotion) requestAnimationFrame(draw); };
+    draw();
+  }
+
+  // ---------- scramble ----------
+  function scramble(el, target, dur) {
+    if (!el) return; const pool = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#·/-'; clearInterval(el._t);
+    target = target || ''; const len = target.length, q = [], fr = Math.max(8, Math.round((dur || 460) / 34));
+    for (let k = 0; k < len; k++) { const st = Math.floor(Math.random() * (fr / 3)); q.push({ to: target.charAt(k) || '', st, en: st + Math.floor(fr * (0.4 + Math.random() * 0.5)), ch: '' }); }
+    let f = 0; el._t = setInterval(() => { let out = '', dn = 0; for (const x of q) { if (f >= x.en) { dn++; out += x.to; } else if (f >= x.st) { if (!x.ch || Math.random() < 0.35) x.ch = pool.charAt((Math.random() * pool.length) | 0); out += x.ch; } else out += ' '; } el.textContent = out; f++; if (dn >= q.length) { el.textContent = target; clearInterval(el._t); } }, 34);
+  }
+  $$('[data-scramble]').forEach((el) => {
+    const original = el.textContent.trim();
+    const to = el.getAttribute('data-scramble-to') || original;
+    el.addEventListener('mouseenter', () => scramble(el, to, 260));
+    el.addEventListener('mouseleave', () => scramble(el, original, 230));
+    if (to !== original) {
+      const lock = () => { const w0 = el.getBoundingClientRect().width; el.textContent = to; const w1 = el.getBoundingClientRect().width; el.textContent = original; el.style.minWidth = Math.ceil(Math.max(w0, w1)) + 'px'; };
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(lock); else lock();
+    }
+  });
+  const omeryFoot = $('[data-omery-foot]');
+  if (omeryFoot) omeryFoot.addEventListener('mouseenter', () => { $$('[data-scramble-foot]', omeryFoot).forEach((s) => { if (s.offsetParent !== null) scramble(s, s.textContent.trim(), 260); }); });
+
+  // ---------- reveal on scroll ----------
+  const reveals = $$('[data-reveal]');
+  if (reduceMotion || !('IntersectionObserver' in window)) reveals.forEach((e) => e.classList.add('in'));
+  else {
+    const io = new IntersectionObserver((ents) => ents.forEach((en) => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } }), { threshold: 0.08, rootMargin: '0px 0px -6% 0px' });
+    reveals.forEach((e) => io.observe(e));
+  }
+
+  // ---------- tour video: plays muted while in view, never when motion is reduced ----------
+  const tour = $('[data-tour]'), tourToggle = $('[data-tour-toggle]'), tourIcon = $('[data-tour-icon]');
+  if (tour && tourToggle) {
+    let userPaused = false;
+    const sync = () => { const playing = !tour.paused; tourIcon.textContent = playing ? 'Pause' : 'Play'; tourToggle.setAttribute('aria-label', playing ? 'Pause the tour' : 'Play the tour'); };
+    const play = () => { const p = tour.play(); if (p && p.catch) p.catch(() => {}); };
+    tour.addEventListener('play', sync); tour.addEventListener('pause', sync);
+    tourToggle.addEventListener('click', () => { if (tour.paused) { userPaused = false; play(); } else { userPaused = true; tour.pause(); } });
+    if (!reduceMotion && 'IntersectionObserver' in window) {
+      new IntersectionObserver((ents) => ents.forEach((en) => { if (en.isIntersecting && !userPaused) play(); else if (!en.isIntersecting) tour.pause(); }), { threshold: 0.45 }).observe(tour);
+    }
+  }
+
+  // ---------- lightbox ----------
+  const lightbox = $('[data-lightbox]'), lightboxImg = $('[data-lightbox-img]');
+  let lastFocus = null;
+  function openLightbox(img) { lastFocus = document.activeElement; lightboxImg.src = img.getAttribute('data-full') || img.currentSrc; lightboxImg.alt = img.alt; lightbox.classList.add('on'); lightbox.setAttribute('tabindex', '-1'); lightbox.focus(); }
+  function closeLightbox() { lightbox.classList.remove('on'); lightboxImg.removeAttribute('src'); if (lastFocus) lastFocus.focus(); }
+  $$('.shot-frame').forEach((frame) => {
+    const img = $('img', frame);
+    frame.addEventListener('click', () => openLightbox(img));
+    frame.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(img); } });
+  });
+  lightbox.addEventListener('click', closeLightbox);
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && lightbox.classList.contains('on')) closeLightbox(); });
+
+  // ---------- scene-cut page transition ----------
+  function pageLabel(path) { const clean = path.replace(/\.html$/, '').replace(/\/$/, ''); if (!clean || clean === '/index') return 'HOME'; return clean.split('/').pop().replace(/-/g, ' ').toUpperCase(); }
+  function playSceneExit(url, label) {
+    if (!transition || !transitionLabel) { location.href = url; return; }
+    transition.style.transition = 'none'; transition.style.display = 'flex'; transition.style.transform = 'translateY(-101%)'; transition.style.pointerEvents = 'auto';
+    transitionLabel.style.opacity = '0'; if (transitionEyebrow) transitionEyebrow.style.opacity = '0'; transition.offsetHeight;
+    transition.style.transition = 'transform 520ms cubic-bezier(.76,0,.24,1)'; transition.style.transform = 'translateY(0)';
+    setTimeout(() => { if (transitionEyebrow) transitionEyebrow.style.opacity = '1'; transitionLabel.style.opacity = '1'; scramble(transitionLabel, label, 420); }, 240);
+    setTimeout(() => { try { sessionStorage.setItem('pendingEntry', label); } catch (e) {} location.href = url; }, 1050);
+  }
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest('a'); if (!a) return; const href = a.getAttribute('href');
+    if (!href || href.startsWith('mailto:') || href.startsWith('tel:') || href.startsWith('#') || a.target === '_blank') return;
+    let url; try { url = new URL(href, location.href); } catch (_) { return; }
+    if (url.origin !== location.origin || url.pathname === location.pathname) return;
+    e.preventDefault(); playSceneExit(url.href, pageLabel(url.pathname));
+  });
+  window.addEventListener('pageshow', (e) => {
+    if (!e.persisted) return;
+    if (transition) { transition.style.transition = 'none'; transition.style.transform = 'translateY(-101%)'; transition.style.pointerEvents = 'none'; transition.style.display = 'none'; if (transitionLabel) transitionLabel.style.opacity = '0'; if (transitionEyebrow) transitionEyebrow.style.opacity = '0'; }
+    if (sweep) { sweep.style.transition = 'none'; sweep.style.display = 'none'; }
+  });
+
+  function whenReady(maxMs) {
+    const ready = Promise.all([
+      (document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve(),
+      (document.readyState === 'complete') ? Promise.resolve() : new Promise((r) => window.addEventListener('load', r, { once: true })),
+    ]);
+    return Promise.race([ready, new Promise((r) => setTimeout(r, maxMs))]);
+  }
+  function playSceneEntry() {
+    if (!transition) return false;
+    let pending = null; try { pending = sessionStorage.getItem('pendingEntry'); } catch (e) {}
+    if (!pending) return false;
+    try { sessionStorage.removeItem('pendingEntry'); } catch (e) {}
+    if (sweep) { sweep.style.transition = 'none'; sweep.style.transform = 'translateY(-101%)'; sweep.style.display = 'none'; }
+    transition.style.transition = 'none'; transition.style.transform = 'translateY(0)'; transition.style.pointerEvents = 'auto';
+    if (transitionEyebrow) transitionEyebrow.style.opacity = '1';
+    transitionLabel.style.opacity = '1'; transitionLabel.textContent = pending; transition.offsetHeight;
+    transition.style.transition = 'transform 520ms cubic-bezier(.76,0,.24,1)';
+    whenReady(4000).then(() => setTimeout(() => {
+      if (transitionEyebrow) transitionEyebrow.style.opacity = '0';
+      transitionLabel.style.opacity = '0'; transition.style.transform = 'translateY(-101%)';
+      setTimeout(() => { transition.style.display = 'none'; transition.style.pointerEvents = 'none'; try { sessionStorage.setItem('hasEntered', '1'); } catch (e) {} }, 620);
+    }, 320));
+    return true;
+  }
+  function initSweep() {
+    if (!sweep) return;
+    const hide = () => { sweep.style.transition = 'none'; sweep.style.transform = 'translateY(-101%)'; sweep.style.display = 'none'; };
+    const finish = () => { try { sessionStorage.setItem('hasEntered', '1'); } catch (e) {} sweep.style.transform = 'translateY(-101%)'; setTimeout(() => { sweep.style.display = 'none'; }, 1100); };
+    let hasEntered = false; try { hasEntered = sessionStorage.getItem('hasEntered') === '1'; } catch (e) {}
+    if (hasEntered) { hide(); return; }
+    if (reduceMotion) { setTimeout(finish, 100); return; }
+    whenReady(6000).then(() => setTimeout(finish, 200));
+  }
+  // ---------- CTA magnetic letters (same physics as "Let's talk" on /about) ----------
+  // Touch has no cursor, so the finger feeds the same position the mouse does.
+  const onTouch = (e) => { const t = e.touches && e.touches[0]; if (t) { state.mx = t.clientX; state.my = t.clientY; } };
+  window.addEventListener('touchstart', onTouch, { passive: true });
+  window.addEventListener('touchmove', onTouch, { passive: true });
+  window.addEventListener('touchend', () => { setTimeout(() => { state.mx = -9999; state.my = -9999; }, 500); }, { passive: true });
+  function initCtaPhysics() {
+    const word = $('[data-cta-word]');
+    if (!word || reduceMotion) return;
+    const arrow = word.querySelector('.arr');
+    const text = word.firstChild.textContent.trim();
+    word.textContent = '';
+    text.split(' ').forEach((w) => {
+      const span = document.createElement('span');
+      span.className = 'cta-w'; span.setAttribute('aria-hidden', 'true');
+      for (const ch of w) { const k = document.createElement('span'); k.setAttribute('data-cta-k', ''); k.textContent = ch; span.appendChild(k); }
+      word.appendChild(span);
+    });
+    if (arrow) word.lastChild.appendChild(arrow); // arrow keeps its own hover slide, outside the physics
+    const SPRING = 0.065, DAMPING = 0.82, THRESHOLD = 300, STRENGTH = 90;
+    const states = $$('[data-cta-k]', word).map((el) => ({ el, x: 0, y: 0, vx: 0, vy: 0 }));
+    let visible = false;
+    const step = () => {
+      if (!visible) return;
+      for (const s of states) {
+        const rect = s.el.getBoundingClientRect();
+        const dx = rect.left + rect.width / 2 - s.x - state.mx, dy = rect.top + rect.height / 2 - s.y - state.my;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < THRESHOLD && dist > 0) {
+          const force = Math.pow(1 - dist / THRESHOLD, 2) * STRENGTH;
+          s.vx += (dx / dist) * force * 0.12;
+          s.vy += (dy / dist) * force * 0.12;
+        }
+        s.vx += -s.x * SPRING; s.vy += -s.y * SPRING;
+        s.vx *= DAMPING; s.vy *= DAMPING;
+        s.x += s.vx; s.y += s.vy;
+        if (Math.abs(s.x) > 0.1 || Math.abs(s.y) > 0.1) {
+          s.el.style.transform = 'translate(' + s.x.toFixed(1) + 'px,' + s.y.toFixed(1) + 'px) rotate(' + (s.vx * 1.6).toFixed(1) + 'deg)';
+        } else if (s.x || s.y) {
+          s.x = 0; s.y = 0; s.vx = 0; s.vy = 0;
+          s.el.style.transform = '';
+        }
+      }
+      requestAnimationFrame(step);
+    };
+    // only run the physics while the CTA is on screen
+    new IntersectionObserver(([entry]) => {
+      const was = visible; visible = entry.isIntersecting;
+      if (visible && !was) requestAnimationFrame(step);
+    }).observe(word);
+  }
+  initCtaPhysics();
+
+  if (!playSceneEntry()) initSweep();
+})();
+</script>
+</body>
+</html>

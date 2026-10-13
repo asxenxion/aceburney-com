@@ -91,11 +91,6 @@
     50%     { opacity: 1; transform: scale(1.07) translateY(-1.4%); }
   }
   @media (prefers-reduced-motion: reduce) { [data-motion] { animation: none !important; } }
-  [data-about] { transition:color .5s ease; }
-  [data-about]::after { content:''; position:absolute; left:0; right:0; bottom:-4px; height:1px; background:#B4AEA4; transform:scaleX(0); transform-origin:right; transition:transform .8s cubic-bezier(.5,0,.3,1), background-color .5s ease; }
-  [data-about].line-in { color:#e8e6e1 !important; }
-  [data-about].line-in::after { transform:scaleX(1); transform-origin:left; background:#e8e6e1; }
-  @media (prefers-reduced-motion: reduce) { [data-about]::after { transition:none; } }
   /* Omery arrow beckon — two gentle up-right nudges, then quiet; 6s period drifts against the 5.2s About pulse */
   [data-omery-arrow] { animation: ab-beckon 6s ease-in-out 1s infinite; }
   @keyframes ab-beckon {
@@ -105,13 +100,18 @@
   }
   [data-omery]:hover [data-omery-arrow] { animation: none; transform: translate(2px,-2px); color: #EDE9E0; transition: transform .3s cubic-bezier(.16,1,.3,1), color .3s ease; }
   @media (prefers-reduced-motion: reduce) { [data-omery-arrow] { animation: none; } }
+
   @media (max-width: 640px) {
     body { overflow-x: hidden; }
+    /* menu open: the page drops by the menu's height (--sm-push), so lift the name half that to keep it centred in what's left */
+    html.sm-anim [data-head] { transition: transform .5s cubic-bezier(.32,.72,0,1); }
+    html.sm-crunch [data-head] { transform: translateY(calc(var(--sm-push, 0px) * -0.5)); }
+    html.sm-drag [data-head] { transition: none; }
+    [data-m="menu"] { top: 20px !important; right: 20px !important; font-size: 9.5px !important; }
     [data-m="head"] { flex-direction: column !important; gap: 0.1em !important; align-items: center !important; }
     [data-m="head"] > span:first-child { margin-right: 14px !important; }
     [data-m="avail"] { top: 20px !important; left: 20px !important; font-size: 9.5px !important; max-width: 42vw; }
     [data-m="start"] { top: 20px !important; right: 20px !important; font-size: 9.5px !important; }
-    [data-m="about"] { top: auto !important; bottom: 22px !important; font-size: 9.5px !important; }
     [data-m="austin"] { bottom: 22px !important; left: auto !important; right: 20px !important; font-size: 9.5px !important; }
     [data-m="omery"] { bottom: 22px !important; left: 20px !important; font-size: 9.5px !important; letter-spacing: 0.16em !important; }
     [data-m="omery-full"] { display: none !important; }
@@ -121,6 +121,8 @@
     [data-m="avail"] { display: none !important; }
   }
 </style>
+<link rel="stylesheet" href="/assets/site-menu.css?v=12">
+<script src="/assets/site-menu.js?v=13" defer></script>
 </head>
 <body>
 <div data-root style="position:relative; width:100%; min-height:100dvh; background:#0D0D0D; overflow:hidden; cursor:none; -webkit-tap-highlight-color:transparent;">
@@ -140,11 +142,9 @@
   <!-- film grain (living) -->
   <div data-motion style="position:absolute; inset:-60%; pointer-events:none; opacity:0.06; mix-blend-mode:overlay; animation:ab-grain 0.7s steps(1) infinite; background-image:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22140%22 height=%22140%22%3E%3Cfilter id=%22n%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.85%22 numOctaves=%222%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23n)%22/%3E%3C/svg%3E'); background-size:200px 200px;"></div>
 
-  <!-- top-left availability -->
-  <div data-avail data-m="avail" style="position:absolute; top:34px; left:60px; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.18em; color:#7A7A7A; text-transform:uppercase; animation:ab-fade 1.2s ease 0.7s both;">Available for projects</div>
-
-  <!-- top-right: Start a Project → intake form -->
-  <a href="/start" data-m="start" aria-label="Start a project" style="position:absolute; top:34px; right:60px; z-index:20; white-space:nowrap; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:#7A7A7A; text-decoration:none; transition:color .3s ease; animation:ab-fade 1.2s ease 0.7s both;">Start a Project</a>
+  <!-- top-left: availability, which is also the way into the intake form.
+       Playing with the name still cycles the disciplines here; hovering it offers Start a Project, clicking opens /start. -->
+  <a href="/start" data-avail data-m="avail" aria-label="Available for projects. Start a project" style="position:absolute; top:34px; left:60px; z-index:20; white-space:nowrap; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.18em; color:#7A7A7A; text-transform:uppercase; text-decoration:none; transition:color .3s ease; animation:ab-fade 1.2s ease 0.7s both;">Available for projects</a>
 
   <!-- center stack -->
   <div style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:0 24px; text-align:center; pointer-events:none;">
@@ -163,9 +163,13 @@
   </div>
 
   <!-- footer -->
-  <div data-m="austin" style="position:absolute; bottom:34px; right:60px; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.18em; color:#7A7A7A; text-transform:uppercase; animation:ab-fade 1.2s ease 1.05s both;">Austin, Texas</div>
-  <a data-about href="/about" data-m="about" style="position:absolute; top:34px; left:50%; transform:translateX(-50%); z-index:20; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.18em; color:#B4AEA4; text-transform:uppercase; transition:color .3s ease; animation:ab-fade 1.2s ease 0.7s both;">About</a>
-  <a data-omery data-m="omery" href="https://omery.studio" target="_blank" rel="noopener" aria-label="Omery, design and systems studio (opens in a new tab)" style="position:absolute; bottom:34px; left:60px; z-index:15; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.18em; color:#7A7A7A; text-transform:uppercase; text-decoration:none; white-space:nowrap; transition:color .3s ease; animation:ab-fade 1.2s ease 1.05s both;"><span data-omery-label data-m="omery-full">Omery &middot; Design &amp; Systems Studio</span><span data-omery-label-short data-m="omery-short" style="display:none;">Omery</span><span data-omery-arrow aria-hidden="true" style="display:inline-block; margin-left:0.45em; will-change:transform;">↗</span></a>
+  <!-- top-right: the site menu (shared: /assets/site-menu.js + .css). Reads "Menu", periodically scrambles to "Explore". -->
+  <button type="button" data-menu-toggle class="sm-toggle" data-m="menu" style="position:absolute; top:34px; right:60px; z-index:20; animation:ab-fade 1.2s ease 0.7s both;">Menu</button>
+  <!-- site footer (shared styles: /assets/site-menu.css) -->
+  <footer class="site-foot site-foot--pinned">
+    <a class="site-foot-omery" href="https://omery.studio" target="_blank" rel="noopener" aria-label="Omery, design and systems studio (opens in a new tab)"><span class="sf-full">Omery &middot; Design &amp; Systems Studio</span><span class="sf-short">Omery</span><span class="sf-arrow" aria-hidden="true">↗</span></a>
+    <span>Austin, Texas</span>
+  </footer>
 
   <!-- custom cursor -->
   <div data-cursor style="position:fixed; top:0; left:0; width:26px; height:26px; border:1px solid rgba(237,233,224,0.55); border-radius:50%; pointer-events:none; z-index:9999; transform:translate(-100px,-100px); transition:width .25s ease, height .25s ease, background-color .25s ease, border-color .25s ease; mix-blend-mode:difference;"></div>
@@ -208,7 +212,6 @@
   const loader = $('[data-loader]');
   const counter = $('[data-counter]');
   const bar = $('[data-bar]');
-  const about = $('[data-about]');
   const letters = $$('[data-k]', root);
   const transition = $('[data-transition]');
   const transitionLabel = $('[data-transition-label]');
@@ -220,7 +223,6 @@
     mx: -9999, my: -9999, mouseSpeed: 0,
     _pmx: 0, _pmy: 0,
     _cx: -100, _cy: -100,
-    _aboutHover: false,
   };
   const timers = {};
 
@@ -282,23 +284,13 @@
   head.addEventListener('mouseenter', nextWord);
   head.addEventListener('mouseleave', resetWord);
 
-  // ---------- Start a Project CTA — in-place scramble on hover ----------
-  const startCta = $('[data-m="start"]');
-  if (startCta) {
-    const so = startCta.textContent.trim();       // "Start a Project"
-    const hover = so + ' →';                       // forward arrow on hover, like the About page
-    let cur = so;
-    startCta.addEventListener('mouseenter', () => { if (cur === hover) return; cur = hover; scramble(startCta, hover, true); });
-    startCta.addEventListener('mouseleave', () => { if (cur === so) return; cur = so; scramble(startCta, so, true); });
-    // reserve the arrow's width (on the right, since the link is right-anchored) so nothing shifts when it reveals
-    const lockStart = () => {
-      const w0 = startCta.getBoundingClientRect().width;
-      startCta.textContent = hover; const w1 = startCta.getBoundingClientRect().width;
-      startCta.textContent = (cur === so ? so : hover);
-      startCta.style.textAlign = 'left';
-      startCta.style.minWidth = Math.ceil(Math.max(w0, w1)) + 'px';
-    };
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(lockStart); else lockStart();
+  // ---------- Available for projects — doubles as the way into the intake form ----------
+  // Hovering it offers "Start a Project →" (the click opens /start); leaving restores the status line.
+  if (avail) {
+    avail.addEventListener('mouseenter', () => { avail.style.color = '#EDE9E0'; scramble(avail, 'START A PROJECT →', true); });
+    avail.addEventListener('mouseleave', () => { avail.style.color = ''; resetWord(); });
+    avail.addEventListener('focus', () => scramble(avail, 'START A PROJECT →', true));
+    avail.addEventListener('blur', resetWord);
   }
 
   // ---------- Omery studio link — in-place scramble on hover (label only; the arrow span stays intact and pulses) ----------
@@ -310,42 +302,6 @@
       const vis = (omeryShort && omeryShort.offsetParent !== null) ? omeryShort : omeryFull;
       scramble(vis, vis === omeryShort ? stxt : ftxt, true);
     });
-  }
-
-  // ---------- About link easter egg ----------
-  let kickAboutPulse = null;
-  if (about) {
-    let pulseOn = false, nameOn = false, aboutOn = false, started = false;
-    const refreshLine = () => { about.classList.toggle('line-in', pulseOn || nameOn || aboutOn); };
-
-    // Hovering the About link itself
-    about.addEventListener('mouseenter', () => { state._aboutHover = true; aboutOn = true; refreshLine(); scramble(about, 'ABOUT'); });
-    about.addEventListener('mouseleave', () => { state._aboutHover = false; aboutOn = false; refreshLine(); });
-
-    // Playing with the ACE BURNEY name makes About react (line draws in + brightens); the name stays pure play
-    if (head) {
-      head.addEventListener('mouseenter', () => { nameOn = true; refreshLine(); });
-      head.addEventListener('mouseleave', () => { nameOn = false; refreshLine(); });
-    }
-
-    // One coordinated reveal: line draws in + word morphs "About" -> "Ascencion" + brightens, then retracts
-    const doPulse = () => {
-      if (state._aboutHover || document.hidden) return;
-      pulseOn = true; refreshLine();
-      scramble(about, 'ASCENCION');
-      timers.aboutCueBack = setTimeout(() => {
-        pulseOn = false; refreshLine();
-        if (!state._aboutHover) scramble(about, 'ABOUT');
-      }, 1800);
-    };
-    // On reveal: hold "About" a beat so it reads first, THEN animate to Ascencion, then keep the rhythm
-    kickAboutPulse = () => {
-      if (started) return; started = true;
-      timers.aboutStart = setTimeout(() => {
-        doPulse();
-        timers.aboutCue = setInterval(doPulse, 5200);
-      }, 1400);
-    };
   }
 
   // ---------- email hover scramble (width-locked) ----------
@@ -885,13 +841,6 @@
   initNavIntercept();
   // If we're arriving from a scene-cut, play the entry; otherwise fall through to loader
   if (!playSceneEntry()) initLoader();
-
-  // Fire the first About pulse the instant the page is revealed (don't wait for the 5.2s interval)
-  (function kickFirstPulse(tries) {
-    const L = $('[data-loader]');
-    if ((!L || getComputedStyle(L).display === 'none') && !document.hidden) { if (kickAboutPulse) kickAboutPulse(); return; }
-    if (tries > 0) setTimeout(() => kickFirstPulse(tries - 1), 180);
-  })(60);
 
   // Back/forward-cache restore keeps full-screen overlays frozen mid-animation, so hitting
   // Back would land on a stale scene-cut transition. Reset the overlay + loader on bfcache restore.
