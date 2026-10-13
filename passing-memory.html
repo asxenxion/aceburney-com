@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Late light on South Congress — In Passing</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0D0D0D">
+<meta name="color-scheme" content="dark">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230D0D0D'/%3E%3Ctext x='16' y='22' font-family='Helvetica,Arial,sans-serif' font-weight='700' font-size='18' fill='%23e8e6e1' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { background: #0D0D0D; }
+  body { color: #e8e6e1; overflow-x: hidden; }
+  a { color: #7A7A7A; text-decoration: none; }
+  ::selection { background: #e8e6e1; color: #0D0D0D; }
+  @keyframes ab-grain { 0%{transform:translate(0,0);}10%{transform:translate(-6%,-4%);}20%{transform:translate(-11%,6%);}30%{transform:translate(6%,-11%);}40%{transform:translate(-4%,14%);}50%{transform:translate(-12%,4%);}60%{transform:translate(14%,0);}70%{transform:translate(0,11%);}80%{transform:translate(-14%,-3%);}90%{transform:translate(10%,6%);}100%{transform:translate(4%,0);} }
+  [data-reveal] { opacity: 0; transform: translateY(24px); transition: opacity .9s cubic-bezier(.16,1,.3,1), transform .9s cubic-bezier(.16,1,.3,1); }
+  [data-reveal].in { opacity: 1; transform: none; }
+
+  .frame { display: block; width: 100%; height: 100%; position: relative; overflow: hidden; border: none; border-radius: 8px; padding: 0; cursor: none; background: var(--g); background-size: cover; background-position: center; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08); }
+  .frame::before { content: ""; position: absolute; inset: 0; opacity: 0.5; mix-blend-mode: overlay; background-image: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22%3E%3Cfilter id=%22n%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.8%22 numOctaves=%222%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23n)%22/%3E%3C/svg%3E'); }
+  .frame::after { content: ""; position: absolute; inset: 0; background: rgba(232,230,225,0); transition: background-color .35s ease; }
+  .frame:hover::after { background: rgba(232,230,225,0.06); }
+
+  .mosaic3 { display: grid; grid-template-columns: 1.5fr 1fr; gap: clamp(10px, 1.4vw, 18px); align-items: stretch; }
+  .mosaic3 .big { aspect-ratio: 4/5; }
+  .mosaic3 .stack { display: grid; grid-template-rows: 1fr 1fr; gap: clamp(10px, 1.4vw, 18px); min-height: 0; }
+
+  .prose { max-width: 60ch; margin: 0 auto; }
+  .prose p { font-family: 'Space Mono', monospace; font-size: clamp(0.92rem,1.05vw,1.02rem); line-height: 1.9; color: #b4aea4; margin-bottom: 22px; }
+  .prose p:first-child::first-letter { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 700; font-size: 3.2em; line-height: 0.8; float: left; margin: 6px 12px 0 0; color: #f2f0ef; }
+
+  /* lightbox with bottom filmstrip */
+  .lb { position: fixed; inset: 0; z-index: 9995; background: rgba(9,9,9,0.95); display: flex; flex-direction: column; opacity: 0; pointer-events: none; transition: opacity .4s ease; }
+  .lb.open { opacity: 1; pointer-events: auto; }
+  .lb-top { flex: 1; position: relative; display: flex; align-items: center; justify-content: center; padding: 64px clamp(16px,7vw,90px) 8px; min-height: 0; }
+  .lb-img { width: min(86vw, 1040px); aspect-ratio: 3/2; max-height: 68vh; background-size: cover; background-position: center; border-radius: 6px; box-shadow: 0 30px 80px rgba(0,0,0,0.5); }
+  .lb-x { position: absolute; top: 22px; right: clamp(16px,5vw,40px); font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: #a8a29a; background: none; border: none; cursor: none; }
+  .lb-x:hover { color: #fff; }
+  .lb-count { position: absolute; top: 24px; left: clamp(16px,5vw,40px); font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.16em; color: #a8a29a; }
+  .lb-arrow { position: absolute; top: 50%; transform: translateY(-50%); width: 46px; height: 46px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.18); background: rgba(13,13,13,0.4); color: #e8e6e1; font-family: 'Space Mono', monospace; font-size: 20px; cursor: none; display: flex; align-items: center; justify-content: center; transition: background-color .3s ease, border-color .3s ease; }
+  .lb-arrow:hover { background: rgba(13,13,13,0.75); border-color: rgba(255,255,255,0.45); }
+  .lb-prev { left: clamp(10px,3vw,30px); } .lb-next { right: clamp(10px,3vw,30px); }
+  .lb-strip { display: flex; gap: 8px; justify-content: center; align-items: center; padding: 12px clamp(16px,5vw,40px) 30px; overflow-x: auto; scrollbar-width: none; }
+  .lb-strip::-webkit-scrollbar { display: none; }
+  .lb-thumb { flex: 0 0 auto; width: 76px; height: 50px; border-radius: 4px; background-size: cover; background-position: center; opacity: 0.4; cursor: none; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.1); transition: opacity .3s ease, box-shadow .3s ease; }
+  .lb-thumb:hover { opacity: 0.75; }
+  .lb-thumb.on { opacity: 1; box-shadow: inset 0 0 0 2px #e8e6e1; }
+
+  @media (max-width: 760px) {
+    .mosaic3 { grid-template-columns: 1fr; }
+    .mosaic3 .big { aspect-ratio: 4/5; }
+    .mosaic3 .stack { grid-template-columns: 1fr 1fr; grid-template-rows: none; }
+    .mosaic3 .stack .frame { aspect-ratio: 1/1; }
+    .lb-img { aspect-ratio: 4/5; max-height: 60vh; }
+    .lb-thumb { width: 60px; height: 40px; }
+  }
+</style>
+</head>
+<body>
+<div data-root style="position:relative; width:100%; min-height:100dvh; background:#0D0D0D; overflow-x:hidden; cursor:none; -webkit-tap-highlight-color:transparent;">
+
+  <canvas data-ambient style="position:fixed; inset:0; z-index:0; width:100vw; height:100vh; pointer-events:none; display:block;"></canvas>
+  <div style="position:fixed; inset:0; z-index:1; pointer-events:none; background:radial-gradient(ellipse 70% 55% at 50% 8%, rgba(237,233,224,0.05), rgba(237,233,224,0) 60%), radial-gradient(circle at 50% 40%, rgba(0,0,0,0) 45%, rgba(0,0,0,0.5) 100%);"></div>
+  <div data-motion style="position:fixed; inset:-60%; z-index:2; pointer-events:none; opacity:0.05; mix-blend-mode:overlay; animation:ab-grain 0.7s steps(1) infinite; background-image:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22140%22 height=%22140%22%3E%3Cfilter id=%22n%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.85%22 numOctaves=%222%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23n)%22/%3E%3C/svg%3E'); background-size:200px 200px;"></div>
+
+  <nav style="position:fixed; top:0; left:0; right:0; z-index:30; display:flex; align-items:center; justify-content:space-between; padding:28px clamp(24px,5vw,60px); mix-blend-mode:difference;">
+    <a href="/" data-scramble data-scramble-to="← BACK HOME" style="font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.18em; color:#e8e6e1; text-transform:uppercase;">Ace Burney.</a>
+    <div style="display:flex; gap:20px; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.18em; text-transform:uppercase;">
+      <a href="/work" data-scramble style="color:#7A7A7A;">Work</a>
+      <a href="in-passing.html" data-scramble style="color:#e8e6e1;">In Passing</a>
+    </div>
+  </nav>
+
+  <div style="position:relative; z-index:10; max-width:1180px; margin:0 auto; padding:0 clamp(24px,5vw,60px);">
+
+    <header style="padding:140px 0 40px;">
+      <a href="in-passing.html" data-reveal data-scramble data-scramble-to="← IN PASSING" style="display:inline-block; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:#7A7A7A; margin-bottom:36px;">← In Passing</a>
+      <div data-reveal style="font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color:#7A7A7A; margin-bottom:18px;">Aug 2026 · Austin, TX</div>
+      <h1 data-reveal style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight:700; font-size:clamp(2.4rem,7vw,5rem); line-height:0.94; letter-spacing:-0.03em; color:#f2f0ef; max-width:16ch;">Late light on South Congress</h1>
+    </header>
+
+    <!-- MOSAIC: 3 photos, click any to open the gallery -->
+    <section data-reveal class="mosaic3">
+      <button class="frame big" data-open="0" style="--g:radial-gradient(120% 120% at 30% 22%, rgba(198,150,84,0.34), rgba(64,63,71,0) 55%), linear-gradient(135deg,#3a352b,#403f47 74%);"></button>
+      <div class="stack">
+        <button class="frame" data-open="1" style="--g:radial-gradient(120% 120% at 65% 35%, rgba(198,84,72,0.28), rgba(64,63,71,0) 55%), linear-gradient(135deg,#3a2f2e,#403f47 74%);"></button>
+        <button class="frame" data-open="2" style="--g:linear-gradient(135deg,#33333a,#403f47 74%);"></button>
+      </div>
+    </section>
+
+    <!-- BLOG WRITING -->
+    <section data-reveal style="padding:clamp(64px,11vh,130px) 0 0;">
+      <div class="prose">
+        <div style="font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.22em; text-transform:uppercase; color:#7A7A7A; margin-bottom:30px; text-align:center;">The Story</div>
+        <p>There's a stretch of South Congress that only works for about twenty minutes a night — the sun drops behind the shopfronts and the whole street turns the color of a warm bulb. Placeholder writing to show how a longer note reads underneath the frames.</p>
+        <p>Some entries will have this. Most won't. When the words are there, this is where they live — plain, personal, no pressure to fill the space. Swap this out with whatever you actually felt like saying that day.</p>
+        <p>The point of the page is the light and the frames; the writing is a quiet companion, not the headline. Keep it short, keep it honest, and let the photographs carry the weight.</p>
+      </div>
+    </section>
+
+    <footer style="margin-top:clamp(64px,12vh,140px); padding:24px 0 44px; border-top:1px solid rgba(255,255,255,0.07);">
+      <div style="display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:12px 24px; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.16em; color:#6b675f; text-transform:uppercase;">
+        <span style="justify-self:start;">© 2026 Ace Burney.</span>
+        <span style="justify-self:center; font-size:10px; color:#5a564f;">Memory — mosaic + gallery</span>
+        <span style="justify-self:end;">Austin, Texas</span>
+      </div>
+    </footer>
+  </div>
+
+  <!-- LIGHTBOX GALLERY (big image + arrows + bottom filmstrip) -->
+  <div class="lb" data-lb aria-hidden="true">
+    <div class="lb-top">
+      <span class="lb-count" data-count>1 / 7</span>
+      <button class="lb-x" data-close>Close ✕</button>
+      <button class="lb-arrow lb-prev" data-prev aria-label="Previous">‹</button>
+      <div class="lb-img" data-img></div>
+      <button class="lb-arrow lb-next" data-next aria-label="Next">›</button>
+    </div>
+    <div class="lb-strip" data-strip></div>
+  </div>
+
+  <div data-cursor style="position:fixed; top:0; left:0; width:26px; height:26px; border:1px solid rgba(237,233,224,0.55); border-radius:50%; pointer-events:none; z-index:9999; transform:translate(-100px,-100px); transition:width .25s ease, height .25s ease, background-color .25s ease, border-color .25s ease; mix-blend-mode:difference;"></div>
+  <div data-sweep style="position:fixed; inset:0; z-index:9990; background:#0D0D0D; pointer-events:none; will-change:transform; transition:transform 1s cubic-bezier(.76,0,.24,1);"></div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+  const $ = (s, c) => (c || document).querySelector(s);
+  const $$ = (s, c) => Array.from((c || document).querySelectorAll(s));
+  const root = $('[data-root]'), cursor = $('[data-cursor]'), ambient = $('[data-ambient]'), sweep = $('[data-sweep]');
+  const state = { mx: -9999, my: -9999, _cx: -100, _cy: -100 };
+  window.addEventListener('mousemove', (e) => { state.mx = e.clientX; state.my = e.clientY; });
+  const canHover = matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+  if (cursor && canHover) {
+    root.addEventListener('mouseover', (e) => { if (e.target.closest('a, button, .lb-thumb')) { cursor.style.width = '46px'; cursor.style.height = '46px'; cursor.style.backgroundColor = 'rgba(237,233,224,0.9)'; } });
+    root.addEventListener('mouseout', (e) => { if (e.target.closest('a, button, .lb-thumb')) { cursor.style.width = '26px'; cursor.style.height = '26px'; cursor.style.backgroundColor = 'transparent'; } });
+    const loop = () => { state._cx += (state.mx - state._cx) * 0.18; state._cy += (state.my - state._cy) * 0.18; cursor.style.transform = 'translate(' + (state._cx - 13).toFixed(1) + 'px,' + (state._cy - 13).toFixed(1) + 'px)'; requestAnimationFrame(loop); };
+    requestAnimationFrame(loop);
+  } else if (cursor) { cursor.style.display = 'none'; }
+
+  if (ambient) {
+    const ctx = ambient.getContext('2d'); const SCALE = 0.15; let w, h;
+    const resize = () => { w = Math.max(1, Math.ceil(innerWidth * SCALE)); h = Math.max(1, Math.ceil(innerHeight * SCALE)); ambient.width = w; ambient.height = h; };
+    resize(); addEventListener('resize', resize, { passive: true });
+    const lights = [{cx:0.14,cy:0.1,r:0.40,a:0.11,phase:0},{cx:0.84,cy:0.5,r:0.34,a:0.08,phase:1.8},{cx:0.7,cy:0.9,r:0.30,a:0.075,phase:3.2},{cx:0.12,cy:0.65,r:0.32,a:0.08,phase:4.7}];
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches; let t = 0;
+    const draw = () => { ctx.clearRect(0,0,w,h); t += 0.006; lights.forEach((l) => { const bx=(l.cx+Math.sin(t*1.1+l.phase)*0.08)*w, by=(l.cy+Math.cos(t*0.9+l.phase)*0.07)*h, baseR=l.r*Math.min(w,h); for(let j=0;j<4;j++){ const ox=bx+Math.sin(t*(0.4+j*0.1)+j*1.7+l.phase)*baseR*0.35, oy=by+Math.cos(t*(0.35+j*0.08)+j*2.3)*baseR*0.3, sr=baseR*(0.55+j*0.12), sa=l.a*(0.4-j*0.05); const g=ctx.createRadialGradient(ox,oy,0,ox,oy,sr*1.2); g.addColorStop(0,'rgba(255,255,255,'+sa.toFixed(4)+')'); g.addColorStop(0.5,'rgba(255,255,255,'+(sa*0.3).toFixed(4)+')'); g.addColorStop(1,'rgba(255,255,255,0)'); ctx.fillStyle=g; ctx.beginPath(); ctx.arc(ox,oy,sr*1.2,0,Math.PI*2); ctx.fill(); } }); if(!reduce) requestAnimationFrame(draw); };
+    draw();
+  }
+
+  function scrambleTo(el, target, dur) {
+    if (!el) return; const pool = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#·/-←'; clearInterval(el._t);
+    const len = target.length, q = [], frames = Math.max(8, Math.round((dur || 500) / 34));
+    for (let i = 0; i < len; i++) { const start = Math.floor(Math.random() * (frames / 3)); q.push({ to: target[i] || '', start, end: start + Math.floor(frames * (0.4 + Math.random() * 0.5)), ch: '' }); }
+    let f = 0; el._t = setInterval(() => { let out = '', done = 0; for (const x of q) { if (f >= x.end) { done++; out += x.to; } else if (f >= x.start) { if (!x.ch || Math.random() < 0.32) x.ch = pool[(Math.random() * pool.length) | 0]; out += x.ch; } else out += ' '; } el.textContent = out; f++; if (done >= q.length) clearInterval(el._t); }, 34);
+  }
+  $$('[data-scramble]').forEach((el) => { const original = el.textContent.trim(); const to = el.getAttribute('data-scramble-to') || original; el.addEventListener('mouseenter', () => scrambleTo(el, to, 420)); el.addEventListener('mouseleave', () => scrambleTo(el, original, 360)); });
+
+  const els = $$('[data-reveal]');
+  if ('IntersectionObserver' in window) { const io = new IntersectionObserver((ents) => ents.forEach((en) => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } }), { threshold: 0.08, rootMargin: '0px 0px -5% 0px' }); els.forEach((e) => io.observe(e)); }
+  else els.forEach((e) => e.classList.add('in'));
+
+  // ---------- gallery lightbox with filmstrip ----------
+  (function initGallery() {
+    const IMAGES = [
+      { g: 'radial-gradient(120% 120% at 30% 22%, rgba(198,150,84,0.34), rgba(64,63,71,0) 55%), linear-gradient(135deg,#3a352b,#403f47 74%)', cap: 'South Congress · Aug 2026' },
+      { g: 'radial-gradient(120% 120% at 65% 35%, rgba(198,84,72,0.28), rgba(64,63,71,0) 55%), linear-gradient(135deg,#3a2f2e,#403f47 74%)', cap: 'Neon · Aug 2026' },
+      { g: 'linear-gradient(135deg,#33333a,#403f47 74%)', cap: 'Crosswalk · Aug 2026' },
+      { g: 'radial-gradient(120% 120% at 40% 40%, rgba(84,140,198,0.22), rgba(64,63,71,0) 55%), linear-gradient(135deg,#2e333b,#403f47 74%)', cap: 'Rain · Aug 2026' },
+      { g: 'linear-gradient(135deg,#363139,#403f47 74%)', cap: 'Alley · Aug 2026' },
+      { g: 'radial-gradient(120% 120% at 55% 30%, rgba(198,150,84,0.18), rgba(64,63,71,0) 55%), linear-gradient(135deg,#38332a,#403f47 74%)', cap: 'Storefront · Aug 2026' },
+      { g: 'radial-gradient(120% 120% at 50% 45%, rgba(120,140,170,0.18), rgba(64,63,71,0) 55%), linear-gradient(135deg,#2f333c,#403f47 74%)', cap: 'Last light · Aug 2026' }
+    ];
+    const lb = $('[data-lb]'), img = $('[data-img]'), count = $('[data-count]'), strip = $('[data-strip]');
+    if (!lb) return;
+    let i = 0;
+    IMAGES.forEach((im, k) => { const t = document.createElement('button'); t.className = 'lb-thumb'; t.style.backgroundImage = im.g; t.setAttribute('aria-label', 'Photo ' + (k + 1)); t.addEventListener('click', () => go(k)); strip.appendChild(t); });
+    const thumbs = $$('.lb-thumb', strip);
+    const go = (x) => {
+      i = (x + IMAGES.length) % IMAGES.length;
+      img.style.backgroundImage = IMAGES[i].g;
+      count.textContent = (i + 1) + ' / ' + IMAGES.length;
+      thumbs.forEach((t, k) => t.classList.toggle('on', k === i));
+      thumbs[i].scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' });
+    };
+    const open = (x) => { go(x); lb.classList.add('open'); lb.setAttribute('aria-hidden', 'false'); };
+    const close = () => { lb.classList.remove('open'); lb.setAttribute('aria-hidden', 'true'); };
+    $$('[data-open]').forEach((b) => b.addEventListener('click', () => open(parseInt(b.getAttribute('data-open'), 10))));
+    $('[data-prev]').addEventListener('click', () => go(i - 1));
+    $('[data-next]').addEventListener('click', () => go(i + 1));
+    $('[data-close]').addEventListener('click', close);
+    lb.addEventListener('click', (e) => { if (e.target === lb || e.target.classList.contains('lb-top')) close(); });
+    document.addEventListener('keydown', (e) => { if (!lb.classList.contains('open')) return; if (e.key === 'Escape') close(); else if (e.key === 'ArrowLeft') go(i - 1); else if (e.key === 'ArrowRight') go(i + 1); });
+    let sx = null;
+    lb.addEventListener('touchstart', (e) => { sx = e.touches[0].clientX; }, { passive: true });
+    lb.addEventListener('touchend', (e) => { if (sx === null) return; const dx = e.changedTouches[0].clientX - sx; if (Math.abs(dx) > 40) go(i + (dx < 0 ? 1 : -1)); sx = null; }, { passive: true });
+  })();
+
+  addEventListener('load', () => requestAnimationFrame(() => { if (sweep) sweep.style.transform = 'translateY(-101%)'; }));
+  setTimeout(() => { if (sweep) sweep.style.transform = 'translateY(-101%)'; }, 600);
+})();
+</script>
+</body>
+</html>

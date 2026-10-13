@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>In Passing — Ace Burney</title>
+<meta name="description" content="In Passing — a personal photo journal by Ace Burney. Frames caught in passing.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0D0D0D">
+<meta name="color-scheme" content="dark">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230D0D0D'/%3E%3Ctext x='16' y='22' font-family='Helvetica,Arial,sans-serif' font-weight='700' font-size='18' fill='%23e8e6e1' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { background: #0D0D0D; }
+  body { background: #0D0D0D; color: #e8e6e1; overflow-x: hidden; }
+  a { color: #7A7A7A; text-decoration: none; }
+  ::selection { background: #e8e6e1; color: #0D0D0D; }
+  @keyframes ab-grain { 0%{transform:translate(0,0);}10%{transform:translate(-6%,-4%);}20%{transform:translate(-11%,6%);}30%{transform:translate(6%,-11%);}40%{transform:translate(-4%,14%);}50%{transform:translate(-12%,4%);}60%{transform:translate(14%,0);}70%{transform:translate(0,11%);}80%{transform:translate(-14%,-3%);}90%{transform:translate(10%,6%);}100%{transform:translate(4%,0);} }
+  [data-reveal] { opacity: 0; transform: translateY(26px); transition: opacity 1s cubic-bezier(.16,1,.3,1), transform 1s cubic-bezier(.16,1,.3,1); }
+  [data-reveal].in { opacity: 1; transform: none; }
+
+  .ip-stage { position: relative; z-index: 10; min-height: 100dvh; display: flex; align-items: center; max-width: 1240px; margin: 0 auto; padding: 120px clamp(24px,5vw,60px) 80px; }
+  .ip-grid { display: grid; grid-template-columns: minmax(0,0.9fr) minmax(0,1.1fr); gap: clamp(24px,4vw,64px); align-items: center; width: 100%; }
+
+  /* left: card + arrows */
+  .ip-cardrow { display: flex; align-items: center; justify-content: center; gap: clamp(8px,1.6vw,20px); perspective: 1500px; }
+  .ip-slot { transform-style: preserve-3d; transition: transform .55s cubic-bezier(.16,1,.3,1), opacity .45s ease; will-change: transform, opacity; }
+  .ip-card { display: block; position: relative; width: clamp(320px, 40vw, 460px); background: linear-gradient(180deg, rgba(255,255,255,0.055), rgba(255,255,255,0.02)); border: 1px solid rgba(255,255,255,0.10); border-radius: 13px; padding: 15px; box-shadow: 0 48px 100px -44px rgba(0,0,0,0.92); transform-style: preserve-3d; will-change: transform; text-decoration: none; cursor: none; }
+  .ip-photo { position: relative; aspect-ratio: 4/3; overflow: hidden; border-radius: 8px; background: #111; background-size: cover; background-position: center; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.07); }
+  .ip-photo::before { content: ""; position: absolute; inset: 0; opacity: 0.5; mix-blend-mode: overlay; background-image: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22%3E%3Cfilter id=%22n%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.8%22 numOctaves=%222%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23n)%22/%3E%3C/svg%3E'); }
+  .ip-scrim { position: absolute; inset: 0; background: radial-gradient(circle at 50% 50%, rgba(0,0,0,0.46), rgba(0,0,0,0.15)); opacity: 0; pointer-events: none; }
+  .ip-openwrap { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; pointer-events: none; }
+  .ip-open { opacity: 0; font-family: 'Space Mono', monospace; font-size: 13px; letter-spacing: 0.34em; text-transform: uppercase; color: #f2f0ef; text-shadow: 0 2px 22px rgba(0,0,0,0.7); }
+
+  .ip-body { padding: 17px 6px 3px; }
+  .ip-head { display: flex; align-items: baseline; justify-content: space-between; gap: 6px 12px; }
+  .ip-cardtitle { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 700; font-size: 1.28rem; line-height: 1.1; letter-spacing: -0.015em; color: #f2f0ef; text-transform: uppercase; min-height: 2.2em; }
+  .ip-tag { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.12em; color: #7A7A7A; text-transform: uppercase; white-space: nowrap; flex: 0 0 auto; }
+  .ip-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.09); }
+  .ip-k { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.16em; color: #6b675f; text-transform: uppercase; }
+  .ip-v { font-family: 'Space Mono', monospace; font-size: 12.5px; color: #e8e6e1; margin-top: 5px; }
+  .ip-foot { display: flex; justify-content: space-between; margin-top: 15px; padding: 13px 0 2px; border-top: 1px solid rgba(255,255,255,0.09); font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.14em; color: #6b675f; text-transform: uppercase; }
+
+  .ip-arw { cursor: none; padding: 12px 5px; display: flex; align-items: center; flex: 0 0 auto; transition: transform .35s cubic-bezier(.16,1,.3,1); z-index: 12; }
+  .ip-arw svg .base { stroke: rgba(255,255,255,0.2); }
+  .ip-arw svg .pulse { stroke: #e8e6e1; stroke-dasharray: 100 100; animation: ip-fill 2.8s ease-in-out infinite; }
+  @keyframes ip-fill { 0%{ stroke-dashoffset:100; opacity:0; } 18%{ opacity:0.55; } 60%{ stroke-dashoffset:0; opacity:0.55; } 80%{ stroke-dashoffset:0; opacity:0.55; } 100%{ stroke-dashoffset:0; opacity:0; } }
+  .ip-prev:hover { transform: translateX(-3px); } .ip-next:hover { transform: translateX(3px); }
+
+  /* right: statement */
+  .ip-words { order: -1; padding-right: clamp(0px, 1vw, 20px); }
+  .ip-eyebrow { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.24em; color: #7A7A7A; text-transform: uppercase; margin-bottom: 26px; }
+  .ip-title { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 700; font-size: clamp(2.6rem, 6vw, 4.6rem); line-height: 0.9; letter-spacing: -0.04em; color: #f2f0ef; }
+  .ip-intro { margin-top: 28px; max-width: 38ch; font-family: 'Space Mono', monospace; font-size: clamp(0.85rem,1vw,1rem); line-height: 1.8; color: #a8a29a; }
+  .ip-note { margin-top: 18px; font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #5a564f; }
+
+  @media (max-width: 860px) {
+    .ip-grid { grid-template-columns: 1fr; gap: 44px; }
+    .ip-words { padding-left: 0; }
+    .ip-intro { max-width: none; }
+    .ip-card { width: min(78vw, 440px); }
+    .ip-cardrow { gap: 4px; }
+    .ip-arw { padding: 10px 2px; }
+  }
+</style>
+</head>
+<body>
+<div data-root style="position:relative; width:100%; background:#0D0D0D; cursor:none; -webkit-tap-highlight-color:transparent;">
+
+  <canvas data-ambient style="position:fixed; inset:0; z-index:0; width:100vw; height:100vh; pointer-events:none; display:block;"></canvas>
+  <div style="position:fixed; inset:0; z-index:1; pointer-events:none; background:radial-gradient(ellipse 70% 55% at 50% 12%, rgba(237,233,224,0.05), rgba(237,233,224,0) 60%), radial-gradient(circle at 50% 45%, rgba(0,0,0,0) 45%, rgba(0,0,0,0.5) 100%);"></div>
+  <div data-motion style="position:fixed; inset:-60%; z-index:2; pointer-events:none; opacity:0.05; mix-blend-mode:overlay; animation:ab-grain 0.7s steps(1) infinite; background-image:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22140%22 height=%22140%22%3E%3Cfilter id=%22n%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.85%22 numOctaves=%222%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23n)%22/%3E%3C/svg%3E'); background-size:200px 200px;"></div>
+
+  <nav style="position:fixed; top:0; left:0; right:0; z-index:30; display:flex; align-items:center; justify-content:space-between; padding:28px clamp(24px,5vw,60px); mix-blend-mode:difference;">
+    <a href="/" data-scramble data-scramble-to="← BACK HOME" style="font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.18em; color:#e8e6e1; text-transform:uppercase;">Ace Burney.</a>
+    <div style="display:flex; gap:20px; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.18em; text-transform:uppercase;">
+      <a href="/work" data-scramble style="color:#7A7A7A;">Work</a>
+      <span style="color:#e8e6e1;">In Passing</span>
+    </div>
+  </nav>
+
+  <section class="ip-stage">
+    <div class="ip-grid">
+
+      <!-- LEFT: memory card + arrows -->
+      <div class="ip-cardrow" data-reveal>
+        <div class="ip-arw ip-prev" data-prev role="button" tabindex="0" aria-label="Previous memory">
+          <svg width="17" height="24" viewBox="0 0 17 24" fill="none"><path class="base" d="M12 20 L5 12 L12 4" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path class="pulse" d="M12 20 L5 12 L12 4" pathLength="100" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+
+        <div class="ip-slot" data-slot>
+          <a class="ip-card" data-card href="passing-memory.html">
+            <div data-sheen style="position:absolute; inset:0; border-radius:13px; pointer-events:none; z-index:6; opacity:0; background:radial-gradient(circle at 50% 0%, rgba(255,255,255,0.35), rgba(255,255,255,0) 45%); mix-blend-mode:soft-light;"></div>
+            <div class="ip-photo" data-photo>
+              <div class="ip-scrim" data-scrim></div>
+              <div class="ip-openwrap"><span class="ip-open" data-open>OPEN</span></div>
+            </div>
+            <div class="ip-body">
+              <div class="ip-head">
+                <h3 class="ip-cardtitle" data-title>Late light on South Congress</h3>
+                <span class="ip-tag" data-tag>Street</span>
+              </div>
+              <div class="ip-stats">
+                <div><div class="ip-k">Place</div><div class="ip-v" data-place>Austin, TX</div></div>
+                <div><div class="ip-k">Frames</div><div class="ip-v" data-frames>07</div></div>
+                <div><div class="ip-k">Date</div><div class="ip-v" data-date>Aug 2026</div></div>
+              </div>
+              <div class="ip-foot"><span>In Passing</span><span data-index>01 / 05</span></div>
+            </div>
+          </a>
+        </div>
+
+        <div class="ip-arw ip-next" data-next role="button" tabindex="0" aria-label="Next memory">
+          <svg width="17" height="24" viewBox="0 0 17 24" fill="none"><path class="base" d="M5 4 L12 12 L5 20" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path class="pulse" d="M5 4 L12 12 L5 20" pathLength="100" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+
+      <!-- RIGHT: statement -->
+      <div class="ip-words" data-reveal>
+        <div class="ip-eyebrow">Available Light</div>
+        <h1 class="ip-title">In<br>Passing</h1>
+        <p class="ip-intro">Frames caught in passing — the human side, mostly unplanned. Some with a few words, most without. Austin and wherever else the light is good.</p>
+        <p class="ip-note">Placeholder frames — drop in your real work.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <div data-cursor style="position:fixed; top:0; left:0; width:26px; height:26px; border:1px solid rgba(237,233,224,0.55); border-radius:50%; pointer-events:none; z-index:9999; transform:translate(-100px,-100px); transition:width .25s ease, height .25s ease, background-color .25s ease, border-color .25s ease; mix-blend-mode:difference;"></div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+  const $ = (s, c) => (c || document).querySelector(s);
+  const $$ = (s, c) => Array.from((c || document).querySelectorAll(s));
+  const clamp01 = (v) => Math.max(0, Math.min(1, v));
+  const root = $('[data-root]'), cursor = $('[data-cursor]'), ambient = $('[data-ambient]');
+  const canHover = matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const st = { mx: -9999, my: -9999, _cx: -100, _cy: -100 };
+  window.addEventListener('mousemove', (e) => { st.mx = e.clientX; st.my = e.clientY; });
+
+  if (cursor && canHover) {
+    root.addEventListener('mouseover', (e) => { if (e.target.closest('a, [role=button], [data-card]')) { cursor.style.width = '46px'; cursor.style.height = '46px'; cursor.style.backgroundColor = 'rgba(237,233,224,0.9)'; } });
+    root.addEventListener('mouseout', (e) => { if (e.target.closest('a, [role=button], [data-card]')) { cursor.style.width = '26px'; cursor.style.height = '26px'; cursor.style.backgroundColor = 'transparent'; } });
+    const cl = () => { st._cx += (st.mx - st._cx) * 0.18; st._cy += (st.my - st._cy) * 0.18; cursor.style.transform = 'translate(' + (st._cx - 13).toFixed(1) + 'px,' + (st._cy - 13).toFixed(1) + 'px)'; requestAnimationFrame(cl); };
+    requestAnimationFrame(cl);
+  } else if (cursor) { cursor.style.display = 'none'; }
+
+  if (ambient) {
+    const ctx = ambient.getContext('2d'); const SCALE = 0.15; let w, h;
+    const resize = () => { w = Math.max(1, Math.ceil(innerWidth * SCALE)); h = Math.max(1, Math.ceil(innerHeight * SCALE)); ambient.width = w; ambient.height = h; };
+    resize(); addEventListener('resize', resize, { passive: true });
+    const lights = [{cx:0.14,cy:0.1,r:0.40,a:0.11,phase:0},{cx:0.84,cy:0.5,r:0.34,a:0.08,phase:1.8},{cx:0.7,cy:0.9,r:0.30,a:0.075,phase:3.2},{cx:0.12,cy:0.65,r:0.32,a:0.08,phase:4.7}];
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches; let t = 0;
+    const draw = () => { ctx.clearRect(0,0,w,h); t += 0.006; lights.forEach((l) => { const bx=(l.cx+Math.sin(t*1.1+l.phase)*0.08)*w, by=(l.cy+Math.cos(t*0.9+l.phase)*0.07)*h, baseR=l.r*Math.min(w,h); for(let j=0;j<4;j++){ const ox=bx+Math.sin(t*(0.4+j*0.1)+j*1.7+l.phase)*baseR*0.35, oy=by+Math.cos(t*(0.35+j*0.08)+j*2.3)*baseR*0.3, sr=baseR*(0.55+j*0.12), sa=l.a*(0.4-j*0.05); const g=ctx.createRadialGradient(ox,oy,0,ox,oy,sr*1.2); g.addColorStop(0,'rgba(255,255,255,'+sa.toFixed(4)+')'); g.addColorStop(0.5,'rgba(255,255,255,'+(sa*0.3).toFixed(4)+')'); g.addColorStop(1,'rgba(255,255,255,0)'); ctx.fillStyle=g; ctx.beginPath(); ctx.arc(ox,oy,sr*1.2,0,Math.PI*2); ctx.fill(); } }); if(!reduce) requestAnimationFrame(draw); };
+    draw();
+  }
+
+  function scramble(el, target, dur) {
+    if (!el) return; const pool = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#·/-'; clearInterval(el._t);
+    target = target || ''; const len = target.length, q = [], fr = Math.max(10, Math.round((dur || 500) / 34));
+    for (let k = 0; k < len; k++) { const stt = Math.floor(Math.random() * (fr / 3)); q.push({ to: target.charAt(k) || '', st: stt, en: stt + Math.floor(fr * (0.4 + Math.random() * 0.5)), ch: '' }); }
+    let f = 0; el._t = setInterval(() => { let out = '', dn = 0; for (const x of q) { if (f >= x.en) { dn++; out += x.to; } else if (f >= x.st) { if (!x.ch || Math.random() < 0.35) x.ch = pool.charAt((Math.random() * pool.length) | 0); out += x.ch; } else out += ' '; } el.textContent = out; f++; if (dn >= q.length) { el.textContent = target; clearInterval(el._t); } }, 34);
+  }
+  $$('[data-scramble]').forEach((el) => { const original = el.textContent.trim(); const to = el.getAttribute('data-scramble-to') || original; el.addEventListener('mouseenter', () => scramble(el, to, 420)); el.addEventListener('mouseleave', () => scramble(el, original, 360)); });
+
+  const rEls = $$('[data-reveal]');
+  if ('IntersectionObserver' in window) { const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.12 }); rEls.forEach((e) => io.observe(e)); }
+  else rEls.forEach((e) => e.classList.add('in'));
+
+  // ---------- carousel (fixed-size memory card) ----------
+  (function initCarousel() {
+    const MEM = [
+      { title: 'Late light on South Congress', place: 'Austin, TX', frames: '07', date: 'Aug 2026', tag: 'Street', href: 'passing-memory.html', g: 'radial-gradient(120% 120% at 30% 25%, rgba(198,150,84,0.34), rgba(64,63,71,0) 55%), linear-gradient(135deg,#3a352b,#403f47 74%)' },
+      { title: 'Roadside, Marfa', place: 'Marfa, TX', frames: '04', date: 'Jul 2026', tag: 'Travel', href: 'passing-memory.html', g: 'linear-gradient(135deg,#33333a,#403f47 74%)' },
+      { title: 'Rain, downtown', place: 'Austin, TX', frames: '05', date: 'Jun 2026', tag: 'Night', href: 'passing-memory.html', g: 'radial-gradient(120% 120% at 45% 35%, rgba(84,140,198,0.26), rgba(64,63,71,0) 55%), linear-gradient(135deg,#2e333b,#403f47 74%)' },
+      { title: 'Big Bend, first light', place: 'Big Bend, TX', frames: '06', date: 'May 2026', tag: 'Desert', href: 'passing-memory.html', g: 'radial-gradient(120% 120% at 55% 30%, rgba(198,150,84,0.18), rgba(64,63,71,0) 55%), linear-gradient(135deg,#38332a,#403f47 74%)' },
+      { title: 'Crowd, in motion', place: 'New York, NY', frames: '03', date: 'Mar 2026', tag: 'Street', href: 'passing-memory.html', g: 'radial-gradient(120% 120% at 50% 45%, rgba(120,140,170,0.2), rgba(64,63,71,0) 55%), linear-gradient(135deg,#2f333c,#403f47 74%)' }
+    ];
+    const N = MEM.length, EASE = 'cubic-bezier(.16,1,.3,1)';
+    const slot = $('[data-slot]'), card = $('[data-card]'), photo = $('[data-photo]'), sheen = $('[data-sheen]'),
+          openEl = $('[data-open]'), scrim = $('[data-scrim]'),
+          title = $('[data-title]'), tag = $('[data-tag]'), place = $('[data-place]'), frames = $('[data-frames]'), date = $('[data-date]'), index = $('[data-index]');
+    let i = 0, busy = false;
+
+    const setCard = () => {
+      const m = MEM[i];
+      photo.style.backgroundImage = m.g;
+      title.textContent = m.title; tag.textContent = m.tag;
+      place.textContent = m.place; frames.textContent = m.frames; date.textContent = m.date;
+      index.textContent = ('0' + (i + 1)).slice(-2) + ' / 0' + N;
+      card.setAttribute('href', m.href);
+    };
+
+    // ----- trading-card 3D tilt + idle orbit (copied from About page) -----
+    const isCoarse = matchMedia('(hover: none) and (pointer: coarse)').matches;
+    const MAX = isCoarse ? 12 : 16;
+    let tx = 0, ty = 0, ttx = 0, tty = 0, sx = 50, sy = 50, tsx = 50, tsy = 50, active = 0, tActive = 0, openArmed = false;
+    const t0 = performance.now();
+    const applyPoint = (clientX, clientY) => {
+      const r = card.getBoundingClientRect();
+      const px = clamp01((clientX - r.left) / r.width);
+      const py = clamp01((clientY - r.top) / r.height);
+      tty = (px - 0.5) * MAX; ttx = (py - 0.5) * -MAX; tsx = px * 100; tsy = py * 100;
+    };
+    card.addEventListener('mouseenter', () => { tActive = 1; });
+    card.addEventListener('mousemove', (e) => { applyPoint(e.clientX, e.clientY); });
+    card.addEventListener('mouseleave', () => { ttx = 0; tty = 0; tActive = 0; });
+    card.addEventListener('touchstart', (e) => { const t = e.touches[0]; if (!t) return; tActive = 1; applyPoint(t.clientX, t.clientY); }, { passive: true });
+    card.addEventListener('touchmove', (e) => { const t = e.touches[0]; if (!t) return; applyPoint(t.clientX, t.clientY); }, { passive: true });
+    const releaseTouch = () => { ttx = 0; tty = 0; tActive = 0; };
+    card.addEventListener('touchend', releaseTouch, { passive: true });
+    card.addEventListener('touchcancel', releaseTouch, { passive: true });
+    if (isCoarse) { openEl.style.opacity = '0.9'; scrim.style.opacity = '0.28'; }
+
+    const loop = () => {
+      active += (tActive - active) * 0.08;
+      const idle = 1 - active;
+      if (idle > 0.001) {
+        const t = (performance.now() - t0) / 1000;
+        const vx = 0.5 + Math.cos(t * 0.5) * 0.5;
+        const vy = 0.5 + Math.sin(t * 0.5 * 1.3) * 0.5;
+        tty = (tty * active) + ((vx - 0.5) * 7) * idle;
+        ttx = (ttx * active) + ((vy - 0.5) * -7) * idle;
+        tsx = (tsx * active) + (vx * 100) * idle;
+        tsy = (tsy * active) + (vy * 100) * idle;
+      }
+      tx += (ttx - tx) * 0.08; ty += (tty - ty) * 0.08;
+      sx += (tsx - sx) * 0.1; sy += (tsy - sy) * 0.1;
+      card.style.transform = 'rotateX(' + tx.toFixed(2) + 'deg) rotateY(' + ty.toFixed(2) + 'deg) translateZ(0)';
+      sheen.style.opacity = (active * 0.9).toFixed(3);
+      sheen.style.background = 'radial-gradient(circle at ' + sx.toFixed(1) + '% ' + sy.toFixed(1) + '%, rgba(255,255,255,0.4), rgba(255,255,255,0) 45%)';
+      if (!isCoarse) {
+        openEl.style.opacity = active.toFixed(3);
+        scrim.style.opacity = (active * 0.85).toFixed(3);
+        if (active > 0.5 && !openArmed) { openArmed = true; scramble(openEl, 'OPEN', 360); }
+        if (active < 0.12 && openArmed) { openArmed = false; }
+      }
+      requestAnimationFrame(loop);
+    };
+
+    function go(d) {
+      if (busy) return; busy = true; ttx = 0; tty = 0; tActive = 0;
+      slot.style.transition = 'transform .4s ' + EASE + ', opacity .38s ease';
+      slot.style.opacity = '0'; slot.style.transform = 'rotateY(' + (d * -50) + 'deg) translateZ(-160px)';
+      setTimeout(() => {
+        i = (i + d + N) % N; setCard();
+        slot.style.transition = 'none'; slot.style.opacity = '0'; slot.style.transform = 'rotateY(' + (d * 50) + 'deg) translateZ(-160px)';
+        void slot.offsetWidth;
+        slot.style.transition = 'transform .72s ' + EASE + ', opacity .5s ease';
+        slot.style.opacity = '1'; slot.style.transform = 'rotateY(0deg) translateZ(0)';
+        setTimeout(() => { busy = false; }, 520);
+      }, 360);
+    }
+    $('[data-prev]').addEventListener('click', () => go(-1));
+    $('[data-next]').addEventListener('click', () => go(1));
+    document.addEventListener('keydown', (e) => { if (e.key === 'ArrowLeft') go(-1); else if (e.key === 'ArrowRight') go(1); });
+    let swx = null;
+    slot.addEventListener('touchstart', (e) => { swx = e.touches[0].clientX; }, { passive: true });
+    slot.addEventListener('touchend', (e) => { if (swx === null) return; const dx = e.changedTouches[0].clientX - swx; if (Math.abs(dx) > 44) go(dx < 0 ? 1 : -1); swx = null; }, { passive: true });
+
+    setCard(); requestAnimationFrame(loop);
+  })();
+})();
+</script>
+</body>
+</html>
