@@ -111,14 +111,14 @@
   [data-omery-cta]:hover [data-omery-arrow], [data-omery-foot]:hover [data-omery-arrow] { animation: none; transform: translate(2px,-2px); color: #EDE9E0; transition: transform .3s cubic-bezier(.16,1,.3,1), color .3s ease; }
   @media (prefers-reduced-motion: reduce) { [data-omery-arrow] { animation: none; } }
 </style>
-<link rel="stylesheet" href="/assets/site-menu.css?v=12">
-<script src="/assets/site-menu.js?v=13" defer></script>
+<link rel="stylesheet" href="/assets/site-menu.css?v=16">
+<script src="/assets/site-menu.js?v=19" defer></script>
 </head>
 <body>
 <div data-root style="position:relative; width:100%; min-height:100dvh; background:#0D0D0D; overflow-x:hidden; cursor:none; -webkit-tap-highlight-color:transparent;">
 
   <!-- Ambient volumetric lights (fixed, behind everything) -->
-  <canvas data-ambient style="position:fixed; inset:0; z-index:0; width:100vw; height:100vh; pointer-events:none; display:block;"></canvas>
+  <canvas data-ambient style="position:fixed; inset:0; z-index:0; width:calc(100 * var(--vw, 1vw)); height:100vh; pointer-events:none; display:block;"></canvas>
 
   <!-- radial glow + vignette -->
   <div style="position:fixed; inset:0; z-index:1; pointer-events:none; background:
@@ -129,25 +129,25 @@
   <div data-motion style="position:fixed; inset:-60%; z-index:2; pointer-events:none; opacity:0.05; mix-blend-mode:overlay; animation:ab-grain 0.7s steps(1) infinite; background-image:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22140%22 height=%22140%22%3E%3Cfilter id=%22n%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.85%22 numOctaves=%222%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23n)%22/%3E%3C/svg%3E'); background-size:200px 200px;"></div>
 
   <!-- cursor particle constellation -->
-  <canvas data-particle style="position:fixed; inset:0; z-index:3; width:100vw; height:100vh; pointer-events:none; display:block;"></canvas>
+  <canvas data-particle style="position:fixed; inset:0; z-index:3; width:calc(100 * var(--vw, 1vw)); height:100vh; pointer-events:none; display:block;"></canvas>
 
   <!-- ===== NAV ===== -->
-  <nav style="position:fixed; top:0; left:0; right:0; z-index:30; display:flex; align-items:center; justify-content:space-between; padding:28px clamp(24px,5vw,60px); mix-blend-mode:difference;">
+  <nav style="position:fixed; top:0; left:0; right:0; z-index:30; display:flex; align-items:center; justify-content:space-between; padding:28px clamp(24px,calc(5 * var(--vw, 1vw)),60px); mix-blend-mode:difference;">
     <a href="/" data-scramble data-scramble-to="← BACK HOME" style="font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.18em; color:#e8e6e1; text-transform:uppercase;">Ace Burney.</a>
     <button type="button" data-menu-toggle class="sm-toggle">Menu</button>
   </nav>
 
   <!-- ===== CONTENT ===== -->
-  <div style="position:relative; z-index:10; max-width:1240px; margin:0 auto; padding:0 clamp(24px,5vw,60px);">
+  <div style="position:relative; z-index:10; max-width:1240px; margin:0 auto; padding:0 clamp(24px,calc(5 * var(--vw, 1vw)),60px);">
 
     <!-- INTRO + TRADING CARD -->
     <section style="min-height:100dvh; display:flex; flex-direction:column; justify-content:center; gap:clamp(30px,5vh,56px); padding:120px 0 60px;">
-      <div data-m="intro-grid" style="display:grid; grid-template-columns:minmax(0,1.15fr) minmax(0,0.85fr); gap:clamp(24px,3vw,48px); align-items:center; width:100%;">
+      <div data-m="intro-grid" style="display:grid; grid-template-columns:minmax(0,1.15fr) minmax(0,0.85fr); gap:clamp(24px,calc(3 * var(--vw, 1vw)),48px); align-items:center; width:100%;">
         <!-- left: intro -->
         <div data-reveal>
           <div style="font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.2em; color:#7A7A7A; text-transform:uppercase; margin-bottom:34px;">Ascencion [Ace] Burney</div>
-          <h1 style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight:700; font-size:clamp(2.4rem,5vw,4.6rem); line-height:0.98; letter-spacing:-0.03em; color:#f2f0ef; text-wrap:balance;">I shape how brands<br>look, feel &amp; run.</h1>
-          <p style="margin-top:32px; max-width:38ch; font-family:'Space Mono',monospace; font-weight:400; font-size:clamp(0.88rem,1.05vw,1rem); line-height:1.75; color:#a8a29a;">Product leader and builder focused on product strategy, systems design, and AI-driven automation — shaping how brands look, feel, and run through product thinking, technical systems, and creative direction, told through photography, film, and design.</p>
+          <h1 style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight:700; font-size:clamp(2.4rem,calc(5 * var(--vw, 1vw)),4.6rem); line-height:0.98; letter-spacing:-0.03em; color:#f2f0ef; text-wrap:balance;">I shape how brands<br>look, feel &amp; run.</h1>
+          <p style="margin-top:32px; max-width:38ch; font-family:'Space Mono',monospace; font-weight:400; font-size:clamp(0.88rem,calc(1.05 * var(--vw, 1vw)),1rem); line-height:1.75; color:#a8a29a;">Product leader and builder focused on product strategy, systems design, and AI-driven automation — shaping how brands look, feel, and run through product thinking, technical systems, and creative direction, told through photography, film, and design.</p>
           <div data-disciplines style="margin-top:36px; display:flex; align-items:baseline; gap:14px; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.14em; text-transform:uppercase; white-space:nowrap;">
             <span data-disc-count style="color:#7A7A7A;">01 / 10</span>
             <span aria-hidden="true" style="color:#3a3833;">·</span>
@@ -217,9 +217,9 @@
     </section>
 
     <section style="padding:40px 0 120px;">
-      <div data-reveal style="display:flex; align-items:center; justify-content:center; gap:clamp(16px,3vw,32px); margin-bottom:clamp(50px,8vh,110px);">
+      <div data-reveal style="display:flex; align-items:center; justify-content:center; gap:clamp(16px,calc(3 * var(--vw, 1vw)),32px); margin-bottom:clamp(50px,8vh,110px);">
         <span style="flex:1; height:1px; background:linear-gradient(90deg, transparent, rgba(255,255,255,0.16));"></span>
-        <h2 style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight:700; font-size:clamp(1.6rem,3.4vw,2.8rem); letter-spacing:-0.01em; color:#f2f0ef; text-transform:uppercase; white-space:nowrap;">Experience</h2>
+        <h2 style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight:700; font-size:clamp(1.6rem,calc(3.4 * var(--vw, 1vw)),2.8rem); letter-spacing:-0.01em; color:#f2f0ef; text-transform:uppercase; white-space:nowrap;">Experience</h2>
         <span style="flex:1; height:1px; background:linear-gradient(90deg, rgba(255,255,255,0.16), transparent);"></span>
       </div>
 
@@ -228,16 +228,16 @@
         <div data-m="tl-spine" style="position:absolute; left:50%; transform:translateX(-50%); top:0; bottom:0; width:1px; background:linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.16) 8%, rgba(255,255,255,0.16) 92%, rgba(255,255,255,0) 100%);"></div>
 
         <!-- ENTRY 01 -->
-        <div data-reveal data-m="tl-row" style="position:relative; min-height:clamp(340px,54vh,560px); display:grid; grid-template-columns:1fr 1fr; align-items:center; column-gap:clamp(24px,6vw,90px);">
-          <div data-m="tl-year" style="position:relative; text-align:right; padding-right:clamp(14px,3vw,54px);">
-            <div style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight:700; font-size:clamp(4.5rem,13vw,13rem); line-height:0.78; letter-spacing:-0.04em; color:#2b2925;">2024</div>
+        <div data-reveal data-m="tl-row" style="position:relative; min-height:clamp(340px,54vh,560px); display:grid; grid-template-columns:1fr 1fr; align-items:center; column-gap:clamp(24px,calc(6 * var(--vw, 1vw)),90px);">
+          <div data-m="tl-year" style="position:relative; text-align:right; padding-right:clamp(14px,calc(3 * var(--vw, 1vw)),54px);">
+            <div style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight:700; font-size:clamp(4.5rem,calc(13 * var(--vw, 1vw)),13rem); line-height:0.78; letter-spacing:-0.04em; color:#2b2925;">2024</div>
           </div>
           <span style="position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:11px; height:11px; border-radius:50%; background:#e8e6e1; box-shadow:0 0 0 5px #0D0D0D, 0 0 0 6px rgba(255,255,255,0.16), 0 0 18px 2px rgba(232,230,225,0.35);"></span>
-          <div style="padding-left:clamp(14px,3vw,54px);">
-            <div data-exp-card style="position:relative; overflow:hidden; border:1px solid rgba(255,255,255,0.09); border-radius:10px; background:linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.015)); padding:clamp(22px,2.4vw,34px); box-shadow:0 30px 70px -46px rgba(0,0,0,0.9); transition:transform .5s cubic-bezier(.2,.7,.2,1), border-color .5s ease;">
+          <div style="padding-left:clamp(14px,calc(3 * var(--vw, 1vw)),54px);">
+            <div data-exp-card style="position:relative; overflow:hidden; border:1px solid rgba(255,255,255,0.09); border-radius:10px; background:linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.015)); padding:clamp(22px,calc(2.4 * var(--vw, 1vw)),34px); box-shadow:0 30px 70px -46px rgba(0,0,0,0.9); transition:transform .5s cubic-bezier(.2,.7,.2,1), border-color .5s ease;">
               <div data-exp-sheen style="position:absolute; inset:0; border-radius:10px; pointer-events:none; opacity:0; background:radial-gradient(circle at 50% 0%, rgba(255,255,255,0.14), rgba(255,255,255,0) 55%); transition:opacity .4s ease;"></div>
               <span style="font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.18em; color:#7A7A7A; text-transform:uppercase;">2024 — Now</span>
-              <h3 style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight:700; font-size:clamp(1.3rem,2.1vw,1.8rem); letter-spacing:-0.01em; color:#f2f0ef; margin-top:14px;">Founder &amp; Product Lead</h3>
+              <h3 style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight:700; font-size:clamp(1.3rem,calc(2.1 * var(--vw, 1vw)),1.8rem); letter-spacing:-0.01em; color:#f2f0ef; margin-top:14px;">Founder &amp; Product Lead</h3>
               <span style="display:block; font-family:'Space Mono',monospace; font-size:12px; color:#a8a29a; margin-top:6px;"><a href="https://www.omery.studio" target="_blank" rel="noopener" data-scramble style="color:#e8e6e1;">Omery</a> — Design &amp; Systems Studio</span>
               <p style="font-family:'Space Mono',monospace; font-size:12.5px; line-height:1.75; color:#8f8a82; margin-top:18px;">Independent practice in AI automation, product strategy, and creative systems for brands and operators.</p>
               <a href="https://www.omery.studio" target="_blank" rel="noopener" aria-label="Visit Omery, design and systems studio (opens in a new tab)" data-omery-cta style="display:flex; align-items:center; gap:0.5em; margin-top:20px; padding-top:16px; border-top:1px solid rgba(255,255,255,0.08); font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.2em; text-transform:uppercase; text-decoration:none;"><span data-scramble>Visit the Studio</span><span data-omery-arrow aria-hidden="true" style="display:inline-block; will-change:transform;">↗</span></a>
@@ -246,33 +246,33 @@
         </div>
 
         <!-- ENTRY 02 -->
-        <div data-reveal data-m="tl-row" style="position:relative; min-height:clamp(340px,54vh,560px); display:grid; grid-template-columns:1fr 1fr; align-items:center; column-gap:clamp(24px,6vw,90px);">
-          <div style="padding-right:clamp(14px,3vw,54px);">
-            <div data-exp-card style="position:relative; overflow:hidden; border:1px solid rgba(255,255,255,0.09); border-radius:10px; background:linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.015)); padding:clamp(22px,2.4vw,34px); box-shadow:0 30px 70px -46px rgba(0,0,0,0.9); transition:transform .5s cubic-bezier(.2,.7,.2,1), border-color .5s ease;">
+        <div data-reveal data-m="tl-row" style="position:relative; min-height:clamp(340px,54vh,560px); display:grid; grid-template-columns:1fr 1fr; align-items:center; column-gap:clamp(24px,calc(6 * var(--vw, 1vw)),90px);">
+          <div style="padding-right:clamp(14px,calc(3 * var(--vw, 1vw)),54px);">
+            <div data-exp-card style="position:relative; overflow:hidden; border:1px solid rgba(255,255,255,0.09); border-radius:10px; background:linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.015)); padding:clamp(22px,calc(2.4 * var(--vw, 1vw)),34px); box-shadow:0 30px 70px -46px rgba(0,0,0,0.9); transition:transform .5s cubic-bezier(.2,.7,.2,1), border-color .5s ease;">
               <div data-exp-sheen style="position:absolute; inset:0; border-radius:10px; pointer-events:none; opacity:0; background:radial-gradient(circle at 50% 0%, rgba(255,255,255,0.14), rgba(255,255,255,0) 55%); transition:opacity .4s ease;"></div>
               <span style="font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.18em; color:#7A7A7A; text-transform:uppercase;">2022 — Now</span>
-              <h3 style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight:700; font-size:clamp(1.3rem,2.1vw,1.8rem); letter-spacing:-0.01em; color:#f2f0ef; margin-top:14px;">Senior Product Manager</h3>
+              <h3 style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight:700; font-size:clamp(1.3rem,calc(2.1 * var(--vw, 1vw)),1.8rem); letter-spacing:-0.01em; color:#f2f0ef; margin-top:14px;">Senior Product Manager</h3>
               <span style="display:block; font-family:'Space Mono',monospace; font-size:12px; color:#a8a29a; margin-top:6px;">Consultant — Product &amp; Systems</span>
               <p style="font-family:'Space Mono',monospace; font-size:12.5px; line-height:1.75; color:#8f8a82; margin-top:18px;">Own SaaS products end-to-end — discovery, roadmap, and delivery. Design data and reporting workflows and automate operational processes.</p>
             </div>
           </div>
           <span style="position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:11px; height:11px; border-radius:50%; background:#5a564f; box-shadow:0 0 0 5px #0D0D0D, 0 0 0 6px rgba(255,255,255,0.1);"></span>
-          <div data-m="tl-year" style="position:relative; text-align:left; padding-left:clamp(14px,3vw,54px);">
-            <div style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight:700; font-size:clamp(4.5rem,13vw,13rem); line-height:0.78; letter-spacing:-0.04em; color:#2b2925;">2022</div>
+          <div data-m="tl-year" style="position:relative; text-align:left; padding-left:clamp(14px,calc(3 * var(--vw, 1vw)),54px);">
+            <div style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight:700; font-size:clamp(4.5rem,calc(13 * var(--vw, 1vw)),13rem); line-height:0.78; letter-spacing:-0.04em; color:#2b2925;">2022</div>
           </div>
         </div>
 
         <!-- ENTRY 03 -->
-        <div data-reveal data-m="tl-row" style="position:relative; min-height:clamp(340px,54vh,560px); display:grid; grid-template-columns:1fr 1fr; align-items:center; column-gap:clamp(24px,6vw,90px);">
-          <div data-m="tl-year" style="position:relative; text-align:right; padding-right:clamp(14px,3vw,54px);">
-            <div style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight:700; font-size:clamp(4.5rem,13vw,13rem); line-height:0.78; letter-spacing:-0.04em; color:#2b2925;">2019</div>
+        <div data-reveal data-m="tl-row" style="position:relative; min-height:clamp(340px,54vh,560px); display:grid; grid-template-columns:1fr 1fr; align-items:center; column-gap:clamp(24px,calc(6 * var(--vw, 1vw)),90px);">
+          <div data-m="tl-year" style="position:relative; text-align:right; padding-right:clamp(14px,calc(3 * var(--vw, 1vw)),54px);">
+            <div style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight:700; font-size:clamp(4.5rem,calc(13 * var(--vw, 1vw)),13rem); line-height:0.78; letter-spacing:-0.04em; color:#2b2925;">2019</div>
           </div>
           <span style="position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:11px; height:11px; border-radius:50%; background:#5a564f; box-shadow:0 0 0 5px #0D0D0D, 0 0 0 6px rgba(255,255,255,0.1);"></span>
-          <div style="padding-left:clamp(14px,3vw,54px);">
-            <div data-exp-card style="position:relative; overflow:hidden; border:1px solid rgba(255,255,255,0.09); border-radius:10px; background:linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.015)); padding:clamp(22px,2.4vw,34px); box-shadow:0 30px 70px -46px rgba(0,0,0,0.9); transition:transform .5s cubic-bezier(.2,.7,.2,1), border-color .5s ease;">
+          <div style="padding-left:clamp(14px,calc(3 * var(--vw, 1vw)),54px);">
+            <div data-exp-card style="position:relative; overflow:hidden; border:1px solid rgba(255,255,255,0.09); border-radius:10px; background:linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.015)); padding:clamp(22px,calc(2.4 * var(--vw, 1vw)),34px); box-shadow:0 30px 70px -46px rgba(0,0,0,0.9); transition:transform .5s cubic-bezier(.2,.7,.2,1), border-color .5s ease;">
               <div data-exp-sheen style="position:absolute; inset:0; border-radius:10px; pointer-events:none; opacity:0; background:radial-gradient(circle at 50% 0%, rgba(255,255,255,0.14), rgba(255,255,255,0) 55%); transition:opacity .4s ease;"></div>
               <span style="font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.18em; color:#7A7A7A; text-transform:uppercase;">2019 — Now</span>
-              <h3 style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight:700; font-size:clamp(1.3rem,2.1vw,1.8rem); letter-spacing:-0.01em; color:#f2f0ef; margin-top:14px;">Creative Director</h3>
+              <h3 style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight:700; font-size:clamp(1.3rem,calc(2.1 * var(--vw, 1vw)),1.8rem); letter-spacing:-0.01em; color:#f2f0ef; margin-top:14px;">Creative Director</h3>
               <span style="display:block; font-family:'Space Mono',monospace; font-size:12px; color:#a8a29a; margin-top:6px;">Creative Studio</span>
               <p style="font-family:'Space Mono',monospace; font-size:12.5px; line-height:1.75; color:#8f8a82; margin-top:18px;">Cinematic film &amp; photography studio — directing, shooting, and editing brand and story-driven work, including Google and nonprofit films, on automated end-to-end client pipelines.</p>
             </div>
@@ -280,19 +280,19 @@
         </div>
 
         <!-- ENTRY 04 -->
-        <div data-reveal data-m="tl-row" style="position:relative; min-height:clamp(340px,54vh,560px); display:grid; grid-template-columns:1fr 1fr; align-items:center; column-gap:clamp(24px,6vw,90px);">
-          <div style="padding-right:clamp(14px,3vw,54px);">
-            <div data-exp-card style="position:relative; overflow:hidden; border:1px solid rgba(255,255,255,0.09); border-radius:10px; background:linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.015)); padding:clamp(22px,2.4vw,34px); box-shadow:0 30px 70px -46px rgba(0,0,0,0.9); transition:transform .5s cubic-bezier(.2,.7,.2,1), border-color .5s ease;">
+        <div data-reveal data-m="tl-row" style="position:relative; min-height:clamp(340px,54vh,560px); display:grid; grid-template-columns:1fr 1fr; align-items:center; column-gap:clamp(24px,calc(6 * var(--vw, 1vw)),90px);">
+          <div style="padding-right:clamp(14px,calc(3 * var(--vw, 1vw)),54px);">
+            <div data-exp-card style="position:relative; overflow:hidden; border:1px solid rgba(255,255,255,0.09); border-radius:10px; background:linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.015)); padding:clamp(22px,calc(2.4 * var(--vw, 1vw)),34px); box-shadow:0 30px 70px -46px rgba(0,0,0,0.9); transition:transform .5s cubic-bezier(.2,.7,.2,1), border-color .5s ease;">
               <div data-exp-sheen style="position:absolute; inset:0; border-radius:10px; pointer-events:none; opacity:0; background:radial-gradient(circle at 50% 0%, rgba(255,255,255,0.14), rgba(255,255,255,0) 55%); transition:opacity .4s ease;"></div>
               <span style="font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.18em; color:#7A7A7A; text-transform:uppercase;">2011 — 2022</span>
-              <h3 style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight:700; font-size:clamp(1.3rem,2.1vw,1.8rem); letter-spacing:-0.01em; color:#f2f0ef; margin-top:14px;">Product &amp; Systems Design</h3>
+              <h3 style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight:700; font-size:clamp(1.3rem,calc(2.1 * var(--vw, 1vw)),1.8rem); letter-spacing:-0.01em; color:#f2f0ef; margin-top:14px;">Product &amp; Systems Design</h3>
               <span style="display:block; font-family:'Space Mono',monospace; font-size:12px; color:#a8a29a; margin-top:6px;">Enterprise Software</span>
               <p style="font-family:'Space Mono',monospace; font-size:12.5px; line-height:1.75; color:#8f8a82; margin-top:18px;">A decade designing enterprise platforms, data systems, dashboards, and digital learning experiences at scale.</p>
             </div>
           </div>
           <span style="position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:11px; height:11px; border-radius:50%; background:#5a564f; box-shadow:0 0 0 5px #0D0D0D, 0 0 0 6px rgba(255,255,255,0.1);"></span>
-          <div data-m="tl-year" style="position:relative; text-align:left; padding-left:clamp(14px,3vw,54px);">
-            <div style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight:700; font-size:clamp(4.5rem,13vw,13rem); line-height:0.78; letter-spacing:-0.04em; color:#2b2925;">2011</div>
+          <div data-m="tl-year" style="position:relative; text-align:left; padding-left:clamp(14px,calc(3 * var(--vw, 1vw)),54px);">
+            <div style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight:700; font-size:clamp(4.5rem,calc(13 * var(--vw, 1vw)),13rem); line-height:0.78; letter-spacing:-0.04em; color:#2b2925;">2011</div>
           </div>
         </div>
       </div>
@@ -301,7 +301,7 @@
     <!-- CONTACT CTA -->
     <section style="padding:60px 0 120px; text-align:center;">
       <div data-reveal style="font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.2em; color:#7A7A7A; text-transform:uppercase; margin-bottom:28px;">Have a project?</div>
-      <a href="/start" data-cta aria-label="Start a project" style="display:inline-flex; flex-wrap:nowrap; align-items:baseline; gap:0.32em; pointer-events:auto; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight:700; font-size:clamp(3rem,11vw,9rem); line-height:0.92; letter-spacing:-0.03em; color:#f2f0ef; text-transform:uppercase;">
+      <a href="/start" data-cta aria-label="Start a project" style="display:inline-flex; flex-wrap:nowrap; align-items:baseline; gap:0.32em; pointer-events:auto; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight:700; font-size:clamp(3rem,calc(11 * var(--vw, 1vw)),9rem); line-height:0.92; letter-spacing:-0.03em; color:#f2f0ef; text-transform:uppercase;">
         <span style="display:inline-flex;"><span data-cta-k style="display:inline-block; will-change:transform;">L</span><span data-cta-k style="display:inline-block; will-change:transform;">e</span><span data-cta-k style="display:inline-block; will-change:transform;">t</span><span data-cta-k style="display:inline-block; will-change:transform;">'</span><span data-cta-k style="display:inline-block; will-change:transform;">s</span></span>
         <span style="display:inline-flex;"><span data-cta-k style="display:inline-block; will-change:transform;">t</span><span data-cta-k style="display:inline-block; will-change:transform;">a</span><span data-cta-k style="display:inline-block; will-change:transform;">l</span><span data-cta-k style="display:inline-block; will-change:transform;">k</span></span>
       </a>
@@ -336,7 +336,7 @@
   <div data-transition style="position:fixed; inset:0; z-index:9998; background:#0D0D0D; transform:translateY(-101%); pointer-events:none; will-change:transform; transition:transform 520ms cubic-bezier(.76,0,.24,1); display:flex; align-items:center; justify-content:center;">
     <div style="text-align:center; padding:0 24px;">
       <div data-transition-eyebrow style="font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.22em; color:#7A7A7A; text-transform:uppercase; margin-bottom:22px; opacity:0; transition:opacity .5s ease;">— Now Arriving —</div>
-      <div data-transition-label style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight:700; color:#e8e6e1; text-transform:uppercase; font-size:clamp(3rem,11vw,9rem); line-height:0.9; letter-spacing:-0.03em; opacity:0; transition:opacity .3s ease; white-space:nowrap;">&nbsp;</div>
+      <div data-transition-label style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight:700; color:#e8e6e1; text-transform:uppercase; font-size:clamp(3rem,calc(11 * var(--vw, 1vw)),9rem); line-height:0.9; letter-spacing:-0.03em; opacity:0; transition:opacity .3s ease; white-space:nowrap;">&nbsp;</div>
     </div>
   </div>
 

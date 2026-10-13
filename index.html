@@ -101,6 +101,10 @@
   [data-omery]:hover [data-omery-arrow] { animation: none; transform: translate(2px,-2px); color: #EDE9E0; transition: transform .3s cubic-bezier(.16,1,.3,1), color .3s ease; }
   @media (prefers-reduced-motion: reduce) { [data-omery-arrow] { animation: none; } }
 
+  /* desktop menu open: the page narrows to the space left of the panel, so the name re-centres there on its own */
+  /* the name stacks, as on phones, whenever one line doesn't fit the space it has (set by fitHead below) */
+  html.head-stack [data-m="head"] { flex-direction: column !important; gap: 0.1em !important; align-items: center !important; }
+  html.head-stack [data-m="head"] > span:first-child { margin-right: 14px !important; }
   @media (max-width: 640px) {
     body { overflow-x: hidden; }
     /* menu open: the page drops by the menu's height (--sm-push), so lift the name half that to keep it centred in what's left */
@@ -121,8 +125,8 @@
     [data-m="avail"] { display: none !important; }
   }
 </style>
-<link rel="stylesheet" href="/assets/site-menu.css?v=12">
-<script src="/assets/site-menu.js?v=13" defer></script>
+<link rel="stylesheet" href="/assets/site-menu.css?v=16">
+<script src="/assets/site-menu.js?v=19" defer></script>
 </head>
 <body>
 <div data-root style="position:relative; width:100%; min-height:100dvh; background:#0D0D0D; overflow:hidden; cursor:none; -webkit-tap-highlight-color:transparent;">
@@ -225,6 +229,42 @@
     _cx: -100, _cy: -100,
   };
   const timers = {};
+
+  // ---------- the name stacks when one line won't fit ----------
+  // Room is the window width, less the menu panel while it's open on desktop. Checked on resize and
+  // whenever the menu opens or closes.
+  (function fitHead() {
+    if (!head) return;
+    const html = document.documentElement;
+    const words = $$(':scope > span', head);
+    const fit = () => {
+      const panel = document.querySelector('.sm-panel');
+      const menuOpen = html.classList.contains('sm-crunch') && innerWidth > 640;
+      const room = innerWidth - (menuOpen && panel ? panel.offsetWidth : 0) - 48;
+      const gap = Math.min(64, Math.max(16, innerWidth * 0.04));
+      const oneLine = words.reduce((w, el) => w + el.offsetWidth, 0) + gap;
+      const stack = oneLine > room;
+      if (stack === html.classList.contains('head-stack')) return;
+      // Glide between the two layouts: note where each word is, switch, then animate each word from its
+      // old spot to its new one (BURNEY a beat behind ACE), so ACE BURNEY folds into ACE over BURNEY and back.
+      const before = words.map((el) => el.getBoundingClientRect());
+      html.classList.toggle('head-stack', stack);
+      if (reduceMotion) return;
+      words.forEach((el, i) => {
+        const now = el.getBoundingClientRect();
+        const dx = (before[i].left + before[i].width / 2) - (now.left + now.width / 2);
+        const dy = (before[i].top + before[i].height / 2) - (now.top + now.height / 2);
+        if (Math.abs(dx) < 1 && Math.abs(dy) < 1) return;
+        el.animate([{ transform: 'translate(' + dx + 'px,' + dy + 'px)' }, { transform: 'translate(0,0)' }],
+          { duration: 900, delay: i * 70, easing: 'cubic-bezier(.76,0,.24,1)', fill: 'backwards', composite: 'add' });
+      });
+    };
+    const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    fit();
+    addEventListener('resize', fit);
+    document.fonts && document.fonts.ready.then(fit);
+    new MutationObserver(fit).observe(html, { attributes: true, attributeFilter: ['class'] });
+  })();
 
   // ---------- mouse tracking (position + speed) ----------
   const onMove = (e) => {

@@ -32,7 +32,7 @@
   .work-meta-row { display: flex; align-items: baseline; justify-content: flex-end; gap: 22px; align-self: center; }
   .work:last-of-type { border-bottom: 1px solid rgba(255,255,255,0.09); }
   .work-num { font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: 0.1em; color: #5f5b53; transition: color .4s ease; align-self: center; }
-  .work-title { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 700; font-size: clamp(1.7rem, 4.6vw, 3.3rem); line-height: 0.98; letter-spacing: -0.025em; color: #cbc7bf; transition: color .4s ease, transform .5s cubic-bezier(.16,1,.3,1); }
+  .work-title { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 700; font-size: clamp(1.7rem, calc(4.6 * var(--vw, 1vw)), 3.3rem); line-height: 0.98; letter-spacing: -0.025em; color: #cbc7bf; transition: color .4s ease, transform .5s cubic-bezier(.16,1,.3,1); }
   .work-cat { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #7A7A7A; align-self: center; transition: color .4s ease; }
   .work-year { font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: 0.08em; color: #5f5b53; align-self: center; transition: color .4s ease; }
   .work-thumb { display: none; }
@@ -64,19 +64,19 @@
     .work-thumb { display: block; width: 100%; aspect-ratio: 16 / 9; border-radius: 6px; background-size: cover; background-position: center; position: relative; overflow: hidden; order: -1; }
     .work-thumb::after { content: attr(data-label); position: absolute; left: 12px; bottom: 10px; font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(232,230,225,0.5); }
     .work-num { display: none; }
-    .work-title { color: #e8e6e1; font-size: clamp(1.9rem, 8.5vw, 2.6rem); }
+    .work-title { color: #e8e6e1; font-size: clamp(1.9rem, calc(8.5 * var(--vw, 1vw)), 2.6rem); }
     .work:hover .work-title { transform: none; }
     .work-meta-row { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; }
   }
 </style>
-<link rel="stylesheet" href="/assets/site-menu.css?v=12">
-<script src="/assets/site-menu.js?v=13" defer></script>
+<link rel="stylesheet" href="/assets/site-menu.css?v=16">
+<script src="/assets/site-menu.js?v=19" defer></script>
 </head>
 <body>
 <div data-root style="position:relative; width:100%; min-height:100dvh; display:flex; flex-direction:column; background:#0D0D0D; overflow-x:hidden; cursor:none; -webkit-tap-highlight-color:transparent;">
 
   <!-- ambient volumetric lights (fixed, behind everything) -->
-  <canvas data-ambient style="position:fixed; inset:0; z-index:0; width:100vw; height:100vh; pointer-events:none; display:block;"></canvas>
+  <canvas data-ambient style="position:fixed; inset:0; z-index:0; width:calc(100 * var(--vw, 1vw)); height:100vh; pointer-events:none; display:block;"></canvas>
 
   <!-- radial glow + vignette -->
   <div style="position:fixed; inset:0; z-index:1; pointer-events:none; background:
@@ -94,19 +94,19 @@
   </div>
 
   <!-- ===== NAV ===== -->
-  <nav style="position:fixed; top:0; left:0; right:0; z-index:30; display:flex; align-items:center; justify-content:space-between; padding:28px clamp(24px,5vw,60px); mix-blend-mode:difference;">
+  <nav style="position:fixed; top:0; left:0; right:0; z-index:30; display:flex; align-items:center; justify-content:space-between; padding:28px clamp(24px,calc(5 * var(--vw, 1vw)),60px); mix-blend-mode:difference;">
     <a href="/" data-scramble data-scramble-to="← BACK HOME" style="font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.18em; color:#e8e6e1; text-transform:uppercase;">Ace Burney.</a>
     <button type="button" data-menu-toggle class="sm-toggle">Menu</button>
   </nav>
 
   <!-- ===== CONTENT ===== -->
-  <div style="position:relative; z-index:10; flex:1 0 auto; width:100%; max-width:1240px; margin:0 auto; padding:0 clamp(24px,5vw,60px);">
+  <div style="position:relative; z-index:10; flex:1 0 auto; width:100%; max-width:1240px; margin:0 auto; padding:0 clamp(24px,calc(5 * var(--vw, 1vw)),60px);">
 
     <!-- HEADER -->
     <header style="min-height:56vh; display:flex; flex-direction:column; justify-content:flex-end; padding:140px 0 40px;">
       <div data-reveal style="font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.24em; color:#7A7A7A; text-transform:uppercase; margin-bottom:26px;">Index — Selected Work</div>
-      <h1 data-reveal style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight:700; font-size:clamp(3rem,11vw,8.5rem); line-height:0.88; letter-spacing:-0.04em; color:#f2f0ef;">Work.</h1>
-      <p data-reveal style="margin-top:30px; max-width:44ch; font-family:'Space Mono',monospace; font-size:clamp(0.85rem,1vw,0.98rem); line-height:1.75; color:#a8a29a;">A running record of things I've designed, built, and shipped, each told as the story of a problem worth solving. More case studies are on the way.</p>
+      <h1 data-reveal style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight:700; font-size:clamp(3rem,calc(11 * var(--vw, 1vw)),8.5rem); line-height:0.88; letter-spacing:-0.04em; color:#f2f0ef;">Work.</h1>
+      <p data-reveal style="margin-top:30px; max-width:44ch; font-family:'Space Mono',monospace; font-size:clamp(0.85rem,calc(1 * var(--vw, 1vw)),0.98rem); line-height:1.75; color:#a8a29a;">A running record of things I've designed, built, and shipped, each told as the story of a problem worth solving. More case studies are on the way.</p>
     </header>
 
     <!-- INDEX -->
@@ -117,6 +117,13 @@
         <span class="work-title">Partition</span>
         <span class="work-thumb" data-work-thumb data-label="A control room for AI agents" aria-hidden="true"></span>
         <span class="work-meta-row"><span class="work-cat">Product · Creative Technology</span><span class="work-year">2026</span></span>
+      </a>
+
+      <a class="work" data-work href="/work/omery" data-cats="web design" style="--thumb:url('/assets/work/omery/hero-1200.webp');">
+        <span class="work-num">02</span>
+        <span class="work-title">Omery</span>
+        <span class="work-thumb" data-work-thumb data-label="A studio website" aria-hidden="true"></span>
+        <span class="work-meta-row"><span class="work-cat">Website · Design and front end</span><span class="work-year">2026</span></span>
       </a>
 
     </section>
@@ -136,6 +143,14 @@
 
   <!-- sweep overlay (reveal on load) -->
   <div data-sweep style="position:fixed; inset:0; z-index:9990; background:#0D0D0D; pointer-events:none; will-change:transform; transition:transform 1s cubic-bezier(.76,0,.24,1);"></div>
+
+  <!-- scene-cut transition overlay (same as every other page) -->
+  <div data-transition style="position:fixed; inset:0; z-index:9998; background:#0D0D0D; transform:translateY(-101%); pointer-events:none; will-change:transform; transition:transform 520ms cubic-bezier(.76,0,.24,1); display:flex; align-items:center; justify-content:center;">
+    <div style="text-align:center; padding:0 24px;">
+      <div data-transition-eyebrow style="font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.22em; color:#7A7A7A; text-transform:uppercase; margin-bottom:22px; opacity:0; transition:opacity .5s ease;">— Now Arriving —</div>
+      <div data-transition-label style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight:700; color:#e8e6e1; text-transform:uppercase; font-size:clamp(3rem,calc(11 * var(--vw, 1vw)),9rem); line-height:0.9; letter-spacing:-0.03em; opacity:0; transition:opacity .3s ease; white-space:nowrap;">&nbsp;</div>
+    </div>
+  </div>
 
 </div>
 
@@ -301,6 +316,46 @@
       });
     });
   })();
+
+  // ---------- scene-cut page transition (same as every other page) ----------
+  const transition = $('[data-transition]'), transitionLabel = $('[data-transition-label]'), transitionEyebrow = $('[data-transition-eyebrow]');
+  function pageLabel(path) { const clean = path.replace(/\.html$/, '').replace(/\/$/, ''); if (!clean || clean === '/index') return 'HOME'; return clean.split('/').pop().replace(/-/g, ' ').toUpperCase(); }
+  function playSceneExit(url, label) {
+    if (!transition || !transitionLabel) { location.href = url; return; }
+    transition.style.transition = 'none'; transition.style.display = 'flex'; transition.style.transform = 'translateY(-101%)'; transition.style.pointerEvents = 'auto';
+    transitionLabel.style.opacity = '0'; if (transitionEyebrow) transitionEyebrow.style.opacity = '0'; transition.offsetHeight;
+    transition.style.transition = 'transform 520ms cubic-bezier(.76,0,.24,1)'; transition.style.transform = 'translateY(0)';
+    setTimeout(() => { if (transitionEyebrow) transitionEyebrow.style.opacity = '1'; transitionLabel.style.opacity = '1'; scrambleTo(transitionLabel, label, 420); }, 240);
+    setTimeout(() => { try { sessionStorage.setItem('pendingEntry', label); } catch (e) {} location.href = url; }, 1050);
+  }
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest('a'); if (!a) return; const href = a.getAttribute('href');
+    if (!href || href.startsWith('mailto:') || href.startsWith('tel:') || href.startsWith('#') || a.target === '_blank') return;
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    let url; try { url = new URL(href, location.href); } catch (_) { return; }
+    if (url.origin !== location.origin || url.pathname.replace(/\/$/, '') === location.pathname.replace(/\/$/, '')) return;
+    e.preventDefault(); playSceneExit(url.href, pageLabel(url.pathname));
+  });
+  window.addEventListener('pageshow', (e) => {
+    if (!e.persisted || !transition) return;
+    transition.style.transition = 'none'; transition.style.transform = 'translateY(-101%)'; transition.style.pointerEvents = 'none'; transition.style.display = 'none';
+    if (transitionLabel) transitionLabel.style.opacity = '0'; if (transitionEyebrow) transitionEyebrow.style.opacity = '0';
+  });
+  // arriving from another page: the overlay is already down showing this page's name, then lifts
+  let arriving = null; try { arriving = sessionStorage.getItem('pendingEntry'); sessionStorage.removeItem('pendingEntry'); } catch (e) {}
+  if (arriving && transition) {
+    if (sweep) { sweep.style.transition = 'none'; sweep.style.display = 'none'; }
+    transition.style.transition = 'none'; transition.style.transform = 'translateY(0)'; transition.style.pointerEvents = 'auto';
+    if (transitionEyebrow) transitionEyebrow.style.opacity = '1';
+    transitionLabel.style.opacity = '1'; transitionLabel.textContent = arriving; transition.offsetHeight;
+    transition.style.transition = 'transform 520ms cubic-bezier(.76,0,.24,1)';
+    const lift = () => setTimeout(() => {
+      if (transitionEyebrow) transitionEyebrow.style.opacity = '0';
+      transitionLabel.style.opacity = '0'; transition.style.transform = 'translateY(-101%)';
+      setTimeout(() => { transition.style.display = 'none'; transition.style.pointerEvents = 'none'; }, 620);
+    }, 320);
+    if (document.readyState === 'complete') lift(); else window.addEventListener('load', lift, { once: true });
+  }
 
   // ---------- sweep reveal on load ----------
   window.addEventListener('load', () => {
