@@ -313,16 +313,21 @@
       const pos = { x: -400, y: -400 }, tgt = { x: -400, y: -400 };
       rows.forEach((r) => {
         const src = r.getAttribute('data-preview');
-        r.addEventListener('mouseenter', () => { if (!src) { hidePeek(); return; } showPeek(src); });
+        // the panel's edge is measured once per hover, not on every mousemove
+        r.addEventListener('mouseenter', () => { if (!src) { hidePeek(); return; } tgt.x = panel.getBoundingClientRect().left - 180; showPeek(src); });
         r.addEventListener('mouseleave', hidePeek);
       });
-      addEventListener('mousemove', (e) => { tgt.x = panel.getBoundingClientRect().left - 180; tgt.y = e.clientY; });
+      addEventListener('mousemove', (e) => { tgt.y = e.clientY; });
+      // only runs while a preview is showing; otherwise there's nothing to follow
+      let following = false;
       const loop = () => {
-        if (peek.classList.contains('on')) { pos.x += (tgt.x - pos.x) * 0.14; pos.y += (tgt.y - pos.y) * 0.14; peek.style.left = pos.x.toFixed(1) + 'px'; peek.style.top = pos.y.toFixed(1) + 'px'; }
-        else { pos.x = tgt.x; pos.y = tgt.y; }
+        if (!peek.classList.contains('on')) { following = false; pos.x = tgt.x; pos.y = tgt.y; return; }
+        pos.x += (tgt.x - pos.x) * 0.14; pos.y += (tgt.y - pos.y) * 0.14;
+        peek.style.left = pos.x.toFixed(1) + 'px'; peek.style.top = pos.y.toFixed(1) + 'px';
         requestAnimationFrame(loop);
       };
-      requestAnimationFrame(loop);
+      new MutationObserver(() => { if (peek.classList.contains('on') && !following) { following = true; requestAnimationFrame(loop); } })
+        .observe(peek, { attributes: true, attributeFilter: ['class'] });
     }
   }
 
