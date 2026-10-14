@@ -320,8 +320,8 @@
 </style>
 <link rel="stylesheet" href="/assets/site-menu.css?v=16">
 <script src="/assets/site-menu.js?v=20" defer></script>
-<link rel="stylesheet" href="/assets/process.css?v=5">
-<script src="/assets/process.js?v=3" defer></script>
+<link rel="stylesheet" href="/assets/thoughtmap.css?v=1">
+<script src="/assets/thoughtmap.js?v=1" defer></script>
 </head>
 <body>
 <div data-root style="position:relative; width:100%; min-height:100dvh; background:#0D0D0D; overflow-x:hidden; cursor:none; -webkit-tap-highlight-color:transparent;">
@@ -394,62 +394,99 @@
         </div>
       </div>
 
-      <section class="proc" data-process style="--proc-accent:#C7CBD0;" aria-label="The creative process, in seven stages">
-        <div class="proc-pin">
-          <div class="proc-head"><span class="eyebrow">The process &middot; seven stages</span><button type="button" class="proc-skip">Skip the process <i aria-hidden="true">&darr;</i></button></div>
-          <nav class="proc-tabs" aria-label="Jump to a stage"><button type="button" class="proc-tab" data-n="01"><span class="proc-tab-n">01</span><span class="proc-tab-v">Frame</span><span class="sr-only"> (go to stage)</span></button><button type="button" class="proc-tab" data-n="02"><span class="proc-tab-n">02</span><span class="proc-tab-v">Explore</span><span class="sr-only"> (go to stage)</span></button><button type="button" class="proc-tab" data-n="03"><span class="proc-tab-n">03</span><span class="proc-tab-v">Decide</span><span class="sr-only"> (go to stage)</span></button><button type="button" class="proc-tab" data-n="04"><span class="proc-tab-n">04</span><span class="proc-tab-v">Build</span><span class="sr-only"> (go to stage)</span></button><button type="button" class="proc-tab" data-n="05"><span class="proc-tab-n">05</span><span class="proc-tab-v">Fit</span><span class="sr-only"> (go to stage)</span></button><button type="button" class="proc-tab" data-n="06"><span class="proc-tab-n">06</span><span class="proc-tab-v">Ship</span><span class="sr-only"> (go to stage)</span></button><button type="button" class="proc-tab" data-n="07"><span class="proc-tab-n">07</span><span class="proc-tab-v">Refine</span><span class="sr-only"> (go to stage)</span></button></nav>
-          <ol class="proc-track">
-          <li class="proc-stage">
-            <div class="proc-when">Jul 3</div>
-            <div class="proc-num" aria-hidden="true">01</div>
-            <h3 class="proc-verb">Frame</h3>
-            <p class="proc-what">Before any pages, one line to build on: "Story and systems, as one." A holding page gave the name a home and a working inquiry form.</p>
-            <ul class="proc-notes"><li class="proc-note"><span>Made</span>A holding page that took real inquiries</li></ul>
-          </li>
-          <li class="proc-stage">
-            <div class="proc-when">Sep 10 to 14</div>
-            <div class="proc-num" aria-hidden="true">02</div>
-            <h3 class="proc-verb">Explore</h3>
-            <p class="proc-what">A motion lab: ten small studies, each testing one way the site could move, from how a headline arrives to how a card settles. It is where the site got its life.</p>
-            <ul class="proc-notes"><li class="proc-note"><span>Made</span>The motion the whole site runs on</li></ul>
-          </li>
-          <li class="proc-stage">
-            <div class="proc-when">Sep 14</div>
-            <div class="proc-num" aria-hidden="true">03</div>
-            <h3 class="proc-verb">Decide</h3>
-            <p class="proc-what">The dust field, the card deck and the type, settled together on the hero before any other page existed.</p>
-            <ul class="proc-notes"><li class="proc-note"><span>Made</span>The field, the deck and the type system</li><li class="proc-note"><span>Rule</span>Left-aligned, everywhere</li></ul>
-          </li>
-          <li class="proc-stage">
-            <div class="proc-when">Sep 15</div>
-            <div class="proc-num" aria-hidden="true">04</div>
-            <h3 class="proc-verb">Build</h3>
-            <p class="proc-what">Services, Studio and Contact in a day, each with its own rhythm, built only from motion that had earned its place in the lab.</p>
-            <ul class="proc-notes"><li class="proc-note"><span>Made</span>Every page of the site</li></ul>
-          </li>
-          <li class="proc-stage">
-            <div class="proc-when">Sep 15 to 16</div>
-            <div class="proc-num" aria-hidden="true">05</div>
-            <h3 class="proc-verb">Fit</h3>
-            <p class="proc-what">A dedicated pass for phones. Every layout rebuilt for a thumb, not shrunk down from the desktop.</p>
-            <ul class="proc-notes"><li class="proc-note"><span>Made</span>A phone layout for each page</li></ul>
-          </li>
-          <li class="proc-stage">
-            <div class="proc-when">Sep 16</div>
-            <div class="proc-num" aria-hidden="true">06</div>
-            <h3 class="proc-verb">Ship</h3>
-            <p class="proc-what">The full site replaced the holding page at omery.studio, with analytics only after a visitor agrees to them.</p>
-            <ul class="proc-notes"><li class="proc-note"><span>Made</span>omery.studio, live</li></ul>
-          </li>
-          <li class="proc-stage">
-            <div class="proc-when">Sep 18 to 28</div>
-            <div class="proc-num" aria-hidden="true">07</div>
-            <h3 class="proc-verb">Refine</h3>
-            <p class="proc-what">An Approach page, the fonts moved onto the site, search details on every route, then every headline rewritten around the reader's problem.</p>
-            <ul class="proc-notes"><li class="proc-note"><span>Made</span>Phone load from 3.2s to 2.1s</li></ul>
-          </li>
-          </ol>
+      <section class="tmap" data-thoughtmap style="--tmap-accent:#C7CBD0;" aria-label="How Omery was thought through, in seven stages"
+        data-start="It started with one line." data-start-line="Before any page existed, there was this. Scroll, and watch everything else grow out of it."
+        data-open="How Omery was thought through." data-open-line="One line in the middle. Seven stages and thirty-two thoughts grew out of it. Scroll to fly through, or drag to turn the map." data-cue="Scroll to fly through it"
+        data-thread-dust="The dust field" data-thread-honest="Only what is true" data-thread-tight="Cutting back" data-thread-two="Two sides, one place"
+        data-finale-line="Every branch on the map pulls back to this one line. It was there before any page was, and it is still the test for everything on the site."
+        data-deck-eyebrow="The process &middot; seven stages" data-deck-end="Where it ends" data-deck-finale-line="Every stage traces back to this one line. It was there before any page was, and it is still the test for everything on the site."
+        data-close="The whole thought." data-close-line="Seven stages, thirty-two thoughts. Drag to turn the map, then keep scrolling.">
+        <div class="tmap-pin">
+          <div class="tmap-view" aria-hidden="false"><div class="tmap-world"></div></div>
+          <div class="tmap-head"><span class="eyebrow">The process &middot; a map of the thinking</span><button type="button" class="tmap-skip">Skip the process <i aria-hidden="true">&darr;</i></button></div>
+          <div class="tmap-cap" aria-live="polite"><div class="tmap-cap-meta"><span class="tmap-cap-n"></span><span class="tmap-cap-when"></span></div><h3 class="tmap-cap-verb"></h3><p class="tmap-cap-what"></p></div>
+          <nav class="tmap-tabs" aria-label="Jump to a stage"></nav>
         </div>
+        <ol class="tmap-source">
+          <li class="tmap-core">
+            <h3>Story and systems, as one.</h3>
+            <p>It started wider: six services, film and campaigns among them. I cut it down to the one thing I could stand behind. The story a brand tells and the systems it runs on, handled in one place.</p>
+          </li>
+          <li class="tmap-stage" data-when="Jul 3 to 4">
+            <h3>Frame</h3>
+            <p>One line before any pages. A coming-soon page gave the name a home, a wordmark that settles letter by letter, and an inquiry form that worked.</p>
+            <ul>
+              <li data-kind="ask">What does Omery do, in one line?</li>
+              <li data-kind="cut" data-thread="tight">Film and campaigns. Six services read as a do-everything agency.</li>
+              <li data-kind="tried">A wordmark as wide as the screen.</li>
+              <li data-kind="rule" data-thread="honest">No implied client history. Every claim has to be checkable.</li>
+              <li data-kind="made">A holding page that took real inquiries</li>
+            </ul>
+          </li>
+          <li class="tmap-stage" data-when="Sep 9 to 14">
+            <h3>Explore</h3>
+            <p>Three directions and two labs. Ten motion studies for how the site could move, and a set of dust fields for what it could be made of.</p>
+            <ul>
+              <li data-kind="ask">Dark and editorial, warm stone, or both?</li>
+              <li data-kind="tried">A calm, warm-stone direction with an oil-slick headline. Built for a day, then set aside.</li>
+              <li data-kind="tried" data-thread="dust">Four dust fields: fine, coarse, familiar, horizon.</li>
+              <li data-kind="made">Ten motion studies. Eight use nothing heavier than fade and move.</li>
+              <li data-kind="cut">A 12,000-point 3D field. Kept as a reference, not the site.</li>
+            </ul>
+          </li>
+          <li class="tmap-stage" data-when="Sep 14">
+            <h3>Decide</h3>
+            <p>The direction, settled on the hero before any other page existed: the horizon field, a deck of three cards, and the type.</p>
+            <ul>
+              <li data-kind="made" data-thread="dust">Horizon: dust that thins out where the words live.</li>
+              <li data-kind="made" data-thread="two">A deck of three cards. Story, Systems, As one.</li>
+              <li data-kind="cut">The giant wordmark. A small mark in the corner instead.</li>
+              <li data-kind="cut" data-thread="tight">Five services. Three moves now: Diagnose, Build, Experience.</li>
+              <li data-kind="rule">Left-aligned, everywhere. Carried over from July.</li>
+            </ul>
+          </li>
+          <li class="tmap-stage" data-when="Sep 15">
+            <h3>Build</h3>
+            <p>Services, Studio and Contact in a day, made only from motion that had earned its place in the lab.</p>
+            <ul>
+              <li data-kind="rule">A page switch keeps the frame. Only the words change.</li>
+              <li data-kind="made" data-thread="two">Portraits drawn in dust. Your cursor clears them to show the photo.</li>
+              <li data-kind="made">A contact form that reads like a note.</li>
+              <li data-kind="cut" data-thread="honest">Invented timings and comparisons, out in the first copy pass.</li>
+            </ul>
+          </li>
+          <li class="tmap-stage" data-when="Sep 15 to 16">
+            <h3>Fit</h3>
+            <p>A pass just for phones. The same site, rebuilt for a thumb rather than shrunk down from the desktop.</p>
+            <ul>
+              <li data-kind="rule">Phones get the same site, scaled.</li>
+              <li data-kind="cut" data-thread="dust">The cursor cloud on touch, so scrolling never fights the dust.</li>
+              <li data-kind="made">The card deck and the questions move on with a tap.</li>
+              <li data-kind="cut">The scroll cue. Nobody needs to be told to swipe.</li>
+            </ul>
+          </li>
+          <li class="tmap-stage" data-when="Sep 16">
+            <h3>Ship</h3>
+            <p>A review call, a list of ten fixes, then the full site replaced the holding page.</p>
+            <ul>
+              <li data-kind="cut" data-thread="honest">An "open seat" card. It read as short-staffed, not as growth.</li>
+              <li data-kind="cut">A questions section that took seven screens of scrolling. Now it switches on a click.</li>
+              <li data-kind="rule">Analytics only after a visitor says yes. No answer means nothing loads.</li>
+              <li data-kind="made">omery.studio, live</li>
+            </ul>
+          </li>
+          <li class="tmap-stage" data-when="Sep 17 to 28">
+            <h3>Refine</h3>
+            <p>Twelve days of listening: an Approach page, the fonts moved onto the site, and every headline rewritten around the reader.</p>
+            <ul>
+              <li data-kind="ask">Why do the services matter? The copy never said.</li>
+              <li data-kind="made">An Approach page that answers it.</li>
+              <li data-kind="cut" data-thread="dust">A third of the dust. It was competing with the words.</li>
+              <li data-kind="made">Phone load from 3.2s to 2.1s, by hosting the fonts.</li>
+              <li data-kind="rule">Lead with the reader's problem, not the company.</li>
+            </ul>
+          </li>
+        </ol>
       </section>
 
       <div class="trio" data-reveal>
