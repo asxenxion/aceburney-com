@@ -161,6 +161,8 @@ body, [data-root] { overflow-x: clip !important; }
 .tmap.is-deck .tmap-view { display: none !important; }
 .tmap.is-live.is-deck:not(.is-flat) .tmap-pin { position: relative; height: auto; overflow: visible; display: flex; flex-direction: column; padding-top: 4px; }
 .tmap.is-deck .tmap-pin::before, .tmap.is-deck .tmap-cap, .tmap.is-deck .tmap-tabs, .tmap.is-deck .tmap-cue, .tmap.is-deck .tmap-drag { display: none; }
+/* the deck is short and never holds the page, so there's nothing to skip */
+.tmap.is-deck .tmap-skip { display: none; }
 .tmap.is-deck .tmap-head { order: -1; position: relative; top: auto; left: auto; right: auto; padding: 0 var(--gutter) 6px; }
 /* the map stays pinned at the top while the cards below are read and swiped, then lets go at the end */
 .tmap.is-deck .tmap-view { position: sticky; inset: auto; top: 0; z-index: 1; height: min(76vw, 44svh); overflow: hidden; background: var(--bg); box-shadow: 0 16px 22px -4px var(--bg); }
