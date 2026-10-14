@@ -276,9 +276,52 @@
     [data-m="omery-short"] { display: inline !important; }
     [data-m="nav-about"] { display: none; }
   }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  @font-face { font-family: "Omery Satoshi"; src: url("/assets/work/omery/fonts/satoshi-400.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+  @font-face { font-family: "Omery Satoshi"; src: url("/assets/work/omery/fonts/satoshi-700.woff2") format("woff2"); font-weight: 700; font-display: swap; }
+  @font-face { font-family: "Omery Mono"; src: url("/assets/work/omery/fonts/geist-mono.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+  .spec { margin: clamp(48px,7vh,80px) 0 0; }
+  .spec-sheet { display: grid; grid-template-columns: 1.25fr 1fr; grid-template-areas: "type colours" "mono motion"; border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; overflow: hidden; background: #07090D; }
+  .spec-sheet > div { padding: clamp(24px,3vw,40px); }
+  .spec-type { grid-area: type; border-right: 1px solid rgba(236,235,231,0.08); border-bottom: 1px solid rgba(236,235,231,0.08); }
+  .spec-colours { grid-area: colours; border-bottom: 1px solid rgba(236,235,231,0.08); }
+  .spec-mono { grid-area: mono; border-right: 1px solid rgba(236,235,231,0.08); }
+  .spec-motion { grid-area: motion; position: relative; }
+  .spec-k { font-family: "Omery Mono", var(--mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: #5F5D59; margin-bottom: 18px; }
+  .spec-aa { font-family: "Omery Satoshi", var(--sans); font-weight: 700; font-size: clamp(6rem,13vw,10.5rem); line-height: 0.8; letter-spacing: -0.05em; color: #ECEBE7; }
+  .spec-line { margin-top: 22px; font-family: "Omery Satoshi", var(--sans); font-weight: 400; font-size: clamp(1.2rem,2vw,1.6rem); letter-spacing: -0.02em; color: #9A9893; }
+  .spec-line em { font-style: normal; font-weight: 700; background: linear-gradient(100deg, #8d939b 0%, #C7CBD0 30%, #f4f6f8 45%, #C7CBD0 60%, #8d939b 100%); background-size: 260% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: spec-sheen 5s ease-in-out infinite; }
+  @keyframes spec-sheen { 0%,100% { background-position: 100% 0; } 50% { background-position: 0 0; } }
+  .spec-w { display: flex; gap: 18px; margin-top: 18px; font-family: "Omery Mono", var(--mono); font-size: 11px; color: #5F5D59; }
+  .spec-w span:last-child { color: #ECEBE7; }
+  .spec-mono-big { font-family: "Omery Mono", var(--mono); font-size: clamp(1.8rem,3.2vw,2.6rem); letter-spacing: 0.04em; color: #ECEBE7; }
+  .spec-mono-label { margin-top: 16px; font-family: "Omery Mono", var(--mono); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: #9A9893; }
+  .spec-colours ul { list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px 14px; margin: 0; padding: 0; }
+  .spec-colours i { display: block; aspect-ratio: 1.4; border-radius: 6px; background: var(--c); border: 1px solid rgba(236,235,231,0.12); margin-bottom: 9px; transition: transform .5s var(--ease); }
+  .spec-colours li:hover i { transform: translateY(-3px); }
+  .spec-colours li.accent i { box-shadow: 0 0 0 3px rgba(199,203,208,0.12); }
+  .spec-colours b { display: block; font-family: "Omery Satoshi", var(--sans); font-weight: 700; font-size: 0.86rem; color: #ECEBE7; }
+  .spec-colours span { font-family: "Omery Mono", var(--mono); font-size: 10.5px; color: #5F5D59; }
+  .spec-motion svg { width: 100%; max-width: 260px; height: auto; display: block; overflow: visible; }
+  .spec-grid { fill: none; stroke: rgba(236,235,231,0.12); stroke-width: 1; }
+  .spec-curve { fill: none; stroke: #C7CBD0; stroke-width: 1.5; }
+  .spec-run { position: relative; height: 12px; margin-top: 20px; border-bottom: 1px solid rgba(236,235,231,0.12); }
+  .spec-run i { position: absolute; left: 0; top: 0; width: 9px; height: 9px; background: #C7CBD0; animation: spec-run 2.6s cubic-bezier(.16,1,.3,1) infinite; }
+  @keyframes spec-run { 0%,8% { left: 0; } 55%,100% { left: calc(100% - 9px); } }
+  .spec-motion code { display: block; margin-top: 16px; font-family: "Omery Mono", var(--mono); font-size: 12px; color: #9A9893; }
+  .spec figcaption { display: flex; gap: 14px; margin-top: 14px; font-family: var(--mono); font-size: 11px; line-height: 1.6; letter-spacing: 0.04em; color: var(--faint); }
+  .spec figcaption b { font-weight: 400; color: var(--fainter); letter-spacing: 0.18em; text-transform: uppercase; flex: none; }
+  @media (max-width: 860px) { .spec-sheet { grid-template-columns: 1fr; grid-template-areas: "type" "colours" "mono" "motion"; } .spec-type, .spec-mono { border-right: 0; } .spec-mono { border-bottom: 1px solid rgba(236,235,231,0.08); } .spec figcaption { flex-direction: column; gap: 4px; } }
+  @media (prefers-reduced-motion: reduce) { .spec-line em, .spec-run i { animation: none; } }
+  .trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(28px,4vw,56px); margin-top: clamp(56px,9vh,96px); padding-top: 34px; border-top: 1px solid var(--rule); }
+  .trio .h3 { font-size: clamp(1.2rem,1.7vw,1.5rem); }
+  .trio .body-copy { font-size: clamp(0.85rem,0.95vw,0.93rem); }
+  @media (max-width: 860px) { .trio { grid-template-columns: 1fr; } }
 </style>
 <link rel="stylesheet" href="/assets/site-menu.css?v=16">
-<script src="/assets/site-menu.js?v=19" defer></script>
+<script src="/assets/site-menu.js?v=20" defer></script>
+<link rel="stylesheet" href="/assets/process.css?v=5">
+<script src="/assets/process.js?v=3" defer></script>
 </head>
 <body>
 <div data-root style="position:relative; width:100%; min-height:100dvh; background:#0D0D0D; overflow-x:hidden; cursor:none; -webkit-tap-highlight-color:transparent;">
@@ -336,12 +379,6 @@
           <p class="body-copy">The people it serves are founders and companies weighing up a studio they've never met. <em>The site is the first project they see me deliver.</em></p>
         </div>
       </div>
-      <figure class="shot" data-reveal>
-        <div class="shot-frame" tabindex="0" role="button" aria-label="Enlarge: the home page hero">
-          <img src="/assets/work/omery/hero-1200.webp" srcset="/assets/work/omery/hero-1200.webp 1200w, /assets/work/omery/hero-2400.webp 2400w" sizes="(max-width: 760px) 100vw, 1200px" width="1200" height="750" alt="The Omery home page: the headline Story and systems, as one, over a dark field of drifting dust, with a deck of cards on the right labelled Story, Systems and As one." loading="lazy" data-full="/assets/work/omery/hero-2400.webp">
-        </div>
-        <figcaption><b>Fig. 02</b><span>The thesis in one line, the offer in a deck of three cards you can flip.</span></figcaption>
-      </figure>
     </section>
 
     <!-- ===== 02 THE APPROACH ===== -->
@@ -357,64 +394,75 @@
         </div>
       </div>
 
-      <ol class="rules" data-reveal>
-        <li class="rule"><span class="rule-n">Jul 3</span><span class="rule-t">A holding page.</span><p class="body-copy">The name got a home and a working inquiry form, so the studio could open conversations before the full site existed.</p></li>
-        <li class="rule"><span class="rule-n">Sep 14</span><span class="rule-t">The field and the hero.</span><p class="body-copy">The dust field, the card deck and the type, decided together, before any other page.</p></li>
-        <li class="rule"><span class="rule-n">Sep 15</span><span class="rule-t">Every page, then phones.</span><p class="body-copy">Services, Studio and Contact, each with its own rhythm, then a dedicated pass for phones.</p></li>
-        <li class="rule"><span class="rule-n">Sep 16</span><span class="rule-t">Live.</span><p class="body-copy">The full site replaced the holding page at omery.studio.</p></li>
-        <li class="rule"><span class="rule-n">Sep 18</span><span class="rule-t">Approach, speed, search.</span><p class="body-copy">A page on how an engagement runs, self-hosted fonts, and search details on every route.</p></li>
-        <li class="rule"><span class="rule-n">Sep 28</span><span class="rule-t">The words.</span><p class="body-copy">Every headline rewritten to lead with the reader's problem instead of the studio.</p></li>
-      </ol>
+      <section class="proc" data-process style="--proc-accent:#C7CBD0;" aria-label="The creative process, in seven stages">
+        <div class="proc-pin">
+          <div class="proc-head"><span class="eyebrow">The process &middot; seven stages</span><button type="button" class="proc-skip">Skip the process <i aria-hidden="true">&darr;</i></button></div>
+          <nav class="proc-tabs" aria-label="Jump to a stage"><button type="button" class="proc-tab" data-n="01"><span class="proc-tab-n">01</span><span class="proc-tab-v">Frame</span><span class="sr-only"> (go to stage)</span></button><button type="button" class="proc-tab" data-n="02"><span class="proc-tab-n">02</span><span class="proc-tab-v">Explore</span><span class="sr-only"> (go to stage)</span></button><button type="button" class="proc-tab" data-n="03"><span class="proc-tab-n">03</span><span class="proc-tab-v">Decide</span><span class="sr-only"> (go to stage)</span></button><button type="button" class="proc-tab" data-n="04"><span class="proc-tab-n">04</span><span class="proc-tab-v">Build</span><span class="sr-only"> (go to stage)</span></button><button type="button" class="proc-tab" data-n="05"><span class="proc-tab-n">05</span><span class="proc-tab-v">Fit</span><span class="sr-only"> (go to stage)</span></button><button type="button" class="proc-tab" data-n="06"><span class="proc-tab-n">06</span><span class="proc-tab-v">Ship</span><span class="sr-only"> (go to stage)</span></button><button type="button" class="proc-tab" data-n="07"><span class="proc-tab-n">07</span><span class="proc-tab-v">Refine</span><span class="sr-only"> (go to stage)</span></button></nav>
+          <ol class="proc-track">
+          <li class="proc-stage">
+            <div class="proc-when">Jul 3</div>
+            <div class="proc-num" aria-hidden="true">01</div>
+            <h3 class="proc-verb">Frame</h3>
+            <p class="proc-what">Before any pages, one line to build on: "Story and systems, as one." A holding page gave the name a home and a working inquiry form.</p>
+            <ul class="proc-notes"><li class="proc-note"><span>Made</span>A holding page that took real inquiries</li></ul>
+          </li>
+          <li class="proc-stage">
+            <div class="proc-when">Sep 10 to 14</div>
+            <div class="proc-num" aria-hidden="true">02</div>
+            <h3 class="proc-verb">Explore</h3>
+            <p class="proc-what">A direction brief, then small studies of motion and type, each tried on its own before it could go near a page.</p>
+            <ul class="proc-notes"><li class="proc-note"><span>Made</span>A short list of patterns worth using</li></ul>
+          </li>
+          <li class="proc-stage">
+            <div class="proc-when">Sep 14</div>
+            <div class="proc-num" aria-hidden="true">03</div>
+            <h3 class="proc-verb">Decide</h3>
+            <p class="proc-what">The dust field, the card deck and the type, settled together on the hero before any other page existed.</p>
+            <ul class="proc-notes"><li class="proc-note"><span>Made</span>The field, the deck and the type system</li><li class="proc-note"><span>Rule</span>Left-aligned, everywhere</li></ul>
+          </li>
+          <li class="proc-stage">
+            <div class="proc-when">Sep 15</div>
+            <div class="proc-num" aria-hidden="true">04</div>
+            <h3 class="proc-verb">Build</h3>
+            <p class="proc-what">Services, Studio and Contact in a day, each with its own rhythm, made only from patterns that had already proven themselves.</p>
+            <ul class="proc-notes"><li class="proc-note"><span>Made</span>Every page of the site</li></ul>
+          </li>
+          <li class="proc-stage">
+            <div class="proc-when">Sep 15 to 16</div>
+            <div class="proc-num" aria-hidden="true">05</div>
+            <h3 class="proc-verb">Fit</h3>
+            <p class="proc-what">A dedicated pass for phones. Every layout rebuilt for a thumb, not shrunk down from the desktop.</p>
+            <ul class="proc-notes"><li class="proc-note"><span>Made</span>A phone layout for each page</li></ul>
+          </li>
+          <li class="proc-stage">
+            <div class="proc-when">Sep 16</div>
+            <div class="proc-num" aria-hidden="true">06</div>
+            <h3 class="proc-verb">Ship</h3>
+            <p class="proc-what">The full site replaced the holding page at omery.studio, with analytics only after a visitor agrees to them.</p>
+            <ul class="proc-notes"><li class="proc-note"><span>Made</span>omery.studio, live</li></ul>
+          </li>
+          <li class="proc-stage">
+            <div class="proc-when">Sep 18 to 28</div>
+            <div class="proc-num" aria-hidden="true">07</div>
+            <h3 class="proc-verb">Refine</h3>
+            <p class="proc-what">An Approach page, the fonts moved onto the site, search details on every route, then every headline rewritten around the reader's problem.</p>
+            <ul class="proc-notes"><li class="proc-note"><span>Made</span>Phone load from 3.2s to 2.1s</li></ul>
+          </li>
+          </ol>
+        </div>
+      </section>
 
-      <div class="walk" style="margin-top:clamp(56px,9vh,96px);">
-        <article class="beat" data-reveal>
-          <div class="beat-text">
-            <div class="beat-step">Explain</div>
-            <h3 class="h3">Three moves, in the order they happen.</h3>
-            <p class="body-copy">Diagnose, build, experience. Three doors of equal weight, each saying what you get and why it matters, so the process reads as a promise rather than a sales pitch.</p>
-          </div>
-          <figure class="shot">
-            <div class="shot-frame" tabindex="0" role="button" aria-label="Enlarge: the three moves">
-              <img src="/assets/work/omery/doors-1200.webp" srcset="/assets/work/omery/doors-1200.webp 1200w, /assets/work/omery/doors-1920.webp 1920w" sizes="(max-width: 760px) 100vw, 820px" width="1200" height="675" alt="A section headed Two sides. One order of operations, with three equal panels: Diagnose, Build and Experience." loading="lazy" data-full="/assets/work/omery/doors-1920.webp">
-            </div>
-            <figcaption><b>Fig. 03</b><span>The process as three doors. The dust gathers under the cursor as you read.</span></figcaption>
-          </figure>
-        </article>
-
-        <article class="beat flip" data-reveal>
-          <div class="beat-text">
-            <div class="beat-step">Show</div>
-            <h3 class="h3">Four services that settle as you scroll.</h3>
-            <p class="body-copy">Story, web, product, systems. They arrive as loose, tilted plates and fall into a neat stack as you read: four separate services becoming one order of operations, which is the whole pitch.</p>
-          </div>
-          <figure class="shot">
-            <div class="shot-frame" tabindex="0" role="button" aria-label="Enlarge: the service plates stacked">
-              <img src="/assets/work/omery/set-closed-1200.webp" srcset="/assets/work/omery/set-closed-1200.webp 1200w, /assets/work/omery/set-closed-1920.webp 1920w" sizes="(max-width: 760px) 100vw, 820px" width="1200" height="675" alt="Four tilted plates labelled Story, Web, Product and Systems, settled into a stack under a label reading The set, four areas, one order of operations." loading="lazy" data-full="/assets/work/omery/set-closed-1920.webp">
-            </div>
-            <figcaption><b>Fig. 04</b><span>Scattered on the way in, stacked by the time you reach them.</span></figcaption>
-          </figure>
-        </article>
-
-        <article class="beat" data-reveal>
-          <div class="beat-text">
-            <div class="beat-step">Ask</div>
-            <h3 class="h3">A contact form you read like a note.</h3>
-            <p class="body-copy">The form is a numbered plate, each field saying what it's for: who to write back to, where the reply goes, two or three lines on what's not clicking. Under it, the promise: a call within the week, then a written read.</p>
-          </div>
-          <figure class="shot">
-            <div class="shot-frame" tabindex="0" role="button" aria-label="Enlarge: the contact page">
-              <img src="/assets/work/omery/contact-1200.webp" srcset="/assets/work/omery/contact-1200.webp 1200w, /assets/work/omery/contact-2400.webp 2400w" sizes="(max-width: 760px) 100vw, 820px" width="1200" height="750" alt="The contact page: Tell us what's not clicking, beside a terminal-style intake form with six numbered lines." loading="lazy" data-full="/assets/work/omery/contact-2400.webp">
-            </div>
-            <figcaption><b>Fig. 05</b><span>Six lines, each with a plain reason for being there.</span></figcaption>
-          </figure>
-        </article>
+      <div class="trio" data-reveal>
+        <div><div class="beat-step">Explain</div><h3 class="h3">Three moves, in the order they happen.</h3><p class="body-copy">Diagnose, build, experience. Three doors of equal weight, each saying what you get and why it matters, so the process reads as a promise rather than a sales pitch.</p></div>
+        <div><div class="beat-step">Show</div><h3 class="h3">Four services that settle as you scroll.</h3><p class="body-copy">Story, web, product, systems. They arrive as loose, tilted plates and fall into a neat stack as you read: four separate services becoming one order of operations, which is the whole pitch.</p></div>
+        <div><div class="beat-step">Ask</div><h3 class="h3">A contact form you read like a note.</h3><p class="body-copy">The form is a numbered plate, each field saying what it's for: who to write back to, where the reply goes, two or three lines on what's not clicking. Under it, the promise: a call within the week, then a written read.</p></div>
       </div>
 
       <figure class="shot" data-reveal style="margin-top:clamp(56px,9vh,96px);">
         <div class="shot-frame" tabindex="0" role="button" aria-label="Enlarge: the site on phones">
           <img src="/assets/work/omery/phones-1200.webp" srcset="/assets/work/omery/phones-1200.webp 1200w, /assets/work/omery/phones-2400.webp 2400w" sizes="(max-width: 760px) 100vw, 1200px" width="1200" height="519" alt="Five phone screens side by side: the Home, Services, Approach, Studio and Contact pages, each with its own phone layout." loading="lazy" data-full="/assets/work/omery/phones-2400.webp">
         </div>
-        <figcaption><b>Fig. 06</b><span>Home, Services, Approach, Studio, Contact. Laid out for phones, not shrunk to fit them.</span></figcaption>
+        <figcaption><b>Fig. 02</b><span>Home, Services, Approach, Studio, Contact. Laid out for phones, not shrunk to fit them.</span></figcaption>
       </figure>
     </section>
 
@@ -429,6 +477,40 @@
           <p class="body-copy">A moving background can easily become noise. These are the calls that keep it working for the words instead of against them.</p>
         </div>
       </div>
+      <figure class="spec" data-reveal aria-label="The Omery design system: two typefaces, six colours, one accent and one easing curve">
+        <div class="spec-sheet">
+          <div class="spec-type">
+            <div class="spec-k">Display and body &middot; Satoshi</div>
+            <div class="spec-aa" aria-hidden="true">Aa</div>
+            <div class="spec-line">Story and systems, <em>as one.</em></div>
+            <div class="spec-w"><span>400</span><span>700</span></div>
+          </div>
+          <div class="spec-mono">
+            <div class="spec-k">Labels and numbers &middot; Geist Mono</div>
+            <div class="spec-mono-big" aria-hidden="true">01 02 03 04</div>
+            <div class="spec-mono-label">Diagnose &middot; Build &middot; Experience</div>
+          </div>
+          <div class="spec-colours">
+            <div class="spec-k">Colour &middot; six values, one accent</div>
+            <ul>
+              <li style="--c:#07090D"><i></i><b>Ground</b><span>#07090D</span></li>
+              <li style="--c:#11161F"><i></i><b>Raised</b><span>#11161F</span></li>
+              <li style="--c:#5F5D59"><i></i><b>Muted</b><span>#5F5D59</span></li>
+              <li style="--c:#9A9893"><i></i><b>Ink, dim</b><span>#9A9893</span></li>
+              <li style="--c:#ECEBE7"><i></i><b>Ink</b><span>#ECEBE7</span></li>
+              <li class="accent" style="--c:#C7CBD0"><i></i><b>Silver accent</b><span>#C7CBD0</span></li>
+            </ul>
+          </div>
+          <div class="spec-motion">
+            <div class="spec-k">Motion &middot; one easing everywhere</div>
+            <svg viewBox="0 0 200 120" aria-hidden="true"><path class="spec-grid" d="M10 110H190M10 10V110"/><path class="spec-curve" d="M10 110 C 38.8 10, 64 10, 190 10"/></svg>
+            <div class="spec-run" aria-hidden="true"><i></i></div>
+            <code>cubic-bezier(.16, 1, .3, 1)</code>
+          </div>
+        </div>
+        <figcaption><b>Fig. 03</b><span>The whole system on one sheet, set in the site's own type. Fast out, soft landing: every reveal, card and hover uses the same curve.</span></figcaption>
+      </figure>
+
       <ol class="rules" data-reveal>
         <li class="rule"><span class="rule-n">01</span><span class="rule-t">The background is the brand.</span><p class="body-copy">Dust settled low like a horizon, stirring under the cursor and parting around headlines so type always reads. With reduced motion turned on, it settles and stops.</p></li>
         <li class="rule"><span class="rule-n">02</span><span class="rule-t">Two typefaces, two jobs.</span><p class="body-copy">Satoshi for what the site says. Geist Mono for labels, numbers and the form. Nothing else, so hierarchy comes from size and spacing, not decoration.</p></li>

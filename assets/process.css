@@ -1,0 +1,56 @@
+/* Case study creative process. The section holds still while the stages slide past as you scroll;
+   the numbered row jumps straight to any stage, and Skip jumps past the whole thing.
+   Driven by /assets/process.js. Phones and reduced motion get a plain vertical list. */
+/* sticky needs the page wrapper to clip, not scroll, sideways */
+body, [data-root] { overflow-x: clip !important; }
+.proc { --proc-accent: #c9a35a; --proc-side: max(var(--gutter), calc((100vw - 1240px) / 2 + var(--gutter))); position: relative; width: 100vw; margin: clamp(56px,9vh,96px) 0 0 calc(50% - 50vw); }
+.proc-pin { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; display: flex; flex-direction: column; justify-content: center; gap: clamp(26px,4.5vh,48px); }
+.proc-head, .proc-tabs { width: min(1240px, 100%); margin: 0 auto; padding: 0 var(--gutter); }
+.proc-head { display: flex; justify-content: space-between; align-items: baseline; gap: 20px; }
+.proc-skip { display: inline-flex; align-items: center; gap: 10px; background: none; border: 0; padding: 6px 0; cursor: pointer; font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); transition: color .3s ease; }
+.proc-skip i { font-style: normal; display: inline-block; transition: transform .4s var(--ease); }
+.proc-skip:hover { color: var(--ink-hi); }
+.proc-skip:hover i { transform: translateY(3px); }
+.proc-skip:focus-visible { outline: 1px solid rgba(232,230,225,0.5); outline-offset: 4px; }
+
+/* The numbered row is also the progress line */
+.proc-tabs { position: relative; display: grid; grid-template-columns: repeat(var(--n, 7), 1fr); }
+.proc-tabs::before, .proc-tabs::after { content: ""; position: absolute; left: var(--gutter); right: var(--gutter); top: 0; height: 1px; background: var(--rule); }
+.proc-tabs::after { background: rgba(232,230,225,0.6); transform-origin: left; transform: scaleX(var(--p, 0)); }
+.proc-tab { position: relative; display: grid; gap: 6px; padding: 16px 10px 0 0; text-align: left; background: none; border: 0; cursor: pointer; color: inherit; font: inherit; }
+.proc-tab::before { content: ""; position: absolute; left: 0; top: -4px; width: 9px; height: 9px; background: var(--proc-accent); transform: scale(0); transition: transform .4s var(--ease); z-index: 1; }
+.proc-tab[aria-current="step"]::before { transform: scale(1); }
+.proc-tab-n { font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; color: var(--fainter); }
+.proc-tab-v { font-family: var(--sans); font-weight: 700; font-size: clamp(0.92rem,1.2vw,1.1rem); letter-spacing: -0.015em; color: #5c5952; transition: color .3s ease; }
+.proc-tab:hover .proc-tab-v, .proc-tab:focus-visible .proc-tab-v { color: var(--ink-2); }
+.proc-tab[aria-current="step"] .proc-tab-v, .proc-tab[aria-current="step"] .proc-tab-n { color: var(--ink-hi); }
+.proc-tab:focus-visible { outline: 1px solid rgba(232,230,225,0.5); outline-offset: 4px; }
+
+.proc-track { list-style: none; display: flex; margin: 0; padding: 0 var(--proc-side); gap: clamp(36px,5vw,80px); will-change: transform; }
+.proc-track::after { content: ""; flex: none; width: 1px; margin-left: calc(var(--proc-side) - clamp(36px,5vw,80px) - 1px); }
+.proc-stage { flex: none; width: clamp(280px, 27vw, 380px); opacity: 0.32; transition: opacity .6s var(--ease); }
+.proc-stage.on, .proc-stage.past { opacity: 1; }
+.proc-stage.past .proc-num { color: #2a2926; }
+.proc-when { font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--faint); margin-bottom: 6px; }
+.proc-num { font-family: var(--sans); font-weight: 700; font-size: clamp(4.6rem,9vw,8.4rem); line-height: 0.82; letter-spacing: -0.06em; color: #34322e; transition: color .6s var(--ease); }
+.proc-stage.on .proc-num { color: var(--ink-hi); }
+.proc-verb { margin: 16px 0 12px; font-family: var(--sans); font-weight: 700; font-size: clamp(1.5rem,2.3vw,2rem); line-height: 1; letter-spacing: -0.025em; color: var(--ink-hi); }
+.proc-verb::after { content: "."; color: var(--proc-accent); }
+.proc-what { font-family: var(--mono); font-size: 12.5px; line-height: 1.75; color: var(--body); }
+.proc-notes { list-style: none; margin: 18px 0 0; padding: 0; border-top: 1px solid var(--rule); }
+.proc-note { display: grid; grid-template-columns: 74px 1fr; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--rule); font-family: var(--mono); font-size: 11.5px; line-height: 1.5; color: var(--ink-2); }
+.proc-note span { font-size: 9.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--fainter); padding-top: 2px; }
+.proc-note.cut { color: #6b675f; }
+.proc-note.cut s { text-decoration-color: rgba(217,120,93,0.6); }
+
+@media (max-width: 860px), (prefers-reduced-motion: reduce) {
+  .proc { width: auto; margin-left: 0; }
+  .proc-pin { position: static; height: auto; overflow: visible; display: block; }
+  .proc-head { width: auto; padding: 0; }
+  .proc-tabs, .proc-skip { display: none; }
+  .proc-track { flex-direction: column; padding: 0 0 0 26px; margin-top: 30px; gap: 46px; border-left: 1px solid rgba(232,230,225,0.14); transform: none !important; }
+  .proc-track::after { display: none; }
+  .proc-stage { width: auto; opacity: 1; position: relative; }
+  .proc-stage::before { content: ""; position: absolute; left: -31px; top: 4px; width: 9px; height: 9px; background: var(--proc-accent); }
+  .proc-num { font-size: 4.2rem; color: var(--ink-hi); }
+}
